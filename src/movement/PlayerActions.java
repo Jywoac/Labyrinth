@@ -14,7 +14,8 @@ public class PlayerActions {
 		
 		while(answer == false){
 
-			String s = in.nextLine();						
+			String s = in.nextLine();
+			// Tee liikkumis GUI, nyt pit‰‰ hakata enteri‰ kokoajan.
 						
 			switch(s){
 				case "w":

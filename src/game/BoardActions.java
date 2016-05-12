@@ -119,17 +119,7 @@ public class BoardActions {
 			
 			// player looking at map
 			// place player on map, print map, then remove player icon from map
-			map[playerXCoord][playerYCoord] = "X";
-			try {
-				b.printBoard(map);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		
-			// currently very dizzying since the board always just jolts up.
-			// VOIPI OLLA ETTÄ ON PAKKO SIIRTÄÄ GRAAFISEEN JÄRJESTELMÄÄN
-			// NYT NYKII NIIN VITUSTI ETTÄ EI PYSTY OIKEIN EDES PELAAMAAN
 			if(playerYCoord >= b.getBoardYSize()-1){
 				//exit found do nothing
 			}else{
@@ -147,6 +137,10 @@ public class BoardActions {
 			
 			}
 			
+			map[playerXCoord][playerYCoord] = "X";
+			
+			b.printBoard(map);
+
 		}
 		
 		System.out.println("You found the exit!");
