@@ -93,7 +93,10 @@ public class MainScreen extends JFrame {
 		JButton startGameButton = new JButton("Start");
 		startGameButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				BoardActions bo = new BoardActions();				
+				//BoardActions bo = new BoardActions();
+				// move to mazeSize screen with a new card
+			    CardLayout cl = (CardLayout)(differentScreens.getLayout());
+			    cl.show(differentScreens, "GAMESIZEMENU");
 			}
 		});
 		startGameButton.setLocation(346, 0);
@@ -173,6 +176,73 @@ public class MainScreen extends JFrame {
 		
 		Component verticalStrut_5 = Box.createVerticalStrut(20);
 		controls.add(verticalStrut_5);
+		
+		JPanel gameSizeChoosingMenu = new JPanel();
+		gameSizeChoosingMenu.setBackground(Color.BLACK);
+		differentScreens.add(gameSizeChoosingMenu, "GAMESIZEMENU");
+		gameSizeChoosingMenu.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		Component verticalStrut_6 = Box.createVerticalStrut(20);
+		gameSizeChoosingMenu.add(verticalStrut_6);
+		
+		JPanel textPanel = new JPanel();
+		textPanel.setBackground(Color.BLACK);
+		gameSizeChoosingMenu.add(textPanel);
+		textPanel.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JLabel lblChooseTheSize = new JLabel("Choose the size of the maze");
+		lblChooseTheSize.setHorizontalAlignment(SwingConstants.CENTER);
+		lblChooseTheSize.setForeground(Color.WHITE);
+		textPanel.add(lblChooseTheSize);
+		
+		JPanel mazeSizeButtons = new JPanel();
+		mazeSizeButtons.setLayout(null);
+		mazeSizeButtons.setBackground(Color.BLACK);
+		gameSizeChoosingMenu.add(mazeSizeButtons);
+		
+		JButton backToMainMenu = new JButton("Back");
+		backToMainMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			    CardLayout cl = (CardLayout)(differentScreens.getLayout());
+			    cl.show(differentScreens, "MAINMENU");
+			}
+		});
+		
+		JButton smallMaze = new JButton("Small");
+		smallMaze.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		smallMaze.setSize(new Dimension(100, 30));
+		smallMaze.setBounds(236, 41, 100, 30);
+		mazeSizeButtons.add(smallMaze);
+		
+		JButton mediumMaze = new JButton("Medium");
+		mediumMaze.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		mediumMaze.setSize(new Dimension(100, 30));
+		mediumMaze.setBounds(346, 41, 100, 30);
+		mazeSizeButtons.add(mediumMaze);
+		
+		JButton bigMaze = new JButton("Big");
+		bigMaze.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		bigMaze.setSize(new Dimension(100, 30));
+		bigMaze.setBounds(456, 41, 100, 30);
+		mazeSizeButtons.add(bigMaze);
+		backToMainMenu.setSize(new Dimension(100, 30));
+		backToMainMenu.setBounds(346, 82, 100, 30);
+		mazeSizeButtons.add(backToMainMenu);
+		
+		Component verticalStrut_7 = Box.createVerticalStrut(20);
+		gameSizeChoosingMenu.add(verticalStrut_7);
+		
+		Component verticalStrut_8 = Box.createVerticalStrut(20);
+		gameSizeChoosingMenu.add(verticalStrut_8);
 		
 
 	}
