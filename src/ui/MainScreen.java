@@ -22,10 +22,14 @@ import java.awt.GridBagConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
+import game.BoardActions;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.Dimension;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MainScreen extends JFrame {
 
@@ -59,37 +63,58 @@ public class MainScreen extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(0, 1, 0, 0));
 		
+		JPanel MainMenu = new JPanel();
+		contentPane.add(MainMenu);
+		MainMenu.setLayout(new GridLayout(0, 1, 0, 0));
+		
 		Component verticalStrut = Box.createVerticalStrut(20);
-		contentPane.add(verticalStrut);
+		MainMenu.add(verticalStrut);
 		
-		JLabel lblNewLabel = new JLabel("Labyrinth");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(lblNewLabel);
+		JLabel GameNameLabel = new JLabel("Labyrinth");
+		MainMenu.add(GameNameLabel);
+		GameNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		JPanel panel_1 = new JPanel();
-		contentPane.add(panel_1);
-		panel_1.setLayout(null);
+		JPanel ButtonPanel = new JPanel();
+		MainMenu.add(ButtonPanel);
+		ButtonPanel.setLayout(null);
 		
-		JButton btnNewButton_2 = new JButton("Start");
-		btnNewButton_2.setLocation(346, 0);
-		btnNewButton_2.setSize(new Dimension(100, 30));
-		panel_1.add(btnNewButton_2);
+		JButton StartGameButton = new JButton("Start");
+		StartGameButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				BoardActions bo = new BoardActions();
+			}
+		});
+		StartGameButton.setLocation(346, 0);
+		StartGameButton.setSize(new Dimension(100, 30));
+		ButtonPanel.add(StartGameButton);
 		
-		JButton btnNewButton_1 = new JButton("Controls");
-		btnNewButton_1.setBounds(346, 41, 790, 31);
-		btnNewButton_1.setSize(new Dimension(100, 30));
-		panel_1.add(btnNewButton_1);
+		JButton ControlsMenuButton = new JButton("Controls");
+		ControlsMenuButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// move to controls menu
+			}
+		});
+		ControlsMenuButton.setBounds(346, 41, 790, 31);
+		ControlsMenuButton.setSize(new Dimension(100, 30));
+		ButtonPanel.add(ControlsMenuButton);
 		
-		JButton btnNewButton = new JButton("Exit");
-		btnNewButton.setBounds(346, 82, 790, 31);
-		btnNewButton.setSize(new Dimension(100, 30));
-		panel_1.add(btnNewButton);
+		JButton ExitGameButton = new JButton("Exit");
+		ExitGameButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		ExitGameButton.setBounds(346, 82, 790, 31);
+		ExitGameButton.setSize(new Dimension(100, 30));
+		ButtonPanel.add(ExitGameButton);
 		
 		Component verticalStrut_2 = Box.createVerticalStrut(20);
-		contentPane.add(verticalStrut_2);
+		MainMenu.add(verticalStrut_2);
 		
 		Component verticalStrut_1 = Box.createVerticalStrut(20);
-		contentPane.add(verticalStrut_1);
+		MainMenu.add(verticalStrut_1);
+		
+
 	}
 
 }
