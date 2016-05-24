@@ -30,10 +30,12 @@ import javax.swing.GroupLayout.Alignment;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class MainScreen extends JFrame {
 
 	private JPanel contentPane;
+	private static JFrame f;
 
 	/**
 	 * Launch the application.
@@ -44,6 +46,8 @@ public class MainScreen extends JFrame {
 				try {
 					MainScreen frame = new MainScreen();
 					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
+					f = frame;
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -59,60 +63,116 @@ public class MainScreen extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(450, 450, 800, 600);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JPanel MainMenu = new JPanel();
-		contentPane.add(MainMenu);
-		MainMenu.setLayout(new GridLayout(0, 1, 0, 0));
+		JPanel differentScreens = new JPanel();
+		contentPane.add(differentScreens);
+		differentScreens.setLayout(new CardLayout(0, 0));
+		
+		JPanel mainMenu = new JPanel();
+		differentScreens.add(mainMenu, "MAINMENU");
+		mainMenu.setBackground(Color.BLACK);
+		mainMenu.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		Component verticalStrut = Box.createVerticalStrut(20);
-		MainMenu.add(verticalStrut);
+		mainMenu.add(verticalStrut);
 		
 		JLabel GameNameLabel = new JLabel("Labyrinth");
-		MainMenu.add(GameNameLabel);
+		GameNameLabel.setForeground(Color.WHITE);
+		mainMenu.add(GameNameLabel);
 		GameNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		JPanel ButtonPanel = new JPanel();
-		MainMenu.add(ButtonPanel);
-		ButtonPanel.setLayout(null);
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.setBackground(Color.BLACK);
+		mainMenu.add(buttonPanel);
+		buttonPanel.setLayout(null);
 		
-		JButton StartGameButton = new JButton("Start");
-		StartGameButton.addActionListener(new ActionListener() {
+		JButton startGameButton = new JButton("Start");
+		startGameButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				BoardActions bo = new BoardActions();
+				BoardActions bo = new BoardActions();				
 			}
 		});
-		StartGameButton.setLocation(346, 0);
-		StartGameButton.setSize(new Dimension(100, 30));
-		ButtonPanel.add(StartGameButton);
+		startGameButton.setLocation(346, 0);
+		startGameButton.setSize(new Dimension(100, 30));
+		buttonPanel.add(startGameButton);
 		
-		JButton ControlsMenuButton = new JButton("Controls");
-		ControlsMenuButton.addActionListener(new ActionListener() {
+		JButton controlsMenuButton = new JButton("Controls");
+		controlsMenuButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// move to controls menu
+				// move to controls screen with a new card
+			    CardLayout cl = (CardLayout)(differentScreens.getLayout());
+			    cl.show(differentScreens, "CONTROLSMENU");
+
 			}
 		});
-		ControlsMenuButton.setBounds(346, 41, 790, 31);
-		ControlsMenuButton.setSize(new Dimension(100, 30));
-		ButtonPanel.add(ControlsMenuButton);
+		controlsMenuButton.setBounds(346, 41, 790, 31);
+		controlsMenuButton.setSize(new Dimension(100, 30));
+		buttonPanel.add(controlsMenuButton);
 		
-		JButton ExitGameButton = new JButton("Exit");
-		ExitGameButton.addActionListener(new ActionListener() {
+		JButton exitGameButton = new JButton("Exit");
+		exitGameButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
 		});
-		ExitGameButton.setBounds(346, 82, 790, 31);
-		ExitGameButton.setSize(new Dimension(100, 30));
-		ButtonPanel.add(ExitGameButton);
+		exitGameButton.setBounds(346, 82, 790, 31);
+		exitGameButton.setSize(new Dimension(100, 30));
+		buttonPanel.add(exitGameButton);
 		
 		Component verticalStrut_2 = Box.createVerticalStrut(20);
-		MainMenu.add(verticalStrut_2);
+		mainMenu.add(verticalStrut_2);
 		
 		Component verticalStrut_1 = Box.createVerticalStrut(20);
-		MainMenu.add(verticalStrut_1);
+		mainMenu.add(verticalStrut_1);
+		
+		JPanel controls = new JPanel();
+		controls.setBackground(Color.BLACK);
+		differentScreens.add(controls, "CONTROLSMENU");
+		controls.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		Component verticalStrut_3 = Box.createVerticalStrut(20);
+		controls.add(verticalStrut_3);
+		
+		JPanel controlTextPanel = new JPanel();
+		controlTextPanel.setBackground(Color.BLACK);
+		controls.add(controlTextPanel);
+		controlTextPanel.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JLabel lblUseTheArrowkeys = new JLabel("Use the arrowkeys to move.");
+		controlTextPanel.add(lblUseTheArrowkeys);
+		lblUseTheArrowkeys.setHorizontalAlignment(SwingConstants.CENTER);
+		lblUseTheArrowkeys.setForeground(Color.WHITE);
+		
+		JLabel lblNewLabel = new JLabel("Press the L key to look around.");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setForeground(Color.WHITE);
+		controlTextPanel.add(lblNewLabel);
+		
+		JPanel controlsMenuButtons = new JPanel();
+		controlsMenuButtons.setLayout(null);
+		controlsMenuButtons.setBackground(Color.BLACK);
+		controls.add(controlsMenuButtons);
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			    CardLayout cl = (CardLayout)(differentScreens.getLayout());
+			    cl.show(differentScreens, "MAINMENU");
+			}
+		});
+		btnBack.setSize(new Dimension(100, 30));
+		btnBack.setBounds(346, 82, 100, 30);
+		controlsMenuButtons.add(btnBack);
+		
+		Component verticalStrut_4 = Box.createVerticalStrut(20);
+		controls.add(verticalStrut_4);
+		
+		Component verticalStrut_5 = Box.createVerticalStrut(20);
+		controls.add(verticalStrut_5);
 		
 
 	}

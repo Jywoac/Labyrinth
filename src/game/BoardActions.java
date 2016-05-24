@@ -20,7 +20,7 @@ public class BoardActions {
 		
 		int menuItemChosen = mainMenu();
 		
-		if(menuItemChosen == 4){
+		if(menuItemChosen == 5){
 			// do nothing, exit program
 		}else{
 			b = new Board(menuItemChosen);
@@ -74,6 +74,7 @@ public class BoardActions {
 					case 5:
 						answer = true; // exit game
 						menuItem = answerAsNumber;
+						break;
 					default:
 						answer = false;
 						System.out.println("Please choose one of the menu item numbers.");
