@@ -14,82 +14,21 @@ public class BoardActions {
 	private int playerYCoord;
 	private int entryPointYCoord;
 	private int entryPointXCoord;
-	private String [][] map;	
-	
-	public BoardActions(){
-		
-		int menuItemChosen = mainMenu();
-		
-		if(menuItemChosen == 5){
-			// do nothing, exit program
-		}else{
-			b = new Board(menuItemChosen);
-			mapBoard = new Board(menuItemChosen);
-			map = mapBoard.getBoard();
-			gameLoop();
-		}
-	}
-		
-	// main menu where player chooses the size of the maze.
-	private int mainMenu(){
-		
-		int menuItem = 0;
-		boolean answer = false;
-		Scanner in = new Scanner(System.in);
-		
-		while(answer == false){
-			
-			System.out.println("Choose the size of the maze.");
+	private String [][] map;
+	private int mazeSize = 0;
 
-			System.out.println("1. Small");
-			System.out.println("2. Medium");
-			System.out.println("3. Big");
-			System.out.println("4. Controls");
-			System.out.println("5. Exit Game");
-			
-			String s = in.nextLine();						
-			int answerAsNumber = 0;
-			
-			try{
-				answerAsNumber = Integer.parseInt(s);
-
-				switch(answerAsNumber){
-					case 1:
-						answer = true;
-						menuItem = answerAsNumber; // small maze
-						break;
-					case 2:
-						answer = true;
-						menuItem = answerAsNumber; // medium maze
-						break;
-					case 3:
-						answer = true;
-						menuItem = answerAsNumber; // big maze
-						break;
-					case 4:
-						answer = false; // control print
-						System.out.println("Use the arrowkeys to move.");
-						System.out.println("Press L to look around.");
-						break;
-					case 5:
-						answer = true; // exit game
-						menuItem = answerAsNumber;
-						break;
-					default:
-						answer = false;
-						System.out.println("Please choose one of the menu item numbers.");
-						
-				}	
-				
-			}catch(NumberFormatException e){
-				System.out.println("Please choose one of the menu item numbers.");
-			}
-		
-		}
-		return menuItem;
-		
+	// set the size of the maze, 1 = small, 2 = medium, 3 = large
+	public void setMazeSize(int size){
+		mazeSize = size;
 	}
 	
+	public void initializeBoard(){
+		b = new Board(mazeSize);
+		mapBoard = new Board(mazeSize);
+		map = mapBoard.getBoard();
+		gameLoop();		
+	}
+
 	// main game loop which ends once player has reached the end of the maze
 	public void gameLoop(){
 		

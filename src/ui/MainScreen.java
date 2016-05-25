@@ -13,6 +13,8 @@ import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
+import javax.swing.text.html.HTMLDocument;
+import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.BoxLayout;
@@ -32,11 +34,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Font;
+import javax.swing.JEditorPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 
 public class MainScreen extends JFrame {
 
 	private JPanel contentPane;
-	private static JFrame f;
 
 	/**
 	 * Launch the application.
@@ -48,7 +52,6 @@ public class MainScreen extends JFrame {
 					MainScreen frame = new MainScreen();
 					frame.setVisible(true);
 					frame.setLocationRelativeTo(null);
-					f = frame;
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -82,7 +85,7 @@ public class MainScreen extends JFrame {
 		mainMenu.add(verticalStrut);
 		
 		JLabel GameNameLabel = new JLabel("Labyrinth");
-		GameNameLabel.setFont(new Font("Sitka Small", Font.PLAIN, 18));
+		GameNameLabel.setFont(new Font("Sitka Small Bold", Font.PLAIN, 18));
 		GameNameLabel.setForeground(Color.WHITE);
 		mainMenu.add(GameNameLabel);
 		GameNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -169,13 +172,13 @@ public class MainScreen extends JFrame {
 		controlTextPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JLabel lblUseTheArrowkeys = new JLabel("Use the arrowkeys to move.");
-		lblUseTheArrowkeys.setFont(new Font("Sitka Small", Font.PLAIN, 18));
+		lblUseTheArrowkeys.setFont(new Font("Sitka Small Bold", Font.PLAIN, 18));
 		controlTextPanel.add(lblUseTheArrowkeys);
 		lblUseTheArrowkeys.setHorizontalAlignment(SwingConstants.CENTER);
 		lblUseTheArrowkeys.setForeground(Color.WHITE);
 		
 		JLabel lblNewLabel = new JLabel("Press the L key to look around.");
-		lblNewLabel.setFont(new Font("Sitka Small", Font.PLAIN, 18));
+		lblNewLabel.setFont(new Font("Sitka Small Bold", Font.PLAIN, 18));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setForeground(Color.WHITE);
 		controlTextPanel.add(lblNewLabel);
@@ -223,7 +226,7 @@ public class MainScreen extends JFrame {
 		textPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JLabel lblChooseTheSize = new JLabel("Choose the size of the maze");
-		lblChooseTheSize.setFont(new Font("Sitka Small", Font.PLAIN, 18));
+		lblChooseTheSize.setFont(new Font("Sitka Small Bold", Font.PLAIN, 18));
 		lblChooseTheSize.setHorizontalAlignment(SwingConstants.CENTER);
 		lblChooseTheSize.setForeground(Color.WHITE);
 		textPanel.add(lblChooseTheSize);
@@ -260,6 +263,12 @@ public class MainScreen extends JFrame {
 		smallMaze.setFocusPainted(false);
 		smallMaze.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+//				BoardActions bo = new BoardActions(); //1 for small maze
+//				bo.setMazeSize(1);
+//				bo.initializeBoard();
+//				bo.gameLoop();
+			    CardLayout cl = (CardLayout)(differentScreens.getLayout());
+			    cl.show(differentScreens, "GAMESCREEN");
 			}
 		});
 		smallMaze.setSize(new Dimension(100, 30));
@@ -306,6 +315,23 @@ public class MainScreen extends JFrame {
 		
 		Component verticalStrut_8 = Box.createVerticalStrut(20);
 		gameSizeChoosingMenu.add(verticalStrut_8);
+		
+		JPanel gameScreen = new JPanel();
+		differentScreens.add(gameScreen, "GAMESCREEN");
+		gameScreen.setBackground(Color.BLACK);
+		gameScreen.setLayout(new GridLayout(0, 1, 0, 0));
+
+	    JEditorPane gameText = new JEditorPane(new HTMLEditorKit().getContentType(),"jee<br>juu");
+	    gameText.setText("Small<br>Medium");
+
+	    Font font = new Font("Sitka Small Bold", Font.PLAIN, 18);
+	    String bodyRule = "body { font-family: " + font.getFamily() + "; " + "font-size: " + 18 + "pt; " + "color : white; }";
+	    ((HTMLDocument)gameText.getDocument()).getStyleSheet().addRule(bodyRule);
+		
+		gameText.setBackground(Color.BLACK);
+		gameText.setFont(new Font("Sitka Small Bold", Font.PLAIN, 18));
+		gameText.setEditable(false);
+		gameScreen.add(gameText);
 		
 
 	}
