@@ -16,6 +16,9 @@ public class BoardActions {
 	private int entryPointXCoord;
 	private String [][] map;
 	private int mazeSize = 0;
+	private int firstMovement = 0; // if first movement is 0 then player is making their first move of the game
+	private String [][] board = null;
+	private PlayerActions pl = null;
 
 	// set the size of the maze, 1 = small, 2 = medium, 3 = large
 	public void setMazeSize(int size){
@@ -25,65 +28,46 @@ public class BoardActions {
 	public void initializeBoard(){
 		b = new Board(mazeSize);
 		mapBoard = new Board(mazeSize);
-		map = mapBoard.getBoard();
-		gameLoop();		
+		map = mapBoard.getBoard();			
 	}
 
 	// main game loop which ends once player has reached the end of the maze
-	public void gameLoop(){
+	public String gameLoop(String movementDirectionKeystroke){
 		
-		String [][] board = b.getBoard();
+		String textToReturn = null;
 		
-		playerXCoord = b.getPlayerXStartPos();
-		playerYCoord= b.getPlayerYStartPos()+1; // +1 needed to move away from edge of wall
-		Scanner in = new Scanner(System.in);
+		if(firstMovement == 0){
 		
-		entryPointYCoord = playerYCoord; // save entry point data for text description
-		entryPointXCoord = playerXCoord;
+			board = b.getBoard();
 		
-		// stay in maze while player y position is not at the edge of the maze
-		// when y position is at the edge, player has found an exit so end the game.
-		
-		PlayerActions pl = new PlayerActions();
-		
-		System.out.println("You hear the maze door close behind you.");
-		System.out.println("Press 's' to move into the maze.");
-		
-		// player map that is initially empty but fills in as player explores different areas.
-		String [][] map = mapBoard.getBoard();				
-		mapBoard.initializeMap(map);
+			playerXCoord = b.getPlayerXStartPos();
+			playerYCoord= b.getPlayerYStartPos()+1; // +1 needed to move away from edge of wall
+			Scanner in = new Scanner(System.in);
+			
+			entryPointYCoord = playerYCoord; // save entry point data for text description
+			entryPointXCoord = playerXCoord;
+			
+			// stay in maze while player y position is not at the edge of the maze
+			// when y position is at the edge, player has found an exit so end the game.
+			
+			pl = new PlayerActions();
+			
+			// player map that is initially empty but fills in as player explores different areas.
+			map = mapBoard.getBoard();				
+			mapBoard.initializeMap(map);
+			firstMovement++;
+		}else{
+			if(playerYCoord < b.getBoardYSize()-1){
 				
-		while(playerYCoord < b.getBoardYSize()-1){
-			
-			actionResult(pl.playerButtonPress());			
-			
-			// player looking at map
-			// place player on map, print map, then remove player icon from map
-		
-			if(playerYCoord >= b.getBoardYSize()-1){
-				//exit found do nothing
+				actionResult(movementDirectionKeystroke);			
+				
+				textToReturn = b.printBoard(map);
+				
 			}else{
-				
-			
-				exploringBoard();
-			
-				// player is always on empty space but future proofing with this catch.
-				// else fork means player is somehow standing either on wall or something else than floor.
-				if(b.getPositionInfo(playerXCoord, playerYCoord).toLowerCase().contains("floor")){
-					map[playerXCoord][playerYCoord] = "."; // player is always on empty space so make it empty again. 
-				}else{
-					map[playerXCoord][playerYCoord] = "#";
-				}
-			
+				textToReturn = ("You found the exit!");
 			}
-			
-			map[playerXCoord][playerYCoord] = "X";
-			
-			b.printBoard(map);
-
 		}
-		
-		System.out.println("You found the exit!");
+		return textToReturn;
 	}
 
 	public void exploringBoard(){		
@@ -145,10 +129,9 @@ public class BoardActions {
 
 	public void actionResult(String action){
 		
-		Scanner in = new Scanner(System.in);
 		
 		switch(action){
-			case "w":
+			case "up":
 				playerYCoord--; // player moving north
 									
 				// check for first movement, show door instead of floor text
@@ -176,7 +159,7 @@ public class BoardActions {
 				
 				}
 				break;
-			case "d":
+			case "right":
 				
 				playerXCoord++; // player moving east
 				
@@ -192,7 +175,7 @@ public class BoardActions {
 				}
 									
 				break;
-			case "s":
+			case "down":
 				
 				playerYCoord++; // player moving south
 				
@@ -208,7 +191,7 @@ public class BoardActions {
 				}
 				
 				break;
-			case "a":
+			case "left":
 				
 				playerXCoord--; // player moving west
 				
@@ -227,8 +210,25 @@ public class BoardActions {
 			case "l":
 				// show what player sees around them as text
 				exploringBoard();
-
 				break;
+			
 		}
+		
+		if(playerYCoord >= b.getBoardYSize()-1){
+			//exit found do nothing
+		}else{
+			exploringBoard();
+		
+			// player is always on empty space but future proofing with this catch.
+			// else fork means player is somehow standing either on wall or something else than floor.
+			if(b.getPositionInfo(playerXCoord, playerYCoord).toLowerCase().contains("floor")){
+				map[playerXCoord][playerYCoord] = "."; // player is always on empty space so make it empty again. 
+			}else{
+				map[playerXCoord][playerYCoord] = "#";
+			}
+		
+		}
+		
+		map[playerXCoord][playerYCoord] = "X";
 	}
 }

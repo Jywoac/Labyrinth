@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
 import java.awt.GridLayout;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
 import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.SwingConstants;
@@ -31,6 +33,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Font;
@@ -41,6 +44,8 @@ import javax.swing.JTextPane;
 public class MainScreen extends JFrame {
 
 	private JPanel contentPane;
+	private JEditorPane gameText = new JEditorPane(new HTMLEditorKit().getContentType(),"");
+	private BoardActions bo = null;
 
 	/**
 	 * Launch the application.
@@ -58,11 +63,79 @@ public class MainScreen extends JFrame {
 			}
 		});
 	}
+	
+    private class MyDispatcher implements KeyEventDispatcher {
+        @Override
+        public boolean dispatchKeyEvent(KeyEvent e) {
+    	    int key = e.getKeyCode();
+    	    
+    	    // text is kind of weird when printed on the gametext, check it out
+    	    // also L button press does not work
+    	    
+    	    if (key == KeyEvent.VK_UP) {
+    	    	//gameText.setText("<center>"+bo.gameLoop("up")+"</center>");
+    	    	gameText.setText(bo.gameLoop("up"));
+    	    }	    
+
+    	    if (key == KeyEvent.VK_RIGHT) {
+    	    	//gameText.setText("<center>"+bo.gameLoop("right")+"</center>");
+    	    	gameText.setText(bo.gameLoop("right"));
+    	    }
+
+    	    if (key == KeyEvent.VK_DOWN) {
+    	    	//gameText.setText("<center>"+bo.gameLoop("down")+"</center>");
+    	    	gameText.setText(bo.gameLoop("down"));
+    	    }
+    	    
+    	    if (key == KeyEvent.VK_LEFT) {
+    	    	//gameText.setText("<center>"+bo.gameLoop("left")+"</center>");
+    	    	gameText.setText(bo.gameLoop("left"));
+    	    }
+    	    
+    	    if (key == KeyEvent.VK_L){
+    	    	//gameText.setText("<center>"+bo.gameLoop("l")+"</center>");
+    	    	gameText.setText(bo.gameLoop("l"));
+    	    }
+            return false;
+        }
+    }
+	
+//	public void keyPressed(KeyEvent e) {
+//		
+//		System.out.print("TEST");
+//		
+//	    int key = e.getKeyCode();
+//
+//	    if (key == KeyEvent.VK_UP) {
+//	    	gameText.setText("<center>"+bo.gameLoop("up")+"</center>");
+//	    }	    
+//
+//	    if (key == KeyEvent.VK_RIGHT) {
+//	    	gameText.setText("<center>"+bo.gameLoop("right")+"</center>");
+//	    }
+//
+//	    if (key == KeyEvent.VK_DOWN) {
+//	    	gameText.setText("<center>"+bo.gameLoop("down")+"</center>");
+//	    }
+//	    
+//	    if (key == KeyEvent.VK_LEFT) {
+//	    	gameText.setText("<center>"+bo.gameLoop("left")+"</center>");
+//	    }
+//	    
+//	    if (key == KeyEvent.VK_L){
+//	    	gameText.setText("<center>"+bo.gameLoop("l")+"</center>");
+//	    }
+//	}
 
 	/**
 	 * Create the frame.
 	 */
 	public MainScreen() {
+		
+        KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+        manager.addKeyEventDispatcher(new MyDispatcher());
+		
+		
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(450, 450, 800, 600);
@@ -263,12 +336,19 @@ public class MainScreen extends JFrame {
 		smallMaze.setFocusPainted(false);
 		smallMaze.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-//				BoardActions bo = new BoardActions(); //1 for small maze
-//				bo.setMazeSize(1);
-//				bo.initializeBoard();
-//				bo.gameLoop();
+				bo = new BoardActions();
+				bo.setMazeSize(1);
+				bo.initializeBoard();
+				
 			    CardLayout cl = (CardLayout)(differentScreens.getLayout());
 			    cl.show(differentScreens, "GAMESCREEN");
+			    gameText.setText("<center>You hear the maze door close behind you.<br>"
+			    		+ "Press 'down arrow' to move into the maze.</center>");
+			    // THREAD juttuja t‰h‰n, t‰st‰ menn‰‰n sitten boardactions puolelle
+			    // joka sitten p‰ivitt‰‰ tota game texti‰
+			    // tarvitaan viel‰ listenerit nuolin‰pp‰imille ja L kirjaimelle
+
+			    
 			}
 		});
 		smallMaze.setSize(new Dimension(100, 30));
@@ -285,6 +365,14 @@ public class MainScreen extends JFrame {
 		mediumMaze.setFocusPainted(false);
 		mediumMaze.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				bo = new BoardActions();
+				bo.setMazeSize(2); // 2 for medium size maze
+				bo.initializeBoard();
+				
+			    CardLayout cl = (CardLayout)(differentScreens.getLayout());
+			    cl.show(differentScreens, "GAMESCREEN");
+			    gameText.setText("<center>You hear the maze door close behind you.<br>"
+			    		+ "Press 'down arrow' to move into the maze.</center>");
 			}
 		});
 		mediumMaze.setSize(new Dimension(100, 30));
@@ -297,6 +385,14 @@ public class MainScreen extends JFrame {
 		bigMaze.setRolloverIcon(new ImageIcon(MainScreen.class.getResource("/large_rollover.png")));
 		bigMaze.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				bo = new BoardActions();
+				bo.setMazeSize(3); // 3 for large size maze
+				bo.initializeBoard();
+				
+			    CardLayout cl = (CardLayout)(differentScreens.getLayout());
+			    cl.show(differentScreens, "GAMESCREEN");
+			    gameText.setText("<center>You hear the maze door close behind you.<br>"
+			    		+ "Press 'down arrow' to move into the maze.</center>");
 			}
 		});
 		bigMaze.setSize(new Dimension(100, 30));
@@ -321,8 +417,7 @@ public class MainScreen extends JFrame {
 		gameScreen.setBackground(Color.BLACK);
 		gameScreen.setLayout(new GridLayout(0, 1, 0, 0));
 
-	    JEditorPane gameText = new JEditorPane(new HTMLEditorKit().getContentType(),"jee<br>juu");
-	    gameText.setText("Small<br>Medium");
+	    gameText.setText("<center>Small<br>Medium</center>");
 
 	    Font font = new Font("Sitka Small Bold", Font.PLAIN, 18);
 	    String bodyRule = "body { font-family: " + font.getFamily() + "; " + "font-size: " + 18 + "pt; " + "color : white; }";
@@ -332,6 +427,7 @@ public class MainScreen extends JFrame {
 		gameText.setFont(new Font("Sitka Small Bold", Font.PLAIN, 18));
 		gameText.setEditable(false);
 		gameScreen.add(gameText);
+		
 		
 
 	}

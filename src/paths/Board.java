@@ -561,7 +561,7 @@ public class Board {
 	
 	
 	// print board items
-	public void printBoard(String[][] board){
+	public String printBoard(String[][] board){
 		
 		int x = 0;
 		int y = 0;
@@ -601,14 +601,15 @@ public class Board {
 			}
 			
 			if(x == boardXSize){
-				boardToPrint = boardToPrint + "\n";
+				boardToPrint = boardToPrint + "<br>";
 				//System.out.println();
 			}
 			
 			y++;
 		}
 		
-		System.out.print(boardToPrint);		
+		//System.out.print(boardToPrint);
+		return boardToPrint;
 	}
 
 	
