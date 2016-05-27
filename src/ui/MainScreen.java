@@ -71,30 +71,42 @@ public class MainScreen extends JFrame {
     	    
     	    // text is kind of weird when printed on the gametext, check it out
     	    // also L button press does not work
+    	    // first press does nothing after that it moves 2 spaces
     	    
-    	    if (key == KeyEvent.VK_UP) {
-    	    	//gameText.setText("<center>"+bo.gameLoop("up")+"</center>");
-    	    	gameText.setText(bo.gameLoop("up"));
-    	    }	    
-
-    	    if (key == KeyEvent.VK_RIGHT) {
-    	    	//gameText.setText("<center>"+bo.gameLoop("right")+"</center>");
-    	    	gameText.setText(bo.gameLoop("right"));
-    	    }
-
-    	    if (key == KeyEvent.VK_DOWN) {
-    	    	//gameText.setText("<center>"+bo.gameLoop("down")+"</center>");
-    	    	gameText.setText(bo.gameLoop("down"));
-    	    }
+    	    if (e.getID() == KeyEvent.KEY_PRESSED){
+	    	       	    	    
+	    	    if (key == KeyEvent.VK_UP) {
+	    	    	gameText.setText("<center>"+bo.gameLoop("up")+"</center>");
+	    	    	//gameText.setText(bo.gameLoop("up"));
+	    	    	
+	    	    	// when gametext is "you found the exit!" then move to starts card page,
+	    	    	// show some stats, ex. movements taken.
+	
+	    	    }	    
+	
+	    	    if (key == KeyEvent.VK_RIGHT) {
+	    	    	gameText.setText("<center>"+bo.gameLoop("right")+"</center>");
+	//    	    	gameText.setText(bo.gameLoop("right"));
+	
+	    	    }
+	
+	    	    if (key == KeyEvent.VK_DOWN) {
+	    	    	gameText.setText("<center>"+bo.gameLoop("down")+"</center>");
+	//    	    	gameText.setText(bo.gameLoop("down"));
+	
+	    	    }
+	    	    
+	    	    if (key == KeyEvent.VK_LEFT) {
+	    	    	gameText.setText("<center>"+bo.gameLoop("left")+"</center>");
+	//    	    	gameText.setText(bo.gameLoop("left"));
+	
+	    	    }
+	    	    
+	    	    if (key == KeyEvent.VK_L){
+	    	    	gameText.setText("<center>"+bo.gameLoop("l")+"</center>");
+	//    	    	gameText.setText(bo.gameLoop("l"));
+	    	    }
     	    
-    	    if (key == KeyEvent.VK_LEFT) {
-    	    	//gameText.setText("<center>"+bo.gameLoop("left")+"</center>");
-    	    	gameText.setText(bo.gameLoop("left"));
-    	    }
-    	    
-    	    if (key == KeyEvent.VK_L){
-    	    	//gameText.setText("<center>"+bo.gameLoop("l")+"</center>");
-    	    	gameText.setText(bo.gameLoop("l"));
     	    }
             return false;
         }
@@ -344,10 +356,6 @@ public class MainScreen extends JFrame {
 			    cl.show(differentScreens, "GAMESCREEN");
 			    gameText.setText("<center>You hear the maze door close behind you.<br>"
 			    		+ "Press 'down arrow' to move into the maze.</center>");
-			    // THREAD juttuja t‰h‰n, t‰st‰ menn‰‰n sitten boardactions puolelle
-			    // joka sitten p‰ivitt‰‰ tota game texti‰
-			    // tarvitaan viel‰ listenerit nuolin‰pp‰imille ja L kirjaimelle
-
 			    
 			}
 		});
@@ -419,12 +427,13 @@ public class MainScreen extends JFrame {
 
 	    gameText.setText("<center>Small<br>Medium</center>");
 
-	    Font font = new Font("Sitka Small Bold", Font.PLAIN, 18);
+	    //Font font = new Font("Sitka Small Bold", Font.PLAIN, 18);
+	    Font font = new Font("monospaced", Font.PLAIN, 18);
 	    String bodyRule = "body { font-family: " + font.getFamily() + "; " + "font-size: " + 18 + "pt; " + "color : white; }";
 	    ((HTMLDocument)gameText.getDocument()).getStyleSheet().addRule(bodyRule);
 		
 		gameText.setBackground(Color.BLACK);
-		gameText.setFont(new Font("Sitka Small Bold", Font.PLAIN, 18));
+		//gameText.setFont(new Font("Sitka Small Bold", Font.PLAIN, 18));
 		gameText.setEditable(false);
 		gameScreen.add(gameText);
 		

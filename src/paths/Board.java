@@ -499,7 +499,7 @@ public class Board {
 		while (y < boardYSize){
 			x = 0;
 			while(x < boardXSize){
-				boardI[x][y] = " ";
+				boardI[x][y] = "?";
 				x++;
 			}			
 			y++;
