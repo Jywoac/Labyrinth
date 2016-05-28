@@ -82,6 +82,7 @@ public class BoardActions {
 				textToReturn = ("You found the exit!");
 			}
 		}
+		
 		return textToReturn;
 	}
 

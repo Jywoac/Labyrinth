@@ -192,8 +192,18 @@ public class MainScreen extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				//BoardActions bo = new BoardActions();
 				// move to mazeSize screen with a new card
-			    CardLayout cl = (CardLayout)(differentScreens.getLayout());
-			    cl.show(differentScreens, "GAMESIZEMENU");
+//			    CardLayout cl = (CardLayout)(differentScreens.getLayout());
+//			    cl.show(differentScreens, "GAMESIZEMENU");
+				
+				bo = new BoardActions();
+				bo.setMazeSize(1);
+				bo.initializeBoard();
+				
+			    gameText.setText("<center>You hear the maze door close behind you.<br>"
+			    		+ "Press 'down arrow' to move into the maze.</center>");
+				
+				CardLayout cl = (CardLayout)(differentScreens.getLayout());
+			    cl.show(differentScreens, "GAMESCREEN");
 			}
 		});
 		startGameButton.setLocation(346, 0);

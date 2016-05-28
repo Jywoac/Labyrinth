@@ -20,16 +20,12 @@ public class Board {
 	private int playerYStartPos = 0;
 	private int playerXStartPos = 0;
 	
-	public Board(){
-		
-	}
-	
 	private void setDifficulty(int diff){
 		
 		switch(diff){
 			case 1:
-				boardXSize = 20;
-				boardYSize = 20;
+				boardXSize = 69;
+				boardYSize = 22;
 				break;
 			case 2:
 				boardXSize = 50;
@@ -46,9 +42,7 @@ public class Board {
 		
 		
 	}
-	
-	// TÄHÄN PITÄÄ LAITTAA UUSI FUNKTIO JOKA TEKEE MAZEN JOKA BOARD KOOLLE.
-	// SIIRRÄ TAVARAA POIS TÄSTÄ BOARD JUTUSTA
+
 	
 	private void makeMazes(int dif){		
 	    
@@ -71,16 +65,64 @@ public class Board {
 		boardItems = makeCorrectPathThroughMaze(boardItems,startingXPosition, startingYPosition);	    
 	    
 		switch(dif){
+//			case 1:
+//				// small maze
+//				// make multiple false paths to generate maze
+//				int numOfYPaths = 3;
+//				
+//				while(numOfYPaths > 0){
+//
+//					// make random y paths		
+//					startingXPosition = rand.nextInt(boardXSize+1); // random number between boardXpos start and end
+//
+//					if(startingXPosition == 0){
+//						startingXPosition = 1;
+//					}else{
+//						if(startingXPosition >= (boardXSize-1)){
+//							startingXPosition = (boardXSize-2);
+//						}
+//					}
+//					startingYPosition = 1; // start at the almost edge of board					
+//					makeFalsePathYAxis(boardItems,startingXPosition, startingYPosition);
+//					
+//					// reset positions for next path generation
+//					startingXPosition = 0;
+//					startingYPosition = 0;
+//
+//					numOfYPaths--;			
+//				}
+//				
+//				// make multiple false paths to generate maze
+//				int numOfXPaths = 3;
+//				
+//				while(numOfXPaths > 0){
+//					
+//					// make random x paths	
+//					startingYPosition = rand.nextInt(boardYSize+1); // random number between boardXpos start and end
+//					if(startingYPosition == 0){
+//						startingYPosition = 1;
+//					}else{
+//						if(startingYPosition >= (boardYSize-1)){
+//							startingYPosition = (boardYSize-2);
+//						}
+//					}
+//					
+//					startingXPosition = 1; // start at the almost edge of board		
+//								
+//					makeFalsePathXAxis(boardItems,startingXPosition, startingYPosition);
+//					numOfXPaths--;			
+//				}
+//				break;
+			
 			case 1:
-				// small maze
+				// medium maze
 				// make multiple false paths to generate maze
-				int numOfYPaths = 3;
+				int numOfYPaths = 5;
 				
 				while(numOfYPaths > 0){
 
 					// make random y paths		
 					startingXPosition = rand.nextInt(boardXSize+1); // random number between boardXpos start and end
-
 					if(startingXPosition == 0){
 						startingXPosition = 1;
 					}else{
@@ -99,7 +141,7 @@ public class Board {
 				}
 				
 				// make multiple false paths to generate maze
-				int numOfXPaths = 3;
+				int numOfXPaths = 5;
 				
 				while(numOfXPaths > 0){
 					
@@ -119,6 +161,7 @@ public class Board {
 					numOfXPaths--;			
 				}
 				break;
+			
 			case 2:
 				// medium maze
 				// make multiple false paths to generate maze
