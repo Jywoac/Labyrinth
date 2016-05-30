@@ -66,7 +66,7 @@ public class BoardActions {
 			
 			map[playerXCoord][playerYCoord] = "X";
 			
-			textToReturn = b.printBoard(map);
+			textToReturn = b.printBoard(map); // change b to mapBoard?
 		}else{
 			if(playerYCoord < b.getBoardYSize()-1){
 				
@@ -78,6 +78,8 @@ public class BoardActions {
 				textToReturn = ("You found the exit!");
 			}
 		}
+		
+		textToReturn = b.printBoard(board); // TESTING remove
 		
 		return textToReturn;
 	}
