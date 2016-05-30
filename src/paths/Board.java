@@ -1,9 +1,5 @@
 package paths;
 
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.Random;
 
 public class Board {

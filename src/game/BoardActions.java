@@ -2,9 +2,6 @@ package game;
 
 import paths.Board;
 
-import java.util.Scanner;
-
-
 public class BoardActions {
 	
 	private Board b;
@@ -40,7 +37,6 @@ public class BoardActions {
 			
 			playerXCoord = b.getPlayerXStartPos();
 			playerYCoord= b.getPlayerYStartPos()+1; // +1 needed to move away from edge of wall
-			Scanner in = new Scanner(System.in);
 			
 			entryPointYCoord = playerYCoord; // save entry point data for text description
 			entryPointXCoord = playerXCoord;
