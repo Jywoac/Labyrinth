@@ -79,7 +79,7 @@ public class BoardActions {
 			}
 		}
 		
-		textToReturn = b.printBoard(board); // TESTING remove
+		//textToReturn = b.printBoard(board); // TESTING remove
 		
 		return textToReturn;
 	}

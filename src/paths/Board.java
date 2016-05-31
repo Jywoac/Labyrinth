@@ -268,95 +268,6 @@ public class Board {
 		
 	}
 	
-//	// Correct and False path need more x movement since they are too linear
-//	// Maybe stop the y from moving like every 2 movement stay on the level for 5 x movements?
-//	private String[][] makeFalsePathYAxis(String[][] BI,int x,int y){
-//		
-//		String [][] boardWithPath = BI;
-//		Random rand = new Random();
-//		
-//		int leftOrRight = 0; // has 2 possible values, 0 move left, 1 move right.
-//		int downUpOrStay = 0; // has 3 possible values, 0 stay on current level, 1 move back up, 2 move down.
-//		
-//		boardWithPath[x][y] = "floor"; // use "floor" text after testing
-//		
-//		//boardWithPath[x][y] = "Y"; // path testing 
-//		
-//		// generate a path from top to bottom
-//		// stop just before exiting the maze so we that we wont have multiple
-//		// paths out of the maze
-//		while(y < boardYSize-1){
-//			
-//			downUpOrStay = rand.nextInt(4); // randomizing the y value path
-//			
-//			// possibly need to make it more likely to move down a level
-//			// Currently moving down with 2x possibility, adding more cases increases
-//			// chance of moving down if y increases in the case
-//			
-//			switch(downUpOrStay){
-//				case 0:
-//					// do nothing, stay on same level
-//					break;
-//				case 1:
-//					y--; // move back a level
-//					break;
-//				case 2:
-//					y++; // move down a level
-//					break;
-//				case 3:
-//					y++; // move down a level
-//					break;
-//			}			
-//			
-//			if(y <= 0){ // prevent breaking of outside wall
-//				y = 1;
-//			}
-//			
-//			// only move x if y stayed on the same level
-//			if(downUpOrStay == 0){				
-//				
-//				leftOrRight = rand.nextInt(2);
-//				
-//				switch(leftOrRight){
-//					case 0:
-//						x--; // move left
-//						break;
-//					case 1:
-//						x++; // move right
-//						break;
-//	
-//				}
-//	
-//				// we don't want multiple paths out of the maze so we must discard edge numbers (boardXsize-1 and 0) since they are 
-//				// the board edge walls that we dont want to break
-//				if(x <= 0){
-//					x = 1;
-//				}
-//				
-//				if(x >= boardXSize-1){ // 19
-//					x = boardXSize-3; // 18
-//				}
-//			}
-//			
-//			// y will reach a size over the board here so 
-//			// needs to have this catch
-//			if(y >= boardYSize-1){
-//				
-//			}else{				
-//				boardWithPath[x][y] = "floor"; // use "floor" text after testing
-//				//boardWithPath[x][y] = "Y"; // path testing 
-//			}
-//		}
-//		return boardWithPath;
-//	}
-	
-	// TESTING PATH
-	// TESTING PATH
-	// TESTING PATH
-	// TESTING PATH
-	// TESTING PATH
-	// TESTING PATH
-	// USE ONE ABOVE IN GAME
 	// Correct and False path need more x movement since they are too linear
 	// Maybe stop the y from moving like every 2 movement stay on the level for 5 x movements?
 	private String[][] makeFalsePathYAxis(String[][] BI,int x,int y){
@@ -367,7 +278,9 @@ public class Board {
 		int leftOrRight = 0; // has 2 possible values, 0 move left, 1 move right.
 		int downUpOrStay = 0; // has 3 possible values, 0 stay on current level, 1 move back up, 2 move down.
 		
-		boardWithPath[x][y] = "Y"; // path testing 
+		boardWithPath[x][y] = "floor"; // use "floor" text after testing
+		
+		//boardWithPath[x][y] = "Y"; // path testing 
 		
 		// generate a path from top to bottom
 		// stop just before exiting the maze so we that we wont have multiple
@@ -430,13 +343,23 @@ public class Board {
 			if(y >= boardYSize-1){
 				
 			}else{				
-				boardWithPath[x][y] = "Y"; // path testing 
+				boardWithPath[x][y] = "floor"; // use "floor" text after testing
+				//boardWithPath[x][y] = "Y"; // path testing 
 			}
 		}
 		return boardWithPath;
 	}
-//	
-//	private String[][] makeFalsePathXAxis(String[][] BI,int x,int y){
+	
+//	// TESTING PATH
+//	// TESTING PATH
+//	// TESTING PATH
+//	// TESTING PATH
+//	// TESTING PATH
+//	// TESTING PATH
+//	// USE ONE ABOVE IN GAME
+//	// Correct and False path need more x movement since they are too linear
+//	// Maybe stop the y from moving like every 2 movement stay on the level for 5 x movements?
+//	private String[][] makeFalsePathYAxis(String[][] BI,int x,int y){
 //		
 //		String [][] boardWithPath = BI;
 //		Random rand = new Random();
@@ -444,34 +367,36 @@ public class Board {
 //		int leftOrRight = 0; // has 2 possible values, 0 move left, 1 move right.
 //		int downUpOrStay = 0; // has 3 possible values, 0 stay on current level, 1 move back up, 2 move down.
 //		
-//		boardWithPath[x][y] = "floor"; // use "floor" text after testing
-//		//boardWithPath[x][y] = "X"; // path testing 
+//		boardWithPath[x][y] = "Y"; // path testing 
 //		
-//		// generate a path from left to right
+//		// generate a path from top to bottom
 //		// stop just before exiting the maze so we that we wont have multiple
 //		// paths out of the maze
-//		while(x < boardXSize-1){
+//		while(y < boardYSize-1){
 //			
 //			downUpOrStay = rand.nextInt(4); // randomizing the y value path
 //			
-//			//generate moving on x axis			
+//			// possibly need to make it more likely to move down a level
+//			// Currently moving down with 2x possibility, adding more cases increases
+//			// chance of moving down if y increases in the case
+//			
 //			switch(downUpOrStay){
 //				case 0:
 //					// do nothing, stay on same level
 //					break;
 //				case 1:
-//					x--; // move left
+//					y--; // move back a level
 //					break;
 //				case 2:
-//					x++; // move right
+//					y++; // move down a level
 //					break;
 //				case 3:
-//					x++; // move right
+//					y++; // move down a level
 //					break;
 //			}			
 //			
-//			if(x <= 0){ // prevent breaking of outside wall
-//				x = 1;
+//			if(y <= 0){ // prevent breaking of outside wall
+//				y = 1;
 //			}
 //			
 //			// only move x if y stayed on the same level
@@ -481,45 +406,36 @@ public class Board {
 //				
 //				switch(leftOrRight){
 //					case 0:
-//						y--; // move up (moves up because a lower y number is higher when drawn)
+//						x--; // move left
 //						break;
 //					case 1:
-//						y++; // move down
+//						x++; // move right
 //						break;
 //	
 //				}
 //	
 //				// we don't want multiple paths out of the maze so we must discard edge numbers (boardXsize-1 and 0) since they are 
 //				// the board edge walls that we dont want to break
-//				if(y <= 0){
-//					y = 1;
-//				}else{
-//					if(y >= boardYSize-1){
-//						y = boardYSize-3;
-//					}
+//				if(x <= 0){
+//					x = 1;
+//				}
+//				
+//				if(x >= boardXSize-1){ // 19
+//					x = boardXSize-3; // 18
 //				}
 //			}
 //			
-//			// x will reach a size over the board here so 
+//			// y will reach a size over the board here so 
 //			// needs to have this catch
-//			if(x >= boardXSize-1){
+//			if(y >= boardYSize-1){
 //				
 //			}else{				
-//				boardWithPath[x][y] = "floor"; // use "floor" text after testing
-//				//boardWithPath[x][y] = "X"; // path testing 
+//				boardWithPath[x][y] = "Y"; // path testing 
 //			}
 //		}
 //		return boardWithPath;
 //	}
 	
-	
-	// TESTING PATH
-	// TESTING PATH
-	// TESTING PATH
-	// TESTING PATH
-	// TESTING PATH
-	// TESTING PATH
-	// USE ONE ABOVE IN GAME
 	private String[][] makeFalsePathXAxis(String[][] BI,int x,int y){
 		
 		String [][] boardWithPath = BI;
@@ -527,8 +443,9 @@ public class Board {
 		
 		int leftOrRight = 0; // has 2 possible values, 0 move left, 1 move right.
 		int downUpOrStay = 0; // has 3 possible values, 0 stay on current level, 1 move back up, 2 move down.
-
-		boardWithPath[x][y] = "X"; // path testing 
+		
+		boardWithPath[x][y] = "floor"; // use "floor" text after testing
+		//boardWithPath[x][y] = "X"; // path testing 
 		
 		// generate a path from left to right
 		// stop just before exiting the maze so we that we wont have multiple
@@ -588,55 +505,56 @@ public class Board {
 			if(x >= boardXSize-1){
 				
 			}else{				
-				boardWithPath[x][y] = "X"; // path testing 
+				boardWithPath[x][y] = "floor"; // use "floor" text after testing
+				//boardWithPath[x][y] = "X"; // path testing 
 			}
-			
-			System.out.println(x);
-			
 		}
 		return boardWithPath;
 	}
 	
-//	// create a path that goes through the maze aka the correct path.
-//	private String[][] makeCorrectPathThroughMaze(String[][] BI,int x,int y){
+	
+//	// TESTING PATH
+//	// TESTING PATH
+//	// TESTING PATH
+//	// TESTING PATH
+//	// TESTING PATH
+//	// TESTING PATH
+//	// USE ONE ABOVE IN GAME
+//	private String[][] makeFalsePathXAxis(String[][] BI,int x,int y){
 //		
 //		String [][] boardWithPath = BI;
 //		Random rand = new Random();
 //		
 //		int leftOrRight = 0; // has 2 possible values, 0 move left, 1 move right.
 //		int downUpOrStay = 0; // has 3 possible values, 0 stay on current level, 1 move back up, 2 move down.
-//		
-//		boardWithPath[x][y] = "floor"; // use "floor" text after testing
-//		//boardWithPath[x][y] = "C"; // path testing 
-//		
-//		// generate a path from top to bottom
 //
+//		boardWithPath[x][y] = "X"; // path testing 
 //		
-//		while(y < boardYSize){
+//		// generate a path from left to right
+//		// stop just before exiting the maze so we that we wont have multiple
+//		// paths out of the maze
+//		while(x < boardXSize-1){
 //			
 //			downUpOrStay = rand.nextInt(4); // randomizing the y value path
 //			
-//			// possibly need to make it more likely to move down a level
-//			// Currently moving down with 2x possibility, adding more cases increases
-//			// chance of moving down if y increases in the case
-//			
+//			//generate moving on x axis			
 //			switch(downUpOrStay){
 //				case 0:
 //					// do nothing, stay on same level
 //					break;
 //				case 1:
-//					y--; // move back a level
+//					x--; // move left
 //					break;
 //				case 2:
-//					y++; // move down a level
+//					x++; // move right
 //					break;
 //				case 3:
-//					y++; // move down a level
+//					x++; // move right
 //					break;
 //			}			
 //			
-//			if(y <= 0){ // prevent breaking of outside wall
-//				y = 1;
+//			if(x <= 0){ // prevent breaking of outside wall
+//				x = 1;
 //			}
 //			
 //			// only move x if y stayed on the same level
@@ -646,45 +564,39 @@ public class Board {
 //				
 //				switch(leftOrRight){
 //					case 0:
-//						x--; // move left
+//						y--; // move up (moves up because a lower y number is higher when drawn)
 //						break;
 //					case 1:
-//						x++; // move right
+//						y++; // move down
 //						break;
 //	
 //				}
 //	
 //				// we don't want multiple paths out of the maze so we must discard edge numbers (boardXsize-1 and 0) since they are 
 //				// the board edge walls that we dont want to break
-//				if(x <= 0){
-//					x = 1;
+//				if(y <= 0){
+//					y = 1;
 //				}else{
-//					if(x >= boardXSize-1){ // 19
-//						x = boardXSize-3; // 18
+//					if(y >= boardYSize-1){
+//						y = boardYSize-3;
 //					}
 //				}
 //			}
 //			
-//			// y will reach a size over the board here so 
+//			// x will reach a size over the board here so 
 //			// needs to have this catch
-//			if(y >= boardYSize){
+//			if(x >= boardXSize-1){
 //				
 //			}else{				
-//				boardWithPath[x][y] = "floor"; // use when not path testing
-//				//boardWithPath[x][y] = "C"; // path testing 
-//			}			
+//				boardWithPath[x][y] = "X"; // path testing 
+//			}
+//			
+//			System.out.println(x);
+//			
 //		}
-//
 //		return boardWithPath;
 //	}
 	
-	// TESTING PATH
-	// TESTING PATH
-	// TESTING PATH
-	// TESTING PATH
-	// TESTING PATH
-	// TESTING PATH
-	// USE ONE ABOVE IN GAME
 	// create a path that goes through the maze aka the correct path.
 	private String[][] makeCorrectPathThroughMaze(String[][] BI,int x,int y){
 		
@@ -693,8 +605,9 @@ public class Board {
 		
 		int leftOrRight = 0; // has 2 possible values, 0 move left, 1 move right.
 		int downUpOrStay = 0; // has 3 possible values, 0 stay on current level, 1 move back up, 2 move down.
-
-		boardWithPath[x][y] = "C"; // path testing 
+		
+		boardWithPath[x][y] = "floor"; // use "floor" text after testing
+		//boardWithPath[x][y] = "C"; // path testing 
 		
 		// generate a path from top to bottom
 
@@ -757,40 +670,100 @@ public class Board {
 			if(y >= boardYSize){
 				
 			}else{				
-				boardWithPath[x][y] = "C"; // path testing 
+				boardWithPath[x][y] = "floor"; // use when not path testing
+				//boardWithPath[x][y] = "C"; // path testing 
 			}			
 		}
 
 		return boardWithPath;
 	}
-	
-//	// initialize the board with wall items
-//	public String[][] initializeBoard(String[][] BI){
+//	
+//	// TESTING PATH
+//	// TESTING PATH
+//	// TESTING PATH
+//	// TESTING PATH
+//	// TESTING PATH
+//	// TESTING PATH
+//	// USE ONE ABOVE IN GAME
+//	// create a path that goes through the maze aka the correct path.
+//	private String[][] makeCorrectPathThroughMaze(String[][] BI,int x,int y){
 //		
-//		int x = 0;
-//		int y = 0;
-//		String [][] boardI = BI;
+//		String [][] boardWithPath = BI;
+//		Random rand = new Random();
 //		
-//		// populate board with walls
-//		while (y < boardYSize){
-//			x = 0;
-//			while(x < boardXSize){
-//				boardI[x][y] = "wall"; // use when not path testing
-//				//boardI[x][y] = "|"; // path testing
-//				x++;
+//		int leftOrRight = 0; // has 2 possible values, 0 move left, 1 move right.
+//		int downUpOrStay = 0; // has 3 possible values, 0 stay on current level, 1 move back up, 2 move down.
+//
+//		boardWithPath[x][y] = "C"; // path testing 
+//		
+//		// generate a path from top to bottom
+//
+//		
+//		while(y < boardYSize){
+//			
+//			downUpOrStay = rand.nextInt(4); // randomizing the y value path
+//			
+//			// possibly need to make it more likely to move down a level
+//			// Currently moving down with 2x possibility, adding more cases increases
+//			// chance of moving down if y increases in the case
+//			
+//			switch(downUpOrStay){
+//				case 0:
+//					// do nothing, stay on same level
+//					break;
+//				case 1:
+//					y--; // move back a level
+//					break;
+//				case 2:
+//					y++; // move down a level
+//					break;
+//				case 3:
+//					y++; // move down a level
+//					break;
 //			}			
-//			y++;
+//			
+//			if(y <= 0){ // prevent breaking of outside wall
+//				y = 1;
+//			}
+//			
+//			// only move x if y stayed on the same level
+//			if(downUpOrStay == 0){				
+//				
+//				leftOrRight = rand.nextInt(2);
+//				
+//				switch(leftOrRight){
+//					case 0:
+//						x--; // move left
+//						break;
+//					case 1:
+//						x++; // move right
+//						break;
+//	
+//				}
+//	
+//				// we don't want multiple paths out of the maze so we must discard edge numbers (boardXsize-1 and 0) since they are 
+//				// the board edge walls that we dont want to break
+//				if(x <= 0){
+//					x = 1;
+//				}else{
+//					if(x >= boardXSize-1){ // 19
+//						x = boardXSize-3; // 18
+//					}
+//				}
+//			}
+//			
+//			// y will reach a size over the board here so 
+//			// needs to have this catch
+//			if(y >= boardYSize){
+//				
+//			}else{				
+//				boardWithPath[x][y] = "C"; // path testing 
+//			}			
 //		}
-//		return boardI;
+//
+//		return boardWithPath;
 //	}
 	
-	// TESTING PATH
-	// TESTING PATH
-	// TESTING PATH
-	// TESTING PATH
-	// TESTING PATH
-	// TESTING PATH
-	// USE ONE ABOVE IN GAME
 	// initialize the board with wall items
 	public String[][] initializeBoard(String[][] BI){
 		
@@ -802,13 +775,40 @@ public class Board {
 		while (y < boardYSize){
 			x = 0;
 			while(x < boardXSize){
-				boardI[x][y] = "|"; // path testing
+				boardI[x][y] = "wall"; // use when not path testing
+				//boardI[x][y] = "|"; // path testing
 				x++;
 			}			
 			y++;
 		}
 		return boardI;
 	}
+	
+//	// TESTING PATH
+//	// TESTING PATH
+//	// TESTING PATH
+//	// TESTING PATH
+//	// TESTING PATH
+//	// TESTING PATH
+//	// USE ONE ABOVE IN GAME
+//	// initialize the board with wall items
+//	public String[][] initializeBoard(String[][] BI){
+//		
+//		int x = 0;
+//		int y = 0;
+//		String [][] boardI = BI;
+//		
+//		// populate board with walls
+//		while (y < boardYSize){
+//			x = 0;
+//			while(x < boardXSize){
+//				boardI[x][y] = "|"; // path testing
+//				x++;
+//			}			
+//			y++;
+//		}
+//		return boardI;
+//	}
 	
 	// initial population of the map with wall items
 	// this map is shown to the player. So all spaces are marked as "unknown" with ? symbol
