@@ -55,75 +55,36 @@ public class MainScreen extends JFrame {
         public boolean dispatchKeyEvent(KeyEvent e) {
     	    int key = e.getKeyCode();
     	    
-    	    // text is kind of weird when printed on the gametext, check it out
-    	    // also L button press does not work
-    	    // first press does nothing after that it moves 2 spaces
-    	    
     	    if (e.getID() == KeyEvent.KEY_PRESSED){
 	    	       	    	    
 	    	    if (key == KeyEvent.VK_UP) {
 	    	    	gameText.setText("<center>"+bo.gameLoop("up")+"</center>");
-	    	    	//gameText.setText(bo.gameLoop("up"));
-	    	    	
-	    	    	// when gametext is "you found the exit!" then move to starts card page,
-	    	    	// show some stats, ex. movements taken.
 	
 	    	    }	    
 	
 	    	    if (key == KeyEvent.VK_RIGHT) {
 	    	    	gameText.setText("<center>"+bo.gameLoop("right")+"</center>");
-	//    	    	gameText.setText(bo.gameLoop("right"));
 	
 	    	    }
 	
 	    	    if (key == KeyEvent.VK_DOWN) {
 	    	    	gameText.setText("<center>"+bo.gameLoop("down")+"</center>");
-	//    	    	gameText.setText(bo.gameLoop("down"));
 	
 	    	    }
 	    	    
 	    	    if (key == KeyEvent.VK_LEFT) {
 	    	    	gameText.setText("<center>"+bo.gameLoop("left")+"</center>");
-	//    	    	gameText.setText(bo.gameLoop("left"));
 	
 	    	    }
 	    	    
 	    	    if (key == KeyEvent.VK_L){
 	    	    	gameText.setText("<center>"+bo.gameLoop("l")+"</center>");
-	//    	    	gameText.setText(bo.gameLoop("l"));
 	    	    }
     	    
     	    }
             return false;
         }
     }
-	
-//	public void keyPressed(KeyEvent e) {
-//		
-//		System.out.print("TEST");
-//		
-//	    int key = e.getKeyCode();
-//
-//	    if (key == KeyEvent.VK_UP) {
-//	    	gameText.setText("<center>"+bo.gameLoop("up")+"</center>");
-//	    }	    
-//
-//	    if (key == KeyEvent.VK_RIGHT) {
-//	    	gameText.setText("<center>"+bo.gameLoop("right")+"</center>");
-//	    }
-//
-//	    if (key == KeyEvent.VK_DOWN) {
-//	    	gameText.setText("<center>"+bo.gameLoop("down")+"</center>");
-//	    }
-//	    
-//	    if (key == KeyEvent.VK_LEFT) {
-//	    	gameText.setText("<center>"+bo.gameLoop("left")+"</center>");
-//	    }
-//	    
-//	    if (key == KeyEvent.VK_L){
-//	    	gameText.setText("<center>"+bo.gameLoop("l")+"</center>");
-//	    }
-//	}
 
 	/**
 	 * Create the frame.
@@ -176,10 +137,6 @@ public class MainScreen extends JFrame {
 		startGameButton.setRolloverIcon(new ImageIcon(MainScreen.class.getResource("/start_rollover.png")));
 		startGameButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//BoardActions bo = new BoardActions();
-				// move to mazeSize screen with a new card
-//			    CardLayout cl = (CardLayout)(differentScreens.getLayout());
-//			    cl.show(differentScreens, "GAMESIZEMENU");
 				
 				bo = new BoardActions();
 				bo.setMazeSize(1);
@@ -432,8 +389,6 @@ public class MainScreen extends JFrame {
 		//gameText.setFont(new Font("Sitka Small Bold", Font.PLAIN, 18));
 		gameText.setEditable(false);
 		gameScreen.add(gameText);
-		
-		
 
 	}
 
