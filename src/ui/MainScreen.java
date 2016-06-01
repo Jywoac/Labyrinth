@@ -11,6 +11,7 @@ import java.awt.KeyboardFocusManager;
 import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 import javax.swing.border.EtchedBorder;
 import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.HTMLEditorKit;
@@ -31,8 +32,13 @@ public class MainScreen extends JFrame {
 
 	private JPanel contentPane;
 	private JEditorPane gameText = new JEditorPane(new HTMLEditorKit().getContentType(),"");
+	private JEditorPane combat = new JEditorPane(new HTMLEditorKit().getContentType(), "");
 	private BoardActions bo = null;
-
+    private Timer timer;
+    private int delay = 1;
+    private static final long serialVersionUID = 1L;
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -93,8 +99,7 @@ public class MainScreen extends JFrame {
 		
         KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         manager.addKeyEventDispatcher(new MyDispatcher());
-		
-		
+	
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(450, 450, 800, 600);
@@ -141,12 +146,16 @@ public class MainScreen extends JFrame {
 				bo = new BoardActions();
 				bo.setMazeSize(1);
 				bo.initializeBoard();
-				
-			    gameText.setText("<center>You hear the maze door close behind you.<br>"
-			    		+ "Press 'down arrow' to move into the maze.</center>");
-				
-				CardLayout cl = (CardLayout)(differentScreens.getLayout());
-			    cl.show(differentScreens, "GAMESCREEN");
+//				
+//			    gameText.setText("<center>You hear the maze door close behind you.<br>"
+//			    		+ "Press 'down arrow' to move into the maze.</center>");
+//				
+//				CardLayout cl = (CardLayout)(differentScreens.getLayout());
+//			    cl.show(differentScreens, "GAMESCREEN");
+			    
+			    CardLayout cl = (CardLayout)(differentScreens.getLayout());
+			    cl.show(differentScreens, "COMBATSCREEN");
+			    enteringCombatAnimationLines();
 			}
 		});
 		startGameButton.setLocation(346, 0);
@@ -250,129 +259,6 @@ public class MainScreen extends JFrame {
 		Component verticalStrut_5 = Box.createVerticalStrut(20);
 		controls.add(verticalStrut_5);
 		
-		JPanel gameSizeChoosingMenu = new JPanel();
-		gameSizeChoosingMenu.setBackground(Color.BLACK);
-		differentScreens.add(gameSizeChoosingMenu, "GAMESIZEMENU");
-		gameSizeChoosingMenu.setLayout(new GridLayout(0, 1, 0, 0));
-		
-		Component verticalStrut_6 = Box.createVerticalStrut(20);
-		gameSizeChoosingMenu.add(verticalStrut_6);
-		
-		JPanel textPanel = new JPanel();
-		textPanel.setBackground(Color.BLACK);
-		gameSizeChoosingMenu.add(textPanel);
-		textPanel.setLayout(new GridLayout(0, 1, 0, 0));
-		
-		JLabel lblChooseTheSize = new JLabel("Choose the size of the maze");
-		lblChooseTheSize.setFont(new Font("Sitka Small Bold", Font.PLAIN, 18));
-		lblChooseTheSize.setHorizontalAlignment(SwingConstants.CENTER);
-		lblChooseTheSize.setForeground(Color.WHITE);
-		textPanel.add(lblChooseTheSize);
-		
-		JPanel mazeSizeButtons = new JPanel();
-		mazeSizeButtons.setLayout(null);
-		mazeSizeButtons.setBackground(Color.BLACK);
-		gameSizeChoosingMenu.add(mazeSizeButtons);
-		
-		JButton backToMainMenu = new JButton("");
-		backToMainMenu.setOpaque(false);
-		backToMainMenu.setContentAreaFilled(false);
-		backToMainMenu.setBorderPainted(false);
-		backToMainMenu.setFocusPainted(false);
-		backToMainMenu.setIcon(new ImageIcon(MainScreen.class.getResource("/back.png")));
-		backToMainMenu.setPressedIcon(new ImageIcon(MainScreen.class.getResource("/back_pressed.png")));
-		backToMainMenu.setRolloverIcon(new ImageIcon(MainScreen.class.getResource("/back_rollover.png")));
-		backToMainMenu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			    CardLayout cl = (CardLayout)(differentScreens.getLayout());
-			    cl.show(differentScreens, "MAINMENU");
-			}
-		});
-		
-		JButton smallMaze = new JButton("");
-		smallMaze.setPressedIcon(new ImageIcon(MainScreen.class.getResource("/small_pressed.png")));
-		smallMaze.setRolloverIcon(new ImageIcon(MainScreen.class.getResource("/small_rollover.png")));
-		smallMaze.setForeground(Color.BLACK);
-		smallMaze.setBackground(Color.BLACK);
-		smallMaze.setIcon(new ImageIcon(MainScreen.class.getResource("/small.png")));
-		smallMaze.setOpaque(false);
-		smallMaze.setContentAreaFilled(false);
-		smallMaze.setBorderPainted(false);
-		smallMaze.setFocusPainted(false);
-		smallMaze.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				bo = new BoardActions();
-				bo.setMazeSize(1);
-				bo.initializeBoard();
-				
-			    CardLayout cl = (CardLayout)(differentScreens.getLayout());
-			    cl.show(differentScreens, "GAMESCREEN");
-			    gameText.setText("<center>You hear the maze door close behind you.<br>"
-			    		+ "Press 'down arrow' to move into the maze.</center>");
-			    
-			}
-		});
-		smallMaze.setSize(new Dimension(100, 30));
-		smallMaze.setBounds(236, 41, 100, 30);
-		mazeSizeButtons.add(smallMaze);
-		
-		JButton mediumMaze = new JButton("");
-		mediumMaze.setIcon(new ImageIcon(MainScreen.class.getResource("/medium.png")));
-		mediumMaze.setPressedIcon(new ImageIcon(MainScreen.class.getResource("/medium_pressed.png")));
-		mediumMaze.setRolloverIcon(new ImageIcon(MainScreen.class.getResource("/medium_rollover.png")));
-		mediumMaze.setOpaque(false);
-		mediumMaze.setContentAreaFilled(false);
-		mediumMaze.setBorderPainted(false);
-		mediumMaze.setFocusPainted(false);
-		mediumMaze.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				bo = new BoardActions();
-				bo.setMazeSize(2); // 2 for medium size maze
-				bo.initializeBoard();
-				
-			    CardLayout cl = (CardLayout)(differentScreens.getLayout());
-			    cl.show(differentScreens, "GAMESCREEN");
-			    gameText.setText("<center>You hear the maze door close behind you.<br>"
-			    		+ "Press 'down arrow' to move into the maze.</center>");
-			}
-		});
-		mediumMaze.setSize(new Dimension(100, 30));
-		mediumMaze.setBounds(346, 41, 100, 30);
-		mazeSizeButtons.add(mediumMaze);
-		
-		JButton bigMaze = new JButton("");
-		bigMaze.setIcon(new ImageIcon(MainScreen.class.getResource("/large.png")));
-		bigMaze.setPressedIcon(new ImageIcon(MainScreen.class.getResource("/large_pressed.png")));
-		bigMaze.setRolloverIcon(new ImageIcon(MainScreen.class.getResource("/large_rollover.png")));
-		bigMaze.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				bo = new BoardActions();
-				bo.setMazeSize(3); // 3 for large size maze
-				bo.initializeBoard();
-				
-			    CardLayout cl = (CardLayout)(differentScreens.getLayout());
-			    cl.show(differentScreens, "GAMESCREEN");
-			    gameText.setText("<center>You hear the maze door close behind you.<br>"
-			    		+ "Press 'down arrow' to move into the maze.</center>");
-			}
-		});
-		bigMaze.setSize(new Dimension(100, 30));
-		bigMaze.setBounds(456, 41, 100, 30);
-		bigMaze.setOpaque(false);
-		bigMaze.setContentAreaFilled(false);
-		bigMaze.setBorderPainted(false);
-		bigMaze.setFocusPainted(false);
-		mazeSizeButtons.add(bigMaze);
-		backToMainMenu.setSize(new Dimension(100, 30));
-		backToMainMenu.setBounds(346, 82, 100, 30);
-		mazeSizeButtons.add(backToMainMenu);
-		
-		Component verticalStrut_7 = Box.createVerticalStrut(20);
-		gameSizeChoosingMenu.add(verticalStrut_7);
-		
-		Component verticalStrut_8 = Box.createVerticalStrut(20);
-		gameSizeChoosingMenu.add(verticalStrut_8);
-		
 		JPanel gameScreen = new JPanel();
 		differentScreens.add(gameScreen, "GAMESCREEN");
 		gameScreen.setBackground(Color.BLACK);
@@ -380,15 +266,72 @@ public class MainScreen extends JFrame {
 
 	    gameText.setText("<center>Small<br>Medium</center>");
 
-	    //Font font = new Font("Sitka Small Bold", Font.PLAIN, 18);
 	    Font font = new Font("monospaced", Font.PLAIN, 18);
 	    String bodyRule = "body { font-family: " + font.getFamily() + "; " + "font-size: " + 18 + "pt; " + "color : white; }";
 	    ((HTMLDocument)gameText.getDocument()).getStyleSheet().addRule(bodyRule);
 		
 		gameText.setBackground(Color.BLACK);
-		//gameText.setFont(new Font("Sitka Small Bold", Font.PLAIN, 18));
 		gameText.setEditable(false);
 		gameScreen.add(gameText);
+		
+		JPanel combatScreen = new JPanel();
+		differentScreens.add(combatScreen, "COMBATSCREEN");
+		combatScreen.setBackground(Color.BLACK);
+		combatScreen.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		((HTMLDocument)combat.getDocument()).getStyleSheet().addRule(bodyRule);
+
+		combat.setEditable(false);
+		combat.setBackground(Color.BLACK);
+		combatScreen.add(combat);
+
+	}
+	// Animation with lines when moving to combat
+	public void enteringCombatAnimationLines(){
+		int x = bo.getXSizeFromBoard();
+		int y = bo.getYSizeFromBoard();
+		
+        ActionListener action = new ActionListener()
+        {   
+        	int size = x * y;
+        	String animation = "";
+
+        	int currentX = 0;
+        	
+            @Override
+            public void actionPerformed(ActionEvent event)
+            {
+                if(size == 0)
+                {
+                    timer.stop();
+                    // REVERSE ANIMATION HERE
+                    combat.setText("");
+                }
+                else
+                {
+       	
+					if(currentX == 0){
+                		animation = animation + "<center>/"; //when we start a line, center text
+                		currentX++;
+                	}else{
+                		if(currentX == x-1){
+                			animation = animation + "/<br></center>"; // when we reach end of line, put line break and end centering
+                			currentX = 0;                			
+                		}else{
+                			animation = animation + "/"; // when not a the end or at the beginning, just put /
+                			currentX++;
+                		}
+                	}
+
+    				combat.setText(animation);                	
+                    size--;
+                }
+            }
+        };
+
+        timer = new Timer(delay, action);
+        timer.setInitialDelay(0);
+        timer.start();        
 
 	}
 

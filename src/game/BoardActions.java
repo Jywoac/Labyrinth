@@ -203,7 +203,7 @@ public class BoardActions {
 		}
 		
 		if(playerYCoord >= b.getBoardYSize()-1){
-			//exit found do nothing
+			//exit found, do nothing
 		}else{
 			exploringBoard();
 		
@@ -219,4 +219,13 @@ public class BoardActions {
 		
 		map[playerXCoord][playerYCoord] = "X";
 	}
+	
+	public int getXSizeFromBoard(){
+		return b.getBoardXSize();
+	}
+	
+	public int getYSizeFromBoard(){
+		return b.getBoardYSize();
+	}
+	
 }
