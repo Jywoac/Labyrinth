@@ -155,7 +155,8 @@ public class MainScreen extends JFrame {
 			    
 			    CardLayout cl = (CardLayout)(differentScreens.getLayout());
 			    cl.show(differentScreens, "COMBATSCREEN");
-			    enteringCombatAnimationLines();
+			    //enteringCombatAnimationLines();
+			    enteringCombatAnimationSquare();
 			}
 		});
 		startGameButton.setLocation(346, 0);
@@ -304,8 +305,12 @@ public class MainScreen extends JFrame {
                 if(size == 0)
                 {
                     timer.stop();
-                    // REVERSE ANIMATION HERE
-                    combat.setText("");
+                    try {
+                        Thread.sleep(1000);
+                      combat.setText(""); // end of animation
+                    } catch(InterruptedException ex) {
+                        Thread.currentThread().interrupt();
+                    }
                 }
                 else
                 {
@@ -319,6 +324,77 @@ public class MainScreen extends JFrame {
                 			currentX = 0;                			
                 		}else{
                 			animation = animation + "/"; // when not a the end or at the beginning, just put /
+                			currentX++;
+                		}
+                	}
+
+    				combat.setText(animation);                	
+                    size--;
+                }
+            }
+        };
+
+        timer = new Timer(delay, action);
+        timer.setInitialDelay(0);
+        timer.start();        
+
+	}
+	
+	// Animation with square when moving to combat
+	public void enteringCombatAnimationSquare(){
+		int x = bo.getXSizeFromBoard();
+		int y = bo.getYSizeFromBoard();
+		
+        ActionListener action = new ActionListener()
+        {   
+        	int size = x * y;
+        	String animation = "";
+        	String textToShow = "~";
+        	
+        	int currentX = 0;
+        	int currentY = 0;
+        	int currentLetter = 0;
+        	
+            @Override
+            public void actionPerformed(ActionEvent event)
+            {
+                if(size == 0)
+                {
+                    timer.stop();                   
+                    try {
+                        Thread.sleep(1000);
+                      combat.setText(""); // end of animation
+                    } catch(InterruptedException ex) {
+                        Thread.currentThread().interrupt();
+                    }
+                }
+                else
+                {
+       	
+					if(currentX == 0){
+                		animation = animation + "<center>#"; //when we start a line, center text
+                		currentX++;
+                	}else{
+                		if(currentX == x-1){
+                			animation = animation + "#<br></center>"; // when we reach end of line, put line break and end centering
+                			currentX = 0;
+                			currentY++;
+                		}else{
+                			
+                			// if currentY is 0 or y-1, then we make the edges of the square otherwise print a letter
+                			if(currentY == 0 || currentY == y-1){
+                				animation = animation + "#";
+                			}else{               			
+                			
+	                			if(currentLetter < textToShow.length()){
+	                				animation = animation + textToShow.charAt(currentLetter);
+	                				currentLetter++;
+	                			}else{
+	                				currentLetter = 0;
+	                				animation = animation + textToShow.charAt(currentLetter);
+	                			}
+                			
+                			}
                 			currentX++;
                 		}
                 	}
