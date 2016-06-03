@@ -35,7 +35,7 @@ public class MainScreen extends JFrame {
 	private JEditorPane combat = new JEditorPane(new HTMLEditorKit().getContentType(), "");
 	private BoardActions bo = null;
     private Timer timer;
-    private int delay = 1;
+    private int delay = 0;
     private static final long serialVersionUID = 1L;
 	
 	
@@ -156,7 +156,8 @@ public class MainScreen extends JFrame {
 			    CardLayout cl = (CardLayout)(differentScreens.getLayout());
 			    cl.show(differentScreens, "COMBATSCREEN");
 			    //enteringCombatAnimationLines();
-			    enteringCombatAnimationSquare();
+			    //enteringCombatAnimationSquare();
+			    enteringCombatAnimationText();
 			}
 		});
 		startGameButton.setLocation(346, 0);
@@ -363,7 +364,7 @@ public class MainScreen extends JFrame {
                     timer.stop();                   
                     try {
                         Thread.sleep(1000);
-                      combat.setText(""); // end of animation
+                        combat.setText(""); // end of animation
                     } catch(InterruptedException ex) {
                         Thread.currentThread().interrupt();
                     }
@@ -398,6 +399,66 @@ public class MainScreen extends JFrame {
                 			currentX++;
                 		}
                 	}
+
+    				combat.setText(animation);                	
+                    size--;
+                }
+            }
+        };
+
+        timer = new Timer(delay, action);
+        timer.setInitialDelay(0);
+        timer.start();        
+
+	}
+	
+	// Animation with square when moving to combat
+	public void enteringCombatAnimationText(){
+		int x = bo.getXSizeFromBoard();
+		int y = bo.getYSizeFromBoard();
+		
+        ActionListener action = new ActionListener()
+        {   
+        	int size = x * y;
+        	String animation = "<center>";
+        	String textToShow = "..........**********";
+        	
+        	int currentX = 0;
+        	int currentY = 0;
+        	int currentLetter = 0;
+        	
+            @Override
+            public void actionPerformed(ActionEvent event)
+            {
+                if(size == 0){
+                	timer.stop();                   
+                    try {
+                        Thread.sleep(1000);
+                        combat.setText(""); // end of animation
+                    } catch(InterruptedException ex) {
+                        Thread.currentThread().interrupt();
+                    }
+                }else{
+        			if(currentLetter < textToShow.length()){
+        				animation = animation + textToShow.charAt(currentLetter);
+        				currentLetter++;
+        				currentX++;
+        			}else{
+        				currentLetter = 0;
+        				currentX++;
+        				animation = animation + textToShow.charAt(currentLetter);
+        				currentLetter++;
+        			}
+        			
+        			if(currentX == x){
+        				animation = animation + "<br>";
+        				currentX = 0;
+        				currentY++;
+        			}
+        			
+        			if(currentY == y){
+        				animation = animation + "</center>";
+        			}        			
 
     				combat.setText(animation);                	
                     size--;
