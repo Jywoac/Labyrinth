@@ -2,6 +2,8 @@ package paths;
 
 import java.util.Random;
 
+import game.MonsterActions;
+
 public class Board {
 	
 	// board items holds the entire board
@@ -13,13 +15,15 @@ public class Board {
 	private int boardYSize = 0;
 	private int playerYStartPos = 0;
 	private int playerXStartPos = 0;
+	private MonsterActions m = null;
 
 	public Board(int difficultyChosen){
 		setDifficulty(difficultyChosen);
 		boardItems = new String[boardXSize][boardYSize];	
 		initializeBoard(boardItems);
-	    makeMazes(difficultyChosen);	   	    
-	
+	    makeMazes(difficultyChosen);
+	    m = new MonsterActions();
+	    m.addMonstersToBoard(boardItems);
 	}
 	
 	private void setDifficulty(int diff){
@@ -485,5 +489,13 @@ public class Board {
 	// return the text at this specific location
 	public String getPositionInfo(int x, int y){
 		return boardItems[x][y];
+	}
+	
+	public void setBoard(String [][] newBoard){
+		boardItems = newBoard;
+	}
+	
+	public MonsterActions getMonsterActions(){
+		return m;
 	}
 }

@@ -14,6 +14,7 @@ public class MonsterFileWork {
 	private int lootTable = 0; // ex. 1 would mean loot table one
 	private int monsterDifficulty = 0; // ex. 1 would mean easiest monster, use 1st gold reward.
 	private int alwaysDrop = 0; // an item that a specific monster always drops, can be random of several items. for example a skeleton might drop a bone or skull.
+	private String monsterSymbol = null; // how the monster appears ingame, a zombie might have Z symbol for example on game board.
 	
 	// save a new monster to the file, NOT FOR PLAYER USE
 	public void addMonster(){
@@ -48,6 +49,7 @@ public class MonsterFileWork {
 			bufferWritter.write(lootTable+"\n");
 			bufferWritter.write(monsterDifficulty+"\n");
 			bufferWritter.write(alwaysDrop+"\n");
+			bufferWritter.write(monsterSymbol+"\n");
 			bufferWritter.write("-----\n");// separator 5 times -----
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -109,6 +111,11 @@ public class MonsterFileWork {
 	// set monster item that monster always drops
 	public void setMonsterAlwaysDrop(int alw){
 		alwaysDrop = alw;
+	}
+	
+	// set monster item that monster always drops
+	public void setMonsterSymbol(String s){
+		monsterSymbol = s;
 	}
 	
 }

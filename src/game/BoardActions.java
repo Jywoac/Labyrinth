@@ -13,7 +13,7 @@ public class BoardActions {
 	private String [][] map;
 	private int mazeSize = 0;
 	private int firstMovement = 0; // if first movement is 0 then player is making their first move of the game
-	private String [][] board = null;
+	//private String [][] board = null;
 
 	// set the size of the maze, 1 = small, 2 = medium, 3 = large
 	public void setMazeSize(int size){
@@ -32,11 +32,9 @@ public class BoardActions {
 		String textToReturn = null;
 		
 		if(firstMovement == 0){
-		
-			board = b.getBoard();
 			
 			playerXCoord = b.getPlayerXStartPos();
-			playerYCoord= b.getPlayerYStartPos()+1; // +1 needed to move away from edge of wall
+			playerYCoord = b.getPlayerYStartPos()+1; // +1 needed to move away from edge of wall
 			
 			entryPointYCoord = playerYCoord; // save entry point data for text description
 			entryPointXCoord = playerXCoord;
@@ -45,7 +43,7 @@ public class BoardActions {
 			// when y position is at the edge, player has found an exit so end the game.
 			
 			// player map that is initially empty but fills in as player explores different areas.
-			map = mapBoard.getBoard();				
+			map = mapBoard.getBoard();		
 			mapBoard.initializeMap(map);
 			firstMovement++;
 			
@@ -227,5 +225,5 @@ public class BoardActions {
 	public int getYSizeFromBoard(){
 		return b.getBoardYSize();
 	}
-	
+		
 }

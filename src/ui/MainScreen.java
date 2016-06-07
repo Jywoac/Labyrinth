@@ -22,6 +22,7 @@ import javax.swing.JOptionPane;
 import java.awt.CardLayout;
 
 import game.BoardActions;
+import game.MonsterActions;
 import game.MonsterFileWork;
 
 import java.awt.Dimension;
@@ -54,6 +55,7 @@ public class MainScreen extends JFrame {
     private JTextField txtLoottable;
     private JTextField txtMonsterDifficulty;
     private JTextField txtAlwaysdrop;
+    private JTextField txtSymbol;
 	
 	
 	/**
@@ -77,6 +79,7 @@ public class MainScreen extends JFrame {
         @Override
         public boolean dispatchKeyEvent(KeyEvent e) {
     	    int key = e.getKeyCode();
+    	     	    
     	    
     	    if (e.getID() == KeyEvent.KEY_PRESSED){
 	    	       	    	    
@@ -86,6 +89,8 @@ public class MainScreen extends JFrame {
 	    	    		
 	    	    	}else{		    	    	
 		    	    	gameText.setText("<center>"+bo.gameLoop("up")+"</center>");
+		    	    	// call for monster movement here via boardactions
+		    	    	
 	    	    	}	
 	    	    }	    
 	
@@ -188,15 +193,15 @@ public class MainScreen extends JFrame {
 				bo = new BoardActions();
 				bo.setMazeSize(1);
 				bo.initializeBoard();
-//				
-//			    gameText.setText("<center>You hear the maze door close behind you.<br>"
-//			    		+ "Press 'down arrow' to move into the maze.</center>");
-//				
-//				CardLayout cl = (CardLayout)(differentScreens.getLayout());
-//			    cl.show(differentScreens, "GAMESCREEN");
+				
+			    gameText.setText("<center>You hear the maze door close behind you.<br>"
+			    		+ "Press 'down arrow' to move into the maze.</center>");
+				
+				CardLayout cl = (CardLayout)(differentScreens.getLayout());
+			    cl.show(differentScreens, "GAMESCREEN");
 			    
-			    CardLayout cl = (CardLayout)(differentScreens.getLayout());
-			    cl.show(differentScreens, "COMBATSCREEN");
+//			    CardLayout cl = (CardLayout)(differentScreens.getLayout());
+//			    cl.show(differentScreens, "COMBATSCREEN");
 			    //enteringCombatAnimationLines();
 			    //enteringCombatAnimationSquare();
 			    //enteringCombatAnimationText();
@@ -433,6 +438,18 @@ public class MainScreen extends JFrame {
 		txtAlwaysdrop.setColumns(10);
 		monsterAttributes.add(txtAlwaysdrop);
 		
+		txtSymbol = new JTextField();
+		txtSymbol.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				txtSymbol.setText("");
+			}
+		});
+		txtSymbol.setText("SYMBOL");
+		txtSymbol.setHorizontalAlignment(SwingConstants.CENTER);
+		txtSymbol.setColumns(10);
+		monsterAttributes.add(txtSymbol);
+		
 		JPanel buttons = new JPanel();
 		buttons.setLayout(null);
 		buttons.setBackground(Color.BLACK);
@@ -449,6 +466,7 @@ public class MainScreen extends JFrame {
 				monsters.setLootTable(Integer.parseInt(txtLoottable.getText()));
 				monsters.setMonsterDifficulty(Integer.parseInt(txtMonsterDifficulty.getText()));
 				monsters.setMonsterAlwaysDrop(Integer.parseInt(txtAlwaysdrop.getText()));
+				monsters.setMonsterSymbol(txtSymbol.getText());
 				monsters.addMonster();
 				
 				JOptionPane.showMessageDialog(AddMonstersDEVSCREEN ,"Monster added!");
@@ -641,22 +659,5 @@ public class MainScreen extends JFrame {
         timer.setInitialDelay(0);
         timer.start();        
 
-	}
-	private static void addPopup(Component component, final JPopupMenu popup) {
-		component.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			public void mouseReleased(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			private void showMenu(MouseEvent e) {
-				popup.show(e.getComponent(), e.getX(), e.getY());
-			}
-		});
 	}
 }
