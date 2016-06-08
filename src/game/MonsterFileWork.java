@@ -1,9 +1,13 @@
 package game;
 
+import java.awt.List;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MonsterFileWork {
 	
@@ -70,6 +74,40 @@ public class MonsterFileWork {
 	// returns monster and all its attributes
 	public String getMonster(String name){
 		return null;
+	}
+	
+	public ArrayList<String> getMonsterSymbols(){
+		ArrayList<String> monsterSymbol = new ArrayList<String>();	
+		BufferedReader reader = null;
+		
+		int currentLine = 0;
+
+		try {
+		    File file = new File("monsters.data");
+		    reader = new BufferedReader(new FileReader(file));
+
+		    String line;
+		    while ((line = reader.readLine()) != null) {    
+		        // check if line is on top of the symbol
+		        // if it is add it to return array
+		        if(currentLine % 8 == 0){
+		        	monsterSymbol.add(line);
+			        System.out.println(line);
+		        }		        
+		        currentLine++;
+		    }
+
+		} catch (IOException e) {
+		    e.printStackTrace();
+		} finally {
+		    try {
+		        reader.close();
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		    }
+		}
+		
+		return monsterSymbol;
 	}
 	
 	// get all monsters
