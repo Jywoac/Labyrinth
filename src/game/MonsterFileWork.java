@@ -76,6 +76,49 @@ public class MonsterFileWork {
 		return null;
 	}
 	
+	public ArrayList<String> getMonsterNames(){
+		ArrayList<String> monsterName = new ArrayList<String>();	
+		BufferedReader reader = null;
+		
+		int currentLine = 0;
+
+		try {
+		    File file = new File("monsters.data");
+		    reader = new BufferedReader(new FileReader(file));
+
+		    String line;
+		    while ((line = reader.readLine()) != null) {    
+		        // check if line is on top of the symbol
+		        // if it is add it to return array
+		    	
+		    	if(currentLine == 0){
+		    		monsterName.add(line);
+		    	}else{		    	
+			        if(currentLine % 8 == 0){
+			        	monsterName.add(line);
+			        	// CHECK HERE IF NAME IS EMPTY
+			        	// TODO
+			        }		        
+		    	}
+		    	
+		    	System.out.println(line);
+		    	
+		        currentLine++;
+		    }
+
+		} catch (IOException e) {
+		    e.printStackTrace();
+		} finally {
+		    try {
+		        reader.close();
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		    }
+		}
+		
+		return monsterName;
+	}
+	
 	public ArrayList<String> getMonsterSymbols(){
 		ArrayList<String> monsterSymbol = new ArrayList<String>();	
 		BufferedReader reader = null;
@@ -90,7 +133,7 @@ public class MonsterFileWork {
 		    while ((line = reader.readLine()) != null) {    
 		        // check if line is on top of the symbol
 		        // if it is add it to return array
-		        if(currentLine % 8 == 0){
+		        if(currentLine % 7 == 0){
 		        	monsterSymbol.add(line);
 			        System.out.println(line);
 		        }		        

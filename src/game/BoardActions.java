@@ -96,8 +96,14 @@ public class BoardActions {
 			}
 			
 		}else{
-			// currently only other possibility besides floor is wall so make the spot a wall if its not a floor.
-			map[playerXCoord][playerYCoord-1] = "#"; // wall space shown as # symbol
+			
+			// check if the spot is a wall, if it is not then it must be a monster or an item.			
+			if(b.getPositionInfo(playerXCoord, playerYCoord-1).toLowerCase().contains("wall")){
+				map[playerXCoord][playerYCoord-1] = "#"; // wall space shown as # symbol
+			}else{
+				map[playerXCoord][playerYCoord-1] = b.getPositionInfo(playerXCoord, playerYCoord-1);
+			}
+
 		}
 		
 		// show to player what he sees east
@@ -106,8 +112,14 @@ public class BoardActions {
 			map[playerXCoord+1][playerYCoord] = "."; // if text is floor mark it as a .
 			
 		}else{
-			//System.out.println("You see a wall EAST of your position.");
-			map[playerXCoord+1][playerYCoord] = "#"; // wall space shown as # symbol
+
+			// check if the spot is a wall, if it is not then it must be a monster or an item.			
+			if(b.getPositionInfo(playerXCoord+1, playerYCoord).toLowerCase().contains("wall")){
+				map[playerXCoord+1][playerYCoord] = "#"; // wall space shown as # symbol
+			}else{
+				map[playerXCoord+1][playerYCoord] = b.getPositionInfo(playerXCoord+1, playerYCoord);
+			}
+			
 		}
 		
 		// show to player what he sees south
@@ -116,8 +128,14 @@ public class BoardActions {
 			map[playerXCoord][playerYCoord+1] = "."; // if text is floor mark it as a .
 			
 		}else{
-
-			map[playerXCoord][playerYCoord+1] = "#"; // wall space shown as # symbol
+			
+			// check if the spot is a wall, if it is not then it must be a monster or an item.			
+			if(b.getPositionInfo(playerXCoord, playerYCoord+1).toLowerCase().contains("wall")){
+				map[playerXCoord][playerYCoord+1] = "#"; // wall space shown as # symbol
+			}else{
+				map[playerXCoord][playerYCoord+1] = b.getPositionInfo(playerXCoord, playerYCoord+1);
+			}
+			
 		}
 		
 		// show to player what he sees west
@@ -126,8 +144,14 @@ public class BoardActions {
 			map[playerXCoord-1][playerYCoord] = "."; // if text is floor mark it as a .
 							
 		}else{
-
-			map[playerXCoord-1][playerYCoord] = "#"; // wall space shown as # symbol
+			
+			// check if the spot is a wall, if it is not then it must be a monster or an item.			
+			if(b.getPositionInfo(playerXCoord-1, playerYCoord).toLowerCase().contains("wall")){
+				map[playerXCoord-1][playerYCoord] = "#"; // wall space shown as # symbol
+			}else{
+				map[playerXCoord-1][playerYCoord] = b.getPositionInfo(playerXCoord-1, playerYCoord);
+			}
+			
 		}
 
 	}

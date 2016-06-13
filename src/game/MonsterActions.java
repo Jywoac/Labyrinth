@@ -41,6 +41,7 @@ public class MonsterActions {
 			}else{
 				// wall at this spot, do nothing.
 				// NEXT CHANGE BOARD ACTIONS TO FIND WHAT SYMBOL IS THERE INSTEAD OF JUST PUTTING # wall symbol everywhere
+				// MONSTERS ARE CURRENTLY STATIC, MAKE MOVEMENT, AND WHEN THEY OR PLAYER MOVE ON THE SAME SPOT MOVE TO COMBAT SCREEN.
 			}
 						
 			
