@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class MonsterActions {
 	
-	private String [][] monstersCoordinates;
+	private String [] monstersCoordinates;
 	
 	
 	public String [][] addMonstersToBoard(String [][] boardWithoutMonsters){
@@ -20,36 +20,119 @@ public class MonsterActions {
 		int numOfMonsters = rand.nextInt(15 - 7 + 1) + 7;
 		//random.nextInt(max - min + 1) + min
 		
-		monstersCoordinates = new String [numOfMonsters][numOfMonsters]; 
+		monstersCoordinates = new String [numOfMonsters];
 		
 
 		int x = boardWithMonsters.length;
 		int y = boardWithMonsters[0].length;
+		
+		int monsterCoordNum = 0;
 		
 		// add monsters to board
 		// if a spot is a floor add a monster to it.
 		while(numOfMonsters > 0){
 			
 			int checkThisX = rand.nextInt(x);
-			int chekcThisY = rand.nextInt(y);
+			int checkThisY = rand.nextInt(y);
 			
-			if(boardWithMonsters[checkThisX][chekcThisY].toLowerCase().contains("floor")){
+			// MONSTERS STILL STATIC, CHECK THIS SPOT FOR PROBLEMS
+						
+			if(boardWithMonsters[checkThisX][checkThisY].toLowerCase().contains("floor")){
 				
 				// add a random monster to board
-				boardWithMonsters[checkThisX][chekcThisY] = monsterSymbols.get(rand.nextInt(monsterSymbols.size()));				
+				boardWithMonsters[checkThisX][checkThisY] = monsterSymbols.get(rand.nextInt(monsterSymbols.size()));
+				monstersCoordinates[monsterCoordNum] = checkThisX +" "+checkThisY;
+				
+				monsterCoordNum++;
 				numOfMonsters--;
 			}else{
 				// wall at this spot, do nothing.
-				// NEXT CHANGE BOARD ACTIONS TO FIND WHAT SYMBOL IS THERE INSTEAD OF JUST PUTTING # wall symbol everywhere
 				// MONSTERS ARE CURRENTLY STATIC, MAKE MOVEMENT, AND WHEN THEY OR PLAYER MOVE ON THE SAME SPOT MOVE TO COMBAT SCREEN.
 			}
 						
 			
 		}
-		
-		
-		
+
 		return boardWithMonsters;
+	}
+	
+	// moves monsters to a random empty square if possible
+	// if not possible stay still (stuck behind other monsters or walls)
+	public String [][] moveMonsters(String [][] moveInThisBoard){		
+		String [][] monstersMovedInBoard = moveInThisBoard;
+		
+		int monstersToMove = monstersCoordinates.length;
+		int spot = 0;
+		
+		while(monstersToMove > 0){
+
+			String[] coordinates = monstersCoordinates[spot].split(" ");
+			int x = Integer.parseInt(coordinates[0]);
+			int y = Integer.parseInt(coordinates[1]);
+			
+			Random rand = new Random();
+			
+			boolean spotFound = false;
+			int tries = 0;
+			
+			while(spotFound == false || tries < 10){
+				// try to move to a random spot, if not possible stay still				
+				switch(rand.nextInt(4)){
+				case 0:
+					// try to move up					
+					if(moveInThisBoard[x][y-1].toLowerCase().contains("floor")){
+						// spot for monster found, move to it
+						monstersCoordinates[spot] = x+" "+(y-1); // new coordinates for monster
+						monstersMovedInBoard[x][y-1] = monstersMovedInBoard[x][y]; // move monster symbol to new spot 
+						monstersMovedInBoard[x][y] = "floor"; // monster moved so change old spot to a floor
+						spotFound = true;
+					}
+					
+					break;
+				case 1:
+					// try to move right
+					if(moveInThisBoard[x+1][y].toLowerCase().contains("floor")){
+						// spot for monster found, move to it
+						monstersCoordinates[spot] = (x+1)+" "+y; // new coordinates for monster
+						monstersMovedInBoard[x+1][y] = monstersMovedInBoard[x][y]; // move monster symbol to new spot 
+						monstersMovedInBoard[x][y] = "floor"; // monster moved so change old spot to a floor
+						spotFound = true;
+					}
+					
+					
+					break;
+				case 2:
+					// try to move down
+					if(moveInThisBoard[x][y+1].toLowerCase().contains("floor")){
+						// spot for monster found, move to it
+						monstersCoordinates[spot] = x+" "+(y+1); // new coordinates for monster
+						monstersMovedInBoard[x][y+1] = monstersMovedInBoard[x][y]; // move monster symbol to new spot 
+						monstersMovedInBoard[x][y] = "floor"; // monster moved so change old spot to a floor
+						spotFound = true;
+					}
+					
+					break;
+				case 3:
+					// try to move left
+					if(moveInThisBoard[x-1][y].toLowerCase().contains("floor")){
+						// spot for monster found, move to it
+						monstersCoordinates[spot] = (x-1)+" "+y; // new coordinates for monster
+						monstersMovedInBoard[x-1][y] = monstersMovedInBoard[x][y]; // move monster symbol to new spot 
+						monstersMovedInBoard[x][y] = "floor"; // monster moved so change old spot to a floor
+						spotFound = true;
+					}
+					
+					break;
+				}				
+				tries++;				
+			}
+		
+			spot++;
+			monstersToMove--;
+		}
+		
+		return monstersMovedInBoard;
+		
 	}
 
 	
