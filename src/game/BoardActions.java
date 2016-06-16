@@ -229,7 +229,10 @@ public class BoardActions {
 			//exit found, do nothing
 		}else{
 			exploringBoard();
-		
+			b.setBoard(b.getMonsterActions().moveMonsters(b.getBoard()));
+			
+			// MOVE TO COMBAT SCREEN IF PLAYER COORDINATE AND MONSTER COORDINATES ARE NEXT TO EACH OTHER OR THE SAME.
+			
 			// player is always on empty space but future proofing with this catch.
 			// else fork means player is somehow standing either on wall or something else than floor.
 			if(b.getPositionInfo(playerXCoord, playerYCoord).toLowerCase().contains("floor")){

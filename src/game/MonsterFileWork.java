@@ -133,10 +133,16 @@ public class MonsterFileWork {
 		    while ((line = reader.readLine()) != null) {    
 		        // check if line is on top of the symbol
 		        // if it is add it to return array
-		        if(currentLine % 7 == 0){
-		        	monsterSymbol.add(line);
-			        System.out.println(line);
-		        }		        
+		    	
+		    	if(currentLine == 0){
+		    		// skip first line
+		    	}else{
+		    	        if(currentLine % 7 == 0){
+			        	monsterSymbol.add(line);
+				        System.out.println(line);
+			        }
+		        
+		    	}
 		        currentLine++;
 		    }
 
