@@ -107,6 +107,22 @@ public class BoardActions {
 
 		}
 		
+		// show to player what he sees north east
+		if(b.getPositionInfo(playerXCoord+1, playerYCoord-1).toLowerCase().contains("floor")){
+
+			map[playerXCoord+1][playerYCoord-1] = "."; // if text is floor mark it as a .
+						
+		}else{
+			
+			// check if the spot is a wall, if it is not then it must be a monster or an item.			
+			if(b.getPositionInfo(playerXCoord+1, playerYCoord-1).toLowerCase().contains("wall")){
+				map[playerXCoord+1][playerYCoord-1] = "#"; // wall space shown as # symbol
+			}else{
+				map[playerXCoord+1][playerYCoord-1] = b.getPositionInfo(playerXCoord+1, playerYCoord-1);
+			}
+
+		}
+		
 		// show to player what he sees east
 		if(b.getPositionInfo(playerXCoord+1, playerYCoord).toLowerCase().contains("floor")){
 
@@ -119,6 +135,22 @@ public class BoardActions {
 				map[playerXCoord+1][playerYCoord] = "#"; // wall space shown as # symbol
 			}else{
 				map[playerXCoord+1][playerYCoord] = b.getPositionInfo(playerXCoord+1, playerYCoord);
+			}
+			
+		}
+		
+		// show to player what he sees south east
+		if(b.getPositionInfo(playerXCoord+1, playerYCoord+1).toLowerCase().contains("floor")){
+
+			map[playerXCoord+1][playerYCoord+1] = "."; // if text is floor mark it as a .
+			
+		}else{
+
+			// check if the spot is a wall, if it is not then it must be a monster or an item.			
+			if(b.getPositionInfo(playerXCoord+1, playerYCoord+1).toLowerCase().contains("wall")){
+				map[playerXCoord+1][playerYCoord+1] = "#"; // wall space shown as # symbol
+			}else{
+				map[playerXCoord+1][playerYCoord+1] = b.getPositionInfo(playerXCoord+1, playerYCoord+1);
 			}
 			
 		}
@@ -139,6 +171,22 @@ public class BoardActions {
 			
 		}
 		
+		// show to player what he sees south west
+		if(b.getPositionInfo(playerXCoord-1, playerYCoord+1).toLowerCase().contains("floor")){
+
+			map[playerXCoord-1][playerYCoord+1] = "."; // if text is floor mark it as a .
+			
+		}else{
+			
+			// check if the spot is a wall, if it is not then it must be a monster or an item.			
+			if(b.getPositionInfo(playerXCoord-1, playerYCoord+1).toLowerCase().contains("wall")){
+				map[playerXCoord-1][playerYCoord+1] = "#"; // wall space shown as # symbol
+			}else{
+				map[playerXCoord-1][playerYCoord+1] = b.getPositionInfo(playerXCoord-1, playerYCoord+1);
+			}
+			
+		}
+		
 		// show to player what he sees west
 		if(b.getPositionInfo(playerXCoord-1, playerYCoord).toLowerCase().contains("floor")){			
 			
@@ -151,6 +199,22 @@ public class BoardActions {
 				map[playerXCoord-1][playerYCoord] = "#"; // wall space shown as # symbol
 			}else{
 				map[playerXCoord-1][playerYCoord] = b.getPositionInfo(playerXCoord-1, playerYCoord);
+			}
+			
+		}
+		
+		// show to player what he sees north west
+		if(b.getPositionInfo(playerXCoord-1, playerYCoord-1).toLowerCase().contains("floor")){			
+			
+			map[playerXCoord-1][playerYCoord-1] = "."; // if text is floor mark it as a .
+							
+		}else{
+			
+			// check if the spot is a wall, if it is not then it must be a monster or an item.			
+			if(b.getPositionInfo(playerXCoord-1, playerYCoord-1).toLowerCase().contains("wall")){
+				map[playerXCoord-1][playerYCoord-1] = "#"; // wall space shown as # symbol
+			}else{
+				map[playerXCoord-1][playerYCoord-1] = b.getPositionInfo(playerXCoord-1, playerYCoord-1);
 			}
 			
 		}
