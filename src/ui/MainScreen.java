@@ -42,6 +42,7 @@ import java.awt.event.MouseEvent;
 public class MainScreen extends JFrame {
 
 	private JPanel contentPane;
+	private JPanel differentScreens;
 	private JEditorPane gameText = new JEditorPane(new HTMLEditorKit().getContentType(),"");
 	private JEditorPane combat = new JEditorPane(new HTMLEditorKit().getContentType(), "");
 	private BoardActions bo = null;
@@ -56,6 +57,7 @@ public class MainScreen extends JFrame {
     private JTextField txtMonsterDifficulty;
     private JTextField txtAlwaysdrop;
     private JTextField txtSymbol;
+    private int numberOfPresses = 0;
 	
 	
 	/**
@@ -79,13 +81,13 @@ public class MainScreen extends JFrame {
         @Override
         public boolean dispatchKeyEvent(KeyEvent e) {
     	    int key = e.getKeyCode();
-    	     	    
-    	    
+    	    boolean characterScreen = false;
+    	        	    
     	    if (e.getID() == KeyEvent.KEY_PRESSED){
 	    	       	    	    
 	    	    if (key == KeyEvent.VK_UP) {
 	    	    	
-	    	    	if(bo == null){
+	    	    	if(bo == null || characterScreen == true){
 	    	    		
 	    	    	}else{		    	    	
 		    	    	gameText.setText("<center>"+bo.gameLoop("up")+"</center>");
@@ -96,7 +98,7 @@ public class MainScreen extends JFrame {
 	
 	    	    if (key == KeyEvent.VK_RIGHT) {    	    	
 	    	    	
-	    	    	if(bo == null){
+	    	    	if(bo == null || characterScreen == true){
 	    	    		
 	    	    	}else{		    	    	
 	    	    		gameText.setText("<center>"+bo.gameLoop("right")+"</center>");
@@ -106,7 +108,7 @@ public class MainScreen extends JFrame {
 	
 	    	    if (key == KeyEvent.VK_DOWN) {	    	    	
 	    	    	
-	    	    	if(bo == null){
+	    	    	if(bo == null || characterScreen == true){
 	    	    		
 	    	    	}else{		    	    	
 	    	    		gameText.setText("<center>"+bo.gameLoop("down")+"</center>");
@@ -116,20 +118,40 @@ public class MainScreen extends JFrame {
 	    	    
 	    	    if (key == KeyEvent.VK_LEFT) {	    	    	
 	    	    	
-	    	    	if(bo == null){
+	    	    	if(bo == null || characterScreen == true){
 	    	    		
 	    	    	}else{		    	    	
 	    	    		gameText.setText("<center>"+bo.gameLoop("left")+"</center>");
 	    	    	}
 	
 	    	    }
-	    	    
-	    	    if (key == KeyEvent.VK_L){
+	    	    // look around and show mentionable items as text (eg. monster near player)
+	    	    if (key == KeyEvent.VK_L || characterScreen == true){
 	    	    	
 	    	    	if(bo == null){
 	    	    		
-	    	    	}else{		    	    	
-	    	    		gameText.setText("<center>"+bo.gameLoop("l")+"</center>");
+	    	    	}else{
+	    	    		// make a function which shows interesting items around the player.
+	    	    		//gameText.setText("<center>"+bo.gameLoop("l")+"</center>");
+	    	    	}
+	    	    	
+	    	    }
+	    	    
+	    	    // move to character screen, disable other button presses 
+	    	    if (key == KeyEvent.VK_C){
+	    	    	
+	    	    	// if even then move to character screen, if not move out of character screen.
+	    	    	if((numberOfPresses & 1) == 0){
+	    	    		characterScreen = true;
+						CardLayout cl = (CardLayout)(differentScreens.getLayout());
+					    cl.show(differentScreens, "CHARACTERSCREEN");
+					    numberOfPresses++;
+	    	    	}else{
+	    	    		characterScreen = false;
+						CardLayout cl = (CardLayout)(differentScreens.getLayout());
+					    cl.show(differentScreens, "GAMESCREEN");
+					    gameText.setText("<center>"+bo.gameLoop("c")+"</center>");
+					    numberOfPresses++;
 	    	    	}
 	    	    	
 	    	    }
@@ -156,7 +178,7 @@ public class MainScreen extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JPanel differentScreens = new JPanel();
+		differentScreens = new JPanel();
 		contentPane.add(differentScreens);
 		differentScreens.setLayout(new CardLayout(0, 0));
 		
@@ -475,6 +497,110 @@ public class MainScreen extends JFrame {
 		});
 		btnAddToFile.setBounds(347, 79, 100, 23);
 		buttons.add(btnAddToFile);
+		
+		JPanel inventory = new JPanel();
+		inventory.setBackground(Color.BLACK);
+		differentScreens.add(inventory, "INVENTORYSCREEN");
+		inventory.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		Component verticalStrut_6 = Box.createVerticalStrut(20);
+		inventory.add(verticalStrut_6);
+		
+		JLabel label = new JLabel("Labyrinth");
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setForeground(Color.WHITE);
+		label.setFont(new Font("Sitka Small", Font.PLAIN, 18));
+		inventory.add(label);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setLayout(null);
+		panel_1.setBackground(Color.BLACK);
+		inventory.add(panel_1);
+		
+		JButton button = new JButton("");
+		button.setSize(new Dimension(100, 30));
+		button.setOpaque(false);
+		button.setFocusPainted(false);
+		button.setContentAreaFilled(false);
+		button.setBorderPainted(false);
+		button.setBounds(346, 0, 100, 30);
+		panel_1.add(button);
+		
+		JButton button_1 = new JButton("");
+		button_1.setSize(new Dimension(100, 30));
+		button_1.setOpaque(false);
+		button_1.setFocusPainted(false);
+		button_1.setContentAreaFilled(false);
+		button_1.setBorderPainted(false);
+		button_1.setBounds(346, 41, 100, 30);
+		panel_1.add(button_1);
+		
+		JButton button_2 = new JButton("");
+		button_2.setSize(new Dimension(100, 30));
+		button_2.setOpaque(false);
+		button_2.setFocusPainted(false);
+		button_2.setContentAreaFilled(false);
+		button_2.setBorderPainted(false);
+		button_2.setBounds(346, 82, 100, 30);
+		panel_1.add(button_2);
+		
+		Component verticalStrut_7 = Box.createVerticalStrut(20);
+		inventory.add(verticalStrut_7);
+		
+		Component verticalStrut_8 = Box.createVerticalStrut(20);
+		inventory.add(verticalStrut_8);
+		
+		JPanel characterScreen = new JPanel();
+		characterScreen.setBackground(Color.BLACK);
+		differentScreens.add(characterScreen, "CHARACTERSCREEN");
+		characterScreen.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		Component verticalStrut_9 = Box.createVerticalStrut(20);
+		characterScreen.add(verticalStrut_9);
+		
+		JLabel label_1 = new JLabel("Labyrinth");
+		label_1.setHorizontalAlignment(SwingConstants.CENTER);
+		label_1.setForeground(Color.WHITE);
+		label_1.setFont(new Font("Sitka Small", Font.PLAIN, 18));
+		characterScreen.add(label_1);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setLayout(null);
+		panel_2.setBackground(Color.BLACK);
+		characterScreen.add(panel_2);
+		
+		JButton button_3 = new JButton("");
+		button_3.setSize(new Dimension(100, 30));
+		button_3.setOpaque(false);
+		button_3.setFocusPainted(false);
+		button_3.setContentAreaFilled(false);
+		button_3.setBorderPainted(false);
+		button_3.setBounds(346, 0, 100, 30);
+		panel_2.add(button_3);
+		
+		JButton button_4 = new JButton("");
+		button_4.setSize(new Dimension(100, 30));
+		button_4.setOpaque(false);
+		button_4.setFocusPainted(false);
+		button_4.setContentAreaFilled(false);
+		button_4.setBorderPainted(false);
+		button_4.setBounds(346, 41, 100, 30);
+		panel_2.add(button_4);
+		
+		JButton button_5 = new JButton("");
+		button_5.setSize(new Dimension(100, 30));
+		button_5.setOpaque(false);
+		button_5.setFocusPainted(false);
+		button_5.setContentAreaFilled(false);
+		button_5.setBorderPainted(false);
+		button_5.setBounds(346, 82, 100, 30);
+		panel_2.add(button_5);
+		
+		Component verticalStrut_10 = Box.createVerticalStrut(20);
+		characterScreen.add(verticalStrut_10);
+		
+		Component verticalStrut_11 = Box.createVerticalStrut(20);
+		characterScreen.add(verticalStrut_11);
 
 	}
 	// Animation with lines when moving to combat

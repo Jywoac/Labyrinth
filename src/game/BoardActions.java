@@ -286,6 +286,11 @@ public class BoardActions {
 				// not implemented yet.
 				exploringBoard();
 				break;
+				
+			case "c":
+				// player moved out of character screen, stay still and show board.
+				exploringBoard();
+				break;
 			
 		}
 		
