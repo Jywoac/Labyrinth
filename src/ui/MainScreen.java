@@ -555,52 +555,69 @@ public class MainScreen extends JFrame {
 		differentScreens.add(characterScreen, "CHARACTERSCREEN");
 		characterScreen.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		Component verticalStrut_9 = Box.createVerticalStrut(20);
-		characterScreen.add(verticalStrut_9);
+		JLabel lblCharacterName = new JLabel("Character NAME");
+		lblCharacterName.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCharacterName.setForeground(Color.WHITE);
+		lblCharacterName.setFont(new Font("Sitka Small", Font.PLAIN, 18));
+		characterScreen.add(lblCharacterName);
 		
-		JLabel label_1 = new JLabel("Labyrinth");
-		label_1.setHorizontalAlignment(SwingConstants.CENTER);
-		label_1.setForeground(Color.WHITE);
-		label_1.setFont(new Font("Sitka Small", Font.PLAIN, 18));
-		characterScreen.add(label_1);
+		JPanel characterStatNames = new JPanel();
+		characterStatNames.setBackground(Color.BLACK);
+		characterScreen.add(characterStatNames);
+		characterStatNames.setLayout(new GridLayout(0, 3, 0, 0));
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setLayout(null);
-		panel_2.setBackground(Color.BLACK);
-		characterScreen.add(panel_2);
+		JLabel lblAttack = new JLabel("Attack");
+		characterStatNames.add(lblAttack);
+		lblAttack.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAttack.setForeground(Color.WHITE);
+		lblAttack.setFont(new Font("Sitka Small", Font.PLAIN, 18));
 		
-		JButton button_3 = new JButton("");
-		button_3.setSize(new Dimension(100, 30));
-		button_3.setOpaque(false);
-		button_3.setFocusPainted(false);
-		button_3.setContentAreaFilled(false);
-		button_3.setBorderPainted(false);
-		button_3.setBounds(346, 0, 100, 30);
-		panel_2.add(button_3);
+		JLabel lblMagicAttack = new JLabel("Magic Attack");
+		lblMagicAttack.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMagicAttack.setForeground(Color.WHITE);
+		lblMagicAttack.setFont(new Font("Sitka Small", Font.PLAIN, 18));
+		characterStatNames.add(lblMagicAttack);
 		
-		JButton button_4 = new JButton("");
-		button_4.setSize(new Dimension(100, 30));
-		button_4.setOpaque(false);
-		button_4.setFocusPainted(false);
-		button_4.setContentAreaFilled(false);
-		button_4.setBorderPainted(false);
-		button_4.setBounds(346, 41, 100, 30);
-		panel_2.add(button_4);
+		JLabel lblDefense = new JLabel("Defense");
+		lblDefense.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDefense.setForeground(Color.WHITE);
+		lblDefense.setFont(new Font("Sitka Small", Font.PLAIN, 18));
+		characterStatNames.add(lblDefense);
 		
-		JButton button_5 = new JButton("");
-		button_5.setSize(new Dimension(100, 30));
-		button_5.setOpaque(false);
-		button_5.setFocusPainted(false);
-		button_5.setContentAreaFilled(false);
-		button_5.setBorderPainted(false);
-		button_5.setBounds(346, 82, 100, 30);
-		panel_2.add(button_5);
+		JPanel values = new JPanel();
+		values.setBackground(Color.BLACK);
+		characterScreen.add(values);
+		values.setLayout(new GridLayout(3, 3, 0, 0));
 		
-		Component verticalStrut_10 = Box.createVerticalStrut(20);
-		characterScreen.add(verticalStrut_10);
+		JLabel lblSlashing = new JLabel("AVALUE");
+		lblSlashing.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSlashing.setForeground(Color.WHITE);
+		lblSlashing.setFont(new Font("Sitka Small", Font.PLAIN, 18));
+		values.add(lblSlashing);
 		
-		Component verticalStrut_11 = Box.createVerticalStrut(20);
-		characterScreen.add(verticalStrut_11);
+		JLabel lblMvalue = new JLabel("MVALUE");
+		lblMvalue.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMvalue.setForeground(Color.WHITE);
+		lblMvalue.setFont(new Font("Sitka Small", Font.PLAIN, 18));
+		values.add(lblMvalue);
+		
+		JLabel lblDvalue = new JLabel("DVALUE");
+		lblDvalue.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDvalue.setForeground(Color.WHITE);
+		lblDvalue.setFont(new Font("Sitka Small", Font.PLAIN, 18));
+		values.add(lblDvalue);
+		
+		Component horizontalStrut = Box.createHorizontalStrut(20);
+		values.add(horizontalStrut);
+		
+		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
+		values.add(horizontalStrut_1);
+		
+		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
+		values.add(horizontalStrut_2);
+		
+		Component horizontalStrut_3 = Box.createHorizontalStrut(20);
+		values.add(horizontalStrut_3);
 
 	}
 	// Animation with lines when moving to combat
