@@ -564,7 +564,7 @@ public class MainScreen extends JFrame {
 		JPanel characterStatNames = new JPanel();
 		characterStatNames.setBackground(Color.BLACK);
 		characterScreen.add(characterStatNames);
-		characterStatNames.setLayout(new GridLayout(0, 3, 0, 0));
+		characterStatNames.setLayout(new GridLayout(0, 4, 0, 0));
 		
 		JLabel lblAttack = new JLabel("Attack");
 		characterStatNames.add(lblAttack);
@@ -584,40 +584,56 @@ public class MainScreen extends JFrame {
 		lblDefense.setFont(new Font("Sitka Small", Font.PLAIN, 18));
 		characterStatNames.add(lblDefense);
 		
+		JLabel lblMagicdefense = new JLabel("MagicDefense");
+		lblMagicdefense.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMagicdefense.setForeground(Color.WHITE);
+		lblMagicdefense.setFont(new Font("Sitka Small", Font.PLAIN, 18));
+		characterStatNames.add(lblMagicdefense);
+		
 		JPanel values = new JPanel();
 		values.setBackground(Color.BLACK);
 		characterScreen.add(values);
-		values.setLayout(new GridLayout(3, 3, 0, 0));
+		values.setLayout(null);
 		
 		JLabel lblSlashing = new JLabel("AVALUE");
+		lblSlashing.setBounds(40, 55, 121, 79);
 		lblSlashing.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSlashing.setForeground(Color.WHITE);
 		lblSlashing.setFont(new Font("Sitka Small", Font.PLAIN, 18));
 		values.add(lblSlashing);
 		
 		JLabel lblMvalue = new JLabel("MVALUE");
+		lblMvalue.setBounds(200, 58, 174, 97);
 		lblMvalue.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMvalue.setForeground(Color.WHITE);
 		lblMvalue.setFont(new Font("Sitka Small", Font.PLAIN, 18));
 		values.add(lblMvalue);
 		
 		JLabel lblDvalue = new JLabel("DVALUE");
+		lblDvalue.setBounds(395, 0, 197, 189);
 		lblDvalue.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDvalue.setForeground(Color.WHITE);
 		lblDvalue.setFont(new Font("Sitka Small", Font.PLAIN, 18));
 		values.add(lblDvalue);
 		
-		Component horizontalStrut = Box.createHorizontalStrut(20);
-		values.add(horizontalStrut);
+		JLabel MDVALUE = new JLabel("MDVALUE");
+		MDVALUE.setBounds(592, 0, 197, 189);
+		MDVALUE.setHorizontalAlignment(SwingConstants.CENTER);
+		MDVALUE.setForeground(Color.WHITE);
+		MDVALUE.setFont(new Font("Sitka Small", Font.PLAIN, 18));
+		values.add(MDVALUE);
 		
-		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
-		values.add(horizontalStrut_1);
-		
-		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
-		values.add(horizontalStrut_2);
-		
-		Component horizontalStrut_3 = Box.createHorizontalStrut(20);
-		values.add(horizontalStrut_3);
+		JButton plusAttackButton = new JButton("");
+		plusAttackButton.setLocation(67, 14);
+		values.add(plusAttackButton);
+		plusAttackButton.setPressedIcon(new ImageIcon(MainScreen.class.getResource("/plus_30_pressed.png")));
+		plusAttackButton.setIcon(new ImageIcon(MainScreen.class.getResource("/plus_30.png")));
+		plusAttackButton.setRolloverIcon(new ImageIcon(MainScreen.class.getResource("/plus_30_rollover.png")));
+		plusAttackButton.setSize(new Dimension(30, 30));
+		plusAttackButton.setOpaque(false);
+		plusAttackButton.setFocusPainted(false);
+		plusAttackButton.setContentAreaFilled(false);
+		plusAttackButton.setBorderPainted(false);
 
 	}
 	// Animation with lines when moving to combat
