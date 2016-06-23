@@ -38,6 +38,7 @@ import java.awt.event.FocusEvent;
 import javax.swing.JPopupMenu;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.FlowLayout;
 
 public class MainScreen extends JFrame {
 
@@ -555,6 +556,11 @@ public class MainScreen extends JFrame {
 		differentScreens.add(characterScreen, "CHARACTERSCREEN");
 		characterScreen.setLayout(new GridLayout(0, 1, 0, 0));
 		
+		JPanel characterName = new JPanel();
+		characterName.setBackground(Color.BLACK);
+		characterScreen.add(characterName);
+		characterName.setLayout(new GridLayout(0, 5, 0, 0));
+		
 		JLabel lblCharacterName = new JLabel("Character NAME");
 		lblCharacterName.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCharacterName.setForeground(Color.WHITE);
@@ -564,7 +570,13 @@ public class MainScreen extends JFrame {
 		JPanel characterStatNames = new JPanel();
 		characterStatNames.setBackground(Color.BLACK);
 		characterScreen.add(characterStatNames);
-		characterStatNames.setLayout(new GridLayout(0, 4, 0, 0));
+		characterStatNames.setLayout(new GridLayout(0, 5, 0, 0));
+		
+		JLabel lblHealth = new JLabel("Health");
+		lblHealth.setHorizontalAlignment(SwingConstants.CENTER);
+		lblHealth.setForeground(Color.WHITE);
+		lblHealth.setFont(new Font("Sitka Small", Font.PLAIN, 18));
+		characterStatNames.add(lblHealth);
 		
 		JLabel lblAttack = new JLabel("Attack");
 		characterStatNames.add(lblAttack);
@@ -584,56 +596,203 @@ public class MainScreen extends JFrame {
 		lblDefense.setFont(new Font("Sitka Small", Font.PLAIN, 18));
 		characterStatNames.add(lblDefense);
 		
-		JLabel lblMagicdefense = new JLabel("MagicDefense");
+		JLabel lblMagicdefense = new JLabel("Magic Defense");
 		lblMagicdefense.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMagicdefense.setForeground(Color.WHITE);
 		lblMagicdefense.setFont(new Font("Sitka Small", Font.PLAIN, 18));
 		characterStatNames.add(lblMagicdefense);
 		
-		JPanel values = new JPanel();
-		values.setBackground(Color.BLACK);
-		characterScreen.add(values);
-		values.setLayout(null);
+		JLabel lblAttack_1 = new JLabel("999");
+		characterStatNames.add(lblAttack_1);
+		lblAttack_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAttack_1.setForeground(Color.WHITE);
+		lblAttack_1.setFont(new Font("Sitka Small", Font.PLAIN, 18));
 		
-		JLabel lblSlashing = new JLabel("AVALUE");
-		lblSlashing.setBounds(40, 55, 121, 79);
-		lblSlashing.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSlashing.setForeground(Color.WHITE);
-		lblSlashing.setFont(new Font("Sitka Small", Font.PLAIN, 18));
-		values.add(lblSlashing);
-		
-		JLabel lblMvalue = new JLabel("MVALUE");
-		lblMvalue.setBounds(200, 58, 174, 97);
+		JLabel lblMvalue = new JLabel("888");
+		characterStatNames.add(lblMvalue);
 		lblMvalue.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMvalue.setForeground(Color.WHITE);
 		lblMvalue.setFont(new Font("Sitka Small", Font.PLAIN, 18));
-		values.add(lblMvalue);
 		
-		JLabel lblDvalue = new JLabel("DVALUE");
-		lblDvalue.setBounds(395, 0, 197, 189);
+		JLabel lblDvalue = new JLabel("777");
+		characterStatNames.add(lblDvalue);
 		lblDvalue.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDvalue.setForeground(Color.WHITE);
 		lblDvalue.setFont(new Font("Sitka Small", Font.PLAIN, 18));
-		values.add(lblDvalue);
 		
-		JLabel MDVALUE = new JLabel("MDVALUE");
-		MDVALUE.setBounds(592, 0, 197, 189);
-		MDVALUE.setHorizontalAlignment(SwingConstants.CENTER);
-		MDVALUE.setForeground(Color.WHITE);
-		MDVALUE.setFont(new Font("Sitka Small", Font.PLAIN, 18));
-		values.add(MDVALUE);
+		JLabel lblMdvalue = new JLabel("666");
+		characterStatNames.add(lblMdvalue);
+		lblMdvalue.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMdvalue.setForeground(Color.WHITE);
+		lblMdvalue.setFont(new Font("Sitka Small", Font.PLAIN, 18));
+		
+		JLabel lblHealth_1 = new JLabel("999");
+		characterStatNames.add(lblHealth_1);
+		lblHealth_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblHealth_1.setForeground(Color.WHITE);
+		lblHealth_1.setFont(new Font("Sitka Small", Font.PLAIN, 18));
+		
+		JPanel increaseAndDecrease = new JPanel();
+		increaseAndDecrease.setBackground(Color.BLACK);
+		characterScreen.add(increaseAndDecrease);
+		increaseAndDecrease.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.BLACK);
+		panel.setBounds(10, 11, 141, 50);
+		increaseAndDecrease.add(panel);
+		panel.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		JButton plusHealthButton = new JButton("");
+		panel.add(plusHealthButton);
+		plusHealthButton.setPressedIcon(new ImageIcon(MainScreen.class.getResource("/plus_30_pressed.png")));
+		plusHealthButton.setIcon(new ImageIcon(MainScreen.class.getResource("/plus_30.png")));
+		plusHealthButton.setRolloverIcon(new ImageIcon(MainScreen.class.getResource("/plus_30_rollover.png")));
+		plusHealthButton.setOpaque(false);
+		plusHealthButton.setFocusPainted(false);
+		plusHealthButton.setContentAreaFilled(false);
+		plusHealthButton.setBorderPainted(false);
+		
+		JButton minusHealthButton = new JButton("");
+		minusHealthButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		panel.add(minusHealthButton);
+		minusHealthButton.setIcon(new ImageIcon(MainScreen.class.getResource("/minus_30.png")));
+		minusHealthButton.setPressedIcon(new ImageIcon(MainScreen.class.getResource("/minus_30_pressed.png")));
+		minusHealthButton.setRolloverIcon(new ImageIcon(MainScreen.class.getResource("/minus_30_rollover.png")));
+		minusHealthButton.setOpaque(false);
+		minusHealthButton.setFocusPainted(false);
+		minusHealthButton.setContentAreaFilled(false);
+		minusHealthButton.setBorderPainted(false);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(Color.BLACK);
+		panel_2.setBounds(166, 11, 141, 50);
+		increaseAndDecrease.add(panel_2);
+		panel_2.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		JButton plusAttackButton = new JButton("");
-		plusAttackButton.setLocation(67, 14);
-		values.add(plusAttackButton);
-		plusAttackButton.setPressedIcon(new ImageIcon(MainScreen.class.getResource("/plus_30_pressed.png")));
 		plusAttackButton.setIcon(new ImageIcon(MainScreen.class.getResource("/plus_30.png")));
+		plusAttackButton.setPressedIcon(new ImageIcon(MainScreen.class.getResource("/plus_30_pressed.png")));
 		plusAttackButton.setRolloverIcon(new ImageIcon(MainScreen.class.getResource("/plus_30_rollover.png")));
-		plusAttackButton.setSize(new Dimension(30, 30));
 		plusAttackButton.setOpaque(false);
 		plusAttackButton.setFocusPainted(false);
 		plusAttackButton.setContentAreaFilled(false);
 		plusAttackButton.setBorderPainted(false);
+		panel_2.add(plusAttackButton);
+		
+		JButton minusAttackButton = new JButton("");
+		minusAttackButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		minusAttackButton.setIcon(new ImageIcon(MainScreen.class.getResource("/minus_30.png")));
+		minusAttackButton.setPressedIcon(new ImageIcon(MainScreen.class.getResource("/minus_30_pressed.png")));
+		minusAttackButton.setRolloverIcon(new ImageIcon(MainScreen.class.getResource("/minus_30_rollover.png")));
+		minusAttackButton.setOpaque(false);
+		minusAttackButton.setFocusPainted(false);
+		minusAttackButton.setContentAreaFilled(false);
+		minusAttackButton.setBorderPainted(false);
+		panel_2.add(minusAttackButton);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(Color.BLACK);
+		panel_3.setBounds(324, 11, 141, 50);
+		increaseAndDecrease.add(panel_3);
+		panel_3.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		JButton plusMagicAttackButton = new JButton("");
+		plusMagicAttackButton.setIcon(new ImageIcon(MainScreen.class.getResource("/plus_30.png")));
+		plusMagicAttackButton.setPressedIcon(new ImageIcon(MainScreen.class.getResource("/plus_30_pressed.png")));
+		plusMagicAttackButton.setRolloverIcon(new ImageIcon(MainScreen.class.getResource("/plus_30_rollover.png")));
+		plusMagicAttackButton.setOpaque(false);
+		plusMagicAttackButton.setFocusPainted(false);
+		plusMagicAttackButton.setContentAreaFilled(false);
+		plusMagicAttackButton.setBorderPainted(false);
+		panel_3.add(plusMagicAttackButton);
+		
+		JButton minusMagicAttackButton = new JButton("");
+		minusMagicAttackButton.setIcon(new ImageIcon(MainScreen.class.getResource("/minus_30.png")));
+		minusMagicAttackButton.setPressedIcon(new ImageIcon(MainScreen.class.getResource("/minus_30_pressed.png")));
+		minusMagicAttackButton.setRolloverIcon(new ImageIcon(MainScreen.class.getResource("/minus_30_rollover.png")));
+		minusMagicAttackButton.setOpaque(false);
+		minusMagicAttackButton.setFocusPainted(false);
+		minusMagicAttackButton.setContentAreaFilled(false);
+		minusMagicAttackButton.setBorderPainted(false);
+		panel_3.add(minusMagicAttackButton);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBackground(Color.BLACK);
+		panel_4.setBounds(482, 11, 141, 50);
+		increaseAndDecrease.add(panel_4);
+		panel_4.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		JButton plusDefenseButton = new JButton("");
+		plusDefenseButton.setIcon(new ImageIcon(MainScreen.class.getResource("/plus_30.png")));
+		plusDefenseButton.setPressedIcon(new ImageIcon(MainScreen.class.getResource("/plus_30_pressed.png")));
+		plusDefenseButton.setRolloverIcon(new ImageIcon(MainScreen.class.getResource("/plus_30_rollover.png")));
+		plusDefenseButton.setOpaque(false);
+		plusDefenseButton.setFocusPainted(false);
+		plusDefenseButton.setContentAreaFilled(false);
+		plusDefenseButton.setBorderPainted(false);
+		panel_4.add(plusDefenseButton);
+		
+		JButton minusDefenseButton = new JButton("");
+		minusDefenseButton.setIcon(new ImageIcon(MainScreen.class.getResource("/minus_30.png")));
+		minusDefenseButton.setPressedIcon(new ImageIcon(MainScreen.class.getResource("/minus_30_pressed.png")));
+		minusDefenseButton.setRolloverIcon(new ImageIcon(MainScreen.class.getResource("/minus_30_rollover.png")));
+		minusDefenseButton.setOpaque(false);
+		minusDefenseButton.setFocusPainted(false);
+		minusDefenseButton.setContentAreaFilled(false);
+		minusDefenseButton.setBorderPainted(false);
+		panel_4.add(minusDefenseButton);
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setBackground(Color.BLACK);
+		panel_5.setBounds(639, 11, 141, 50);
+		increaseAndDecrease.add(panel_5);
+		panel_5.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		JButton plusMagicDefenseButton = new JButton("");
+		plusMagicDefenseButton.setIcon(new ImageIcon(MainScreen.class.getResource("/plus_30.png")));
+		plusMagicDefenseButton.setPressedIcon(new ImageIcon(MainScreen.class.getResource("/plus_30_pressed.png")));
+		plusMagicDefenseButton.setRolloverIcon(new ImageIcon(MainScreen.class.getResource("/plus_30_rollover.png")));
+		plusMagicDefenseButton.setOpaque(false);
+		plusMagicDefenseButton.setFocusPainted(false);
+		plusMagicDefenseButton.setContentAreaFilled(false);
+		plusMagicDefenseButton.setBorderPainted(false);
+		panel_5.add(plusMagicDefenseButton);
+		
+		JButton minusMagicDefenseButton = new JButton("");
+		minusMagicDefenseButton.setIcon(new ImageIcon(MainScreen.class.getResource("/minus_30.png")));
+		minusMagicDefenseButton.setPressedIcon(new ImageIcon(MainScreen.class.getResource("/minus_30_pressed.png")));
+		minusMagicDefenseButton.setRolloverIcon(new ImageIcon(MainScreen.class.getResource("/minus_30_rollover.png")));
+		minusMagicDefenseButton.setOpaque(false);
+		minusMagicDefenseButton.setFocusPainted(false);
+		minusMagicDefenseButton.setContentAreaFilled(false);
+		minusMagicDefenseButton.setBorderPainted(false);
+		panel_5.add(minusMagicDefenseButton);
+		
+		JButton button_3 = new JButton("");
+		button_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		button_3.setIcon(new ImageIcon(MainScreen.class.getResource("/start.png")));
+		button_3.setPressedIcon(new ImageIcon(MainScreen.class.getResource("/start_pressed.png")));
+		button_3.setRolloverIcon(new ImageIcon(MainScreen.class.getResource("/start_rollover.png")));
+		button_3.setSize(new Dimension(100, 30));
+		button_3.setOpaque(false);
+		button_3.setFocusPainted(false);
+		button_3.setContentAreaFilled(false);
+		button_3.setBorderPainted(false);
+		button_3.setBounds(346, 72, 100, 30);
+		increaseAndDecrease.add(button_3);
+		
+		Component verticalStrut_9 = Box.createVerticalStrut(20);
+		characterScreen.add(verticalStrut_9);
 
 	}
 	// Animation with lines when moving to combat
