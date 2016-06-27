@@ -1,11 +1,19 @@
 package game;
 
-public class Character {
+public class PlayerCharacter {
 	private String name;
+	private int health;
 	private int attack;
 	private int defense;
 	private int magicAttack;
 	private int magicDefense;
+	
+	public int getHealth() {
+		return health;
+	}
+	public void setHealth(int health) {
+		this.health = health;
+	}
 	
 	public String getName() {
 		return name;

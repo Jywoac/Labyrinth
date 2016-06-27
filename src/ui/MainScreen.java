@@ -24,6 +24,7 @@ import java.awt.CardLayout;
 import game.BoardActions;
 import game.MonsterActions;
 import game.MonsterFileWork;
+import game.PlayerCharacter;
 
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
@@ -59,6 +60,8 @@ public class MainScreen extends JFrame {
     private JTextField txtAlwaysdrop;
     private JTextField txtSymbol;
     private int numberOfPresses = 0;
+    private JTextField txtWriteCharacterName;
+    private PlayerCharacter playerCharacter = null;
 	
 	
 	/**
@@ -213,21 +216,9 @@ public class MainScreen extends JFrame {
 		startGameButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				bo = new BoardActions();
-				bo.setMazeSize(1);
-				bo.initializeBoard();
-				
-			    gameText.setText("<center>You hear the maze door close behind you.<br>"
-			    		+ "Press 'down arrow' to move into the maze.</center>");
-				
 				CardLayout cl = (CardLayout)(differentScreens.getLayout());
-			    cl.show(differentScreens, "GAMESCREEN");
-			    
-//			    CardLayout cl = (CardLayout)(differentScreens.getLayout());
-//			    cl.show(differentScreens, "COMBATSCREEN");
-			    //enteringCombatAnimationLines();
-			    //enteringCombatAnimationSquare();
-			    //enteringCombatAnimationText();
+			    cl.show(differentScreens, "CHARACTERSCREEN");				
+
 			}
 		});
 		startGameButton.setLocation(346, 0);
@@ -561,11 +552,21 @@ public class MainScreen extends JFrame {
 		characterScreen.add(characterName);
 		characterName.setLayout(new GridLayout(0, 5, 0, 0));
 		
-		JLabel lblCharacterName = new JLabel("Character NAME");
-		lblCharacterName.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCharacterName.setForeground(Color.WHITE);
-		lblCharacterName.setFont(new Font("Sitka Small", Font.PLAIN, 18));
-		characterScreen.add(lblCharacterName);
+		txtWriteCharacterName = new JTextField();
+		txtWriteCharacterName.setBorder(null);
+		txtWriteCharacterName.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				txtWriteCharacterName.setText("");
+			}
+		});
+		txtWriteCharacterName.setForeground(Color.WHITE);
+		txtWriteCharacterName.setBackground(Color.BLACK);
+		txtWriteCharacterName.setHorizontalAlignment(SwingConstants.CENTER);
+		txtWriteCharacterName.setText("Write Character Name Here");
+		txtWriteCharacterName.setFont(new Font("Sitka Small", Font.PLAIN, 18));
+		characterScreen.add(txtWriteCharacterName);
+		txtWriteCharacterName.setColumns(1);
 		
 		JPanel characterStatNames = new JPanel();
 		characterStatNames.setBackground(Color.BLACK);
@@ -602,35 +603,35 @@ public class MainScreen extends JFrame {
 		lblMagicdefense.setFont(new Font("Sitka Small", Font.PLAIN, 18));
 		characterStatNames.add(lblMagicdefense);
 		
-		JLabel lblAttack_1 = new JLabel("999");
-		characterStatNames.add(lblAttack_1);
-		lblAttack_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAttack_1.setForeground(Color.WHITE);
-		lblAttack_1.setFont(new Font("Sitka Small", Font.PLAIN, 18));
+		JLabel lblHvalue = new JLabel("999");
+		characterStatNames.add(lblHvalue);
+		lblHvalue.setHorizontalAlignment(SwingConstants.CENTER);
+		lblHvalue.setForeground(Color.WHITE);
+		lblHvalue.setFont(new Font("Sitka Small", Font.PLAIN, 18));
 		
-		JLabel lblMvalue = new JLabel("888");
-		characterStatNames.add(lblMvalue);
-		lblMvalue.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMvalue.setForeground(Color.WHITE);
-		lblMvalue.setFont(new Font("Sitka Small", Font.PLAIN, 18));
+		JLabel lblAvalue = new JLabel("888");
+		characterStatNames.add(lblAvalue);
+		lblAvalue.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAvalue.setForeground(Color.WHITE);
+		lblAvalue.setFont(new Font("Sitka Small", Font.PLAIN, 18));
 		
-		JLabel lblDvalue = new JLabel("777");
+		JLabel lblMAvalue = new JLabel("777");
+		characterStatNames.add(lblMAvalue);
+		lblMAvalue.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMAvalue.setForeground(Color.WHITE);
+		lblMAvalue.setFont(new Font("Sitka Small", Font.PLAIN, 18));
+		
+		JLabel lblDvalue = new JLabel("666");
 		characterStatNames.add(lblDvalue);
 		lblDvalue.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDvalue.setForeground(Color.WHITE);
 		lblDvalue.setFont(new Font("Sitka Small", Font.PLAIN, 18));
 		
-		JLabel lblMdvalue = new JLabel("666");
-		characterStatNames.add(lblMdvalue);
-		lblMdvalue.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMdvalue.setForeground(Color.WHITE);
-		lblMdvalue.setFont(new Font("Sitka Small", Font.PLAIN, 18));
-		
-		JLabel lblHealth_1 = new JLabel("999");
-		characterStatNames.add(lblHealth_1);
-		lblHealth_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblHealth_1.setForeground(Color.WHITE);
-		lblHealth_1.setFont(new Font("Sitka Small", Font.PLAIN, 18));
+		JLabel lblMDvalue = new JLabel("999");
+		characterStatNames.add(lblMDvalue);
+		lblMDvalue.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMDvalue.setForeground(Color.WHITE);
+		lblMDvalue.setFont(new Font("Sitka Small", Font.PLAIN, 18));
 		
 		JPanel increaseAndDecrease = new JPanel();
 		increaseAndDecrease.setBackground(Color.BLACK);
@@ -775,24 +776,60 @@ public class MainScreen extends JFrame {
 		minusMagicDefenseButton.setBorderPainted(false);
 		panel_5.add(minusMagicDefenseButton);
 		
-		JButton button_3 = new JButton("");
-		button_3.addActionListener(new ActionListener() {
+		JButton startGameWithChar = new JButton("");
+		startGameWithChar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				// set character values 
+				playerCharacter = new PlayerCharacter();				
+				playerCharacter.setName(txtWriteCharacterName.getText());
+				playerCharacter.setHealth(Integer.parseInt(lblHvalue.getText()));
+				playerCharacter.setAttack(Integer.parseInt(lblAvalue.getText()));
+				playerCharacter.setMagicAttack(Integer.parseInt(lblMAvalue.getText()));
+				playerCharacter.setDefense(Integer.parseInt(lblDvalue.getText()));
+				playerCharacter.setMagicDefense(Integer.parseInt(lblMDvalue.getText()));
+				
+				// add listener for c button to move to character screen
+				// add points left thing 
+				// add button listeners and change the values when plus minus buttons are pressed
+				// change listener for start button so that it can only be pressed when name is given and points are spent.
+				
+				
+				bo = new BoardActions();
+				bo.setMazeSize(1);
+				bo.initializeBoard();
+				
+			    gameText.setText("<center>You hear the maze door close behind you.<br>"
+			    		+ "Press 'down arrow' to move into the maze.</center>");
+				
+				CardLayout cl = (CardLayout)(differentScreens.getLayout());
+			    cl.show(differentScreens, "GAMESCREEN");
+			    
+//			    CardLayout cl = (CardLayout)(differentScreens.getLayout());
+//			    cl.show(differentScreens, "COMBATSCREEN");
+			    //enteringCombatAnimationLines();
+			    //enteringCombatAnimationSquare();
+			    //enteringCombatAnimationText();
+				
 			}
 		});
-		button_3.setIcon(new ImageIcon(MainScreen.class.getResource("/start.png")));
-		button_3.setPressedIcon(new ImageIcon(MainScreen.class.getResource("/start_pressed.png")));
-		button_3.setRolloverIcon(new ImageIcon(MainScreen.class.getResource("/start_rollover.png")));
-		button_3.setSize(new Dimension(100, 30));
-		button_3.setOpaque(false);
-		button_3.setFocusPainted(false);
-		button_3.setContentAreaFilled(false);
-		button_3.setBorderPainted(false);
-		button_3.setBounds(346, 72, 100, 30);
-		increaseAndDecrease.add(button_3);
+		startGameWithChar.setIcon(new ImageIcon(MainScreen.class.getResource("/start.png")));
+		startGameWithChar.setPressedIcon(new ImageIcon(MainScreen.class.getResource("/start_pressed.png")));
+		startGameWithChar.setRolloverIcon(new ImageIcon(MainScreen.class.getResource("/start_rollover.png")));
+		startGameWithChar.setSize(new Dimension(100, 30));
+		startGameWithChar.setOpaque(false);
+		startGameWithChar.setFocusPainted(false);
+		startGameWithChar.setContentAreaFilled(false);
+		startGameWithChar.setBorderPainted(false);
+		startGameWithChar.setBounds(346, 72, 100, 30);
+		increaseAndDecrease.add(startGameWithChar);
 		
-		Component verticalStrut_9 = Box.createVerticalStrut(20);
-		characterScreen.add(verticalStrut_9);
+		JLabel pointsLeftLabel = new JLabel("Points left: ");
+		pointsLeftLabel.setForeground(Color.WHITE);
+		pointsLeftLabel.setBackground(Color.BLACK);
+		pointsLeftLabel.setFont(new Font("Sitka Small", Font.PLAIN, 18));
+		pointsLeftLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		characterScreen.add(pointsLeftLabel);
 
 	}
 	// Animation with lines when moving to combat
