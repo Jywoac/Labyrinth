@@ -61,8 +61,24 @@ public class MainScreen extends JFrame {
     private JTextField txtSymbol;
     private int numberOfPresses = 0;
     private JTextField txtWriteCharacterName;
-    private PlayerCharacter playerCharacter = null;
-	
+    private PlayerCharacter playerCharacter = new PlayerCharacter();
+    private JLabel pointsLeftLabel;
+	private JButton plusHealthButton;
+	private JButton minusHealthButton;
+	private JButton plusAttackButton;
+	private JButton minusAttackButton;
+	private JButton plusMagicAttackButton;
+	private JButton minusMagicAttackButton;
+	private JButton plusDefenseButton;
+	private JButton minusDefenseButton;
+	private JButton plusMagicDefenseButton;
+	private JButton minusMagicDefenseButton;
+	private JButton startGameWithChar;
+	private JLabel lblHvalue;	
+	private JLabel lblAvalue;	
+	private JLabel lblMAvalue;	
+	private JLabel lblDvalue;	
+	private JLabel lblMDvalue;
 	
 	/**
 	 * Launch the application.
@@ -172,7 +188,10 @@ public class MainScreen extends JFrame {
 		
         KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         manager.addKeyEventDispatcher(new MyDispatcher());
-	
+        
+        // ininitalize a default character
+        playerCharacter.initializeCharacter();
+        
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(450, 450, 800, 600);
@@ -603,31 +622,31 @@ public class MainScreen extends JFrame {
 		lblMagicdefense.setFont(new Font("Sitka Small", Font.PLAIN, 18));
 		characterStatNames.add(lblMagicdefense);
 		
-		JLabel lblHvalue = new JLabel("999");
+		lblHvalue = new JLabel(Integer.toString(playerCharacter.getHealth()));
 		characterStatNames.add(lblHvalue);
 		lblHvalue.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHvalue.setForeground(Color.WHITE);
 		lblHvalue.setFont(new Font("Sitka Small", Font.PLAIN, 18));
 		
-		JLabel lblAvalue = new JLabel("888");
+		lblAvalue = new JLabel(Integer.toString(playerCharacter.getAttack()));
 		characterStatNames.add(lblAvalue);
 		lblAvalue.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAvalue.setForeground(Color.WHITE);
 		lblAvalue.setFont(new Font("Sitka Small", Font.PLAIN, 18));
 		
-		JLabel lblMAvalue = new JLabel("777");
+		lblMAvalue = new JLabel(Integer.toString(playerCharacter.getMagicAttack()));
 		characterStatNames.add(lblMAvalue);
 		lblMAvalue.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMAvalue.setForeground(Color.WHITE);
 		lblMAvalue.setFont(new Font("Sitka Small", Font.PLAIN, 18));
 		
-		JLabel lblDvalue = new JLabel("666");
+		lblDvalue = new JLabel(Integer.toString(playerCharacter.getDefense()));
 		characterStatNames.add(lblDvalue);
 		lblDvalue.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDvalue.setForeground(Color.WHITE);
 		lblDvalue.setFont(new Font("Sitka Small", Font.PLAIN, 18));
 		
-		JLabel lblMDvalue = new JLabel("999");
+		lblMDvalue = new JLabel(Integer.toString(playerCharacter.getMagicDefense()));
 		characterStatNames.add(lblMDvalue);
 		lblMDvalue.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMDvalue.setForeground(Color.WHITE);
@@ -644,7 +663,11 @@ public class MainScreen extends JFrame {
 		increaseAndDecrease.add(panel);
 		panel.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JButton plusHealthButton = new JButton("");
+		plusHealthButton = new JButton("");
+		plusHealthButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		panel.add(plusHealthButton);
 		plusHealthButton.setPressedIcon(new ImageIcon(MainScreen.class.getResource("/plus_30_pressed.png")));
 		plusHealthButton.setIcon(new ImageIcon(MainScreen.class.getResource("/plus_30.png")));
@@ -654,9 +677,32 @@ public class MainScreen extends JFrame {
 		plusHealthButton.setContentAreaFilled(false);
 		plusHealthButton.setBorderPainted(false);
 		
-		JButton minusHealthButton = new JButton("");
+		minusHealthButton = new JButton("");
 		minusHealthButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+			
+		        playerCharacter.setPointsLeft(playerCharacter.getPointsLeft()+1);
+		        pointsLeftLabel.setText("Points left: "+playerCharacter.getPointsLeft());
+		        
+		        playerCharacter.setHealth(playerCharacter.getHealth()-5); // health changes in increments of 5 per point.
+		        lblHvalue.setText(Integer.toString(playerCharacter.getHealth()));
+		        		        
+		        // if all points are refunded, disable minus buttons
+		        if(playerCharacter.getPointsLeft() == playerCharacter.getPointsToUse()){
+		        	minusHealthButton.setEnabled(false);
+		        	minusAttackButton.setEnabled(false);
+		        	minusMagicAttackButton.setEnabled(false);
+		        	minusDefenseButton.setEnabled(false);
+		        	minusMagicDefenseButton.setEnabled(false);
+		        }
+		        
+		        // if health is reduced to minimum, disable minus button.
+		        if(playerCharacter.getMinHealth() == playerCharacter.getHealth()){
+		        	minusHealthButton.setEnabled(false);
+		        }
+		        
+		        // make button things for other buttons
+		        
 			}
 		});
 		panel.add(minusHealthButton);
@@ -674,7 +720,11 @@ public class MainScreen extends JFrame {
 		increaseAndDecrease.add(panel_2);
 		panel_2.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JButton plusAttackButton = new JButton("");
+		plusAttackButton = new JButton("");
+		plusAttackButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		plusAttackButton.setIcon(new ImageIcon(MainScreen.class.getResource("/plus_30.png")));
 		plusAttackButton.setPressedIcon(new ImageIcon(MainScreen.class.getResource("/plus_30_pressed.png")));
 		plusAttackButton.setRolloverIcon(new ImageIcon(MainScreen.class.getResource("/plus_30_rollover.png")));
@@ -684,7 +734,7 @@ public class MainScreen extends JFrame {
 		plusAttackButton.setBorderPainted(false);
 		panel_2.add(plusAttackButton);
 		
-		JButton minusAttackButton = new JButton("");
+		minusAttackButton = new JButton("");
 		minusAttackButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -704,7 +754,11 @@ public class MainScreen extends JFrame {
 		increaseAndDecrease.add(panel_3);
 		panel_3.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JButton plusMagicAttackButton = new JButton("");
+		plusMagicAttackButton = new JButton("");
+		plusMagicAttackButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		plusMagicAttackButton.setIcon(new ImageIcon(MainScreen.class.getResource("/plus_30.png")));
 		plusMagicAttackButton.setPressedIcon(new ImageIcon(MainScreen.class.getResource("/plus_30_pressed.png")));
 		plusMagicAttackButton.setRolloverIcon(new ImageIcon(MainScreen.class.getResource("/plus_30_rollover.png")));
@@ -714,7 +768,11 @@ public class MainScreen extends JFrame {
 		plusMagicAttackButton.setBorderPainted(false);
 		panel_3.add(plusMagicAttackButton);
 		
-		JButton minusMagicAttackButton = new JButton("");
+		minusMagicAttackButton = new JButton("");
+		minusMagicAttackButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		minusMagicAttackButton.setIcon(new ImageIcon(MainScreen.class.getResource("/minus_30.png")));
 		minusMagicAttackButton.setPressedIcon(new ImageIcon(MainScreen.class.getResource("/minus_30_pressed.png")));
 		minusMagicAttackButton.setRolloverIcon(new ImageIcon(MainScreen.class.getResource("/minus_30_rollover.png")));
@@ -730,7 +788,11 @@ public class MainScreen extends JFrame {
 		increaseAndDecrease.add(panel_4);
 		panel_4.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JButton plusDefenseButton = new JButton("");
+		plusDefenseButton = new JButton("");
+		plusDefenseButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		plusDefenseButton.setIcon(new ImageIcon(MainScreen.class.getResource("/plus_30.png")));
 		plusDefenseButton.setPressedIcon(new ImageIcon(MainScreen.class.getResource("/plus_30_pressed.png")));
 		plusDefenseButton.setRolloverIcon(new ImageIcon(MainScreen.class.getResource("/plus_30_rollover.png")));
@@ -740,7 +802,11 @@ public class MainScreen extends JFrame {
 		plusDefenseButton.setBorderPainted(false);
 		panel_4.add(plusDefenseButton);
 		
-		JButton minusDefenseButton = new JButton("");
+		minusDefenseButton = new JButton("");
+		minusDefenseButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		minusDefenseButton.setIcon(new ImageIcon(MainScreen.class.getResource("/minus_30.png")));
 		minusDefenseButton.setPressedIcon(new ImageIcon(MainScreen.class.getResource("/minus_30_pressed.png")));
 		minusDefenseButton.setRolloverIcon(new ImageIcon(MainScreen.class.getResource("/minus_30_rollover.png")));
@@ -756,7 +822,11 @@ public class MainScreen extends JFrame {
 		increaseAndDecrease.add(panel_5);
 		panel_5.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JButton plusMagicDefenseButton = new JButton("");
+		plusMagicDefenseButton = new JButton("");
+		plusMagicDefenseButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		plusMagicDefenseButton.setIcon(new ImageIcon(MainScreen.class.getResource("/plus_30.png")));
 		plusMagicDefenseButton.setPressedIcon(new ImageIcon(MainScreen.class.getResource("/plus_30_pressed.png")));
 		plusMagicDefenseButton.setRolloverIcon(new ImageIcon(MainScreen.class.getResource("/plus_30_rollover.png")));
@@ -766,7 +836,11 @@ public class MainScreen extends JFrame {
 		plusMagicDefenseButton.setBorderPainted(false);
 		panel_5.add(plusMagicDefenseButton);
 		
-		JButton minusMagicDefenseButton = new JButton("");
+		minusMagicDefenseButton = new JButton("");
+		minusMagicDefenseButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		minusMagicDefenseButton.setIcon(new ImageIcon(MainScreen.class.getResource("/minus_30.png")));
 		minusMagicDefenseButton.setPressedIcon(new ImageIcon(MainScreen.class.getResource("/minus_30_pressed.png")));
 		minusMagicDefenseButton.setRolloverIcon(new ImageIcon(MainScreen.class.getResource("/minus_30_rollover.png")));
@@ -776,12 +850,11 @@ public class MainScreen extends JFrame {
 		minusMagicDefenseButton.setBorderPainted(false);
 		panel_5.add(minusMagicDefenseButton);
 		
-		JButton startGameWithChar = new JButton("");
+		startGameWithChar = new JButton("");
 		startGameWithChar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				// set character values 
-				playerCharacter = new PlayerCharacter();				
 				playerCharacter.setName(txtWriteCharacterName.getText());
 				playerCharacter.setHealth(Integer.parseInt(lblHvalue.getText()));
 				playerCharacter.setAttack(Integer.parseInt(lblAvalue.getText()));
@@ -789,7 +862,8 @@ public class MainScreen extends JFrame {
 				playerCharacter.setDefense(Integer.parseInt(lblDvalue.getText()));
 				playerCharacter.setMagicDefense(Integer.parseInt(lblMDvalue.getText()));
 				
-				// add listener for c button to move to character screen
+				txtWriteCharacterName.setEditable(false); // once game starts character name cannot be changed.
+				
 				// add points left thing 
 				// add button listeners and change the values when plus minus buttons are pressed
 				// change listener for start button so that it can only be pressed when name is given and points are spent.
@@ -824,7 +898,7 @@ public class MainScreen extends JFrame {
 		startGameWithChar.setBounds(346, 72, 100, 30);
 		increaseAndDecrease.add(startGameWithChar);
 		
-		JLabel pointsLeftLabel = new JLabel("Points left: ");
+		pointsLeftLabel = new JLabel("Points left: "+playerCharacter.getPointsLeft());
 		pointsLeftLabel.setForeground(Color.WHITE);
 		pointsLeftLabel.setBackground(Color.BLACK);
 		pointsLeftLabel.setFont(new Font("Sitka Small", Font.PLAIN, 18));
