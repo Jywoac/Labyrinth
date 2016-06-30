@@ -710,36 +710,36 @@ public class MainScreen extends JFrame {
 		minusHealthButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				// disable start button
-				startGameWithChar.setEnabled(false);
-								
-				// more points are added to the pool, activate plus buttons
-	        	plusHealthButton.setEnabled(true);
-	        	plusAttackButton.setEnabled(true);
-	        	plusMagicAttackButton.setEnabled(true);
-	        	plusDefenseButton.setEnabled(true);
-	        	plusMagicDefenseButton.setEnabled(true);
-			
-		        playerCharacter.setPointsLeft(playerCharacter.getPointsLeft()+1);
-		        pointsLeftLabel.setText("Points left: "+playerCharacter.getPointsLeft());
-		        
-		        playerCharacter.setHealth(playerCharacter.getHealth()-5); // health changes in increments of 5 per point.
-		        lblHvalue.setText(Integer.toString(playerCharacter.getHealth()));
-		        		        
-		        // if all points are refunded, disable minus buttons
-		        if(playerCharacter.getPointsLeft() == playerCharacter.getPointsToUse()){
-		        	minusHealthButton.setEnabled(false);
-		        	minusAttackButton.setEnabled(false);
-		        	minusMagicAttackButton.setEnabled(false);
-		        	minusDefenseButton.setEnabled(false);
-		        	minusMagicDefenseButton.setEnabled(false);
-		        }
-		        
 		        // if health is reduced to minimum, disable minus button.
-		        if(playerCharacter.getMinHealth() == playerCharacter.getHealth()){
+		        if(playerCharacter.getMinHealth() == playerCharacter.getHealth()-5){
 		        	minusHealthButton.setEnabled(false);
+		        }else{
+
+					// disable start button
+					startGameWithChar.setEnabled(false);
+					
+					// more points are added to the pool, activate plus buttons
+		        	plusHealthButton.setEnabled(true);
+		        	plusAttackButton.setEnabled(true);
+		        	plusMagicAttackButton.setEnabled(true);
+		        	plusDefenseButton.setEnabled(true);
+		        	plusMagicDefenseButton.setEnabled(true);
+				
+			        playerCharacter.setPointsLeft(playerCharacter.getPointsLeft()+1);
+			        pointsLeftLabel.setText("Points left: "+playerCharacter.getPointsLeft());
+			        
+			        playerCharacter.setHealth(playerCharacter.getHealth()-5); // health changes in increments of 5 per point.
+			        lblHvalue.setText(Integer.toString(playerCharacter.getHealth()));
+			        		        
+			        // if all points are refunded, disable minus buttons
+			        if(playerCharacter.getPointsLeft() == playerCharacter.getPointsToUse()){
+			        	minusHealthButton.setEnabled(false);
+			        	minusAttackButton.setEnabled(false);
+			        	minusMagicAttackButton.setEnabled(false);
+			        	minusDefenseButton.setEnabled(false);
+			        	minusMagicDefenseButton.setEnabled(false);
+			        }
 		        }
-		        
 		        
 			}
 		});
@@ -804,37 +804,37 @@ public class MainScreen extends JFrame {
 		minusAttackButton = new JButton("");
 		minusAttackButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				// disable start button
-				startGameWithChar.setEnabled(false);
-				
-				// more points are added to the pool, activate plus buttons
-	        	plusHealthButton.setEnabled(true);
-	        	plusAttackButton.setEnabled(true);
-	        	plusMagicAttackButton.setEnabled(true);
-	        	plusDefenseButton.setEnabled(true);
-	        	plusMagicDefenseButton.setEnabled(true);
-				
-		        playerCharacter.setPointsLeft(playerCharacter.getPointsLeft()+1);
-		        pointsLeftLabel.setText("Points left: "+playerCharacter.getPointsLeft());
-		        
-		        playerCharacter.setAttack(playerCharacter.getAttack()-1);
-		        lblAvalue.setText(Integer.toString(playerCharacter.getAttack()));
-		        		        
-		        // if all points are refunded, disable minus buttons
-		        if(playerCharacter.getPointsLeft() == playerCharacter.getPointsToUse()){
-		        	minusHealthButton.setEnabled(false);
-		        	minusAttackButton.setEnabled(false);
-		        	minusMagicAttackButton.setEnabled(false);
-		        	minusDefenseButton.setEnabled(false);
-		        	minusMagicDefenseButton.setEnabled(false);
-		        }
-		        
+
 		        // if attack is reduced to minimum, disable minus button.
-		        if(playerCharacter.getMinAttack() == playerCharacter.getAttack()){
+		        if(playerCharacter.getMinAttack() == playerCharacter.getAttack()-1){
 		        	minusAttackButton.setEnabled(false);
+		        }else{
+					
+					// disable start button
+					startGameWithChar.setEnabled(false);
+					
+					// more points are added to the pool, activate plus buttons
+		        	plusHealthButton.setEnabled(true);
+		        	plusAttackButton.setEnabled(true);
+		        	plusMagicAttackButton.setEnabled(true);
+		        	plusDefenseButton.setEnabled(true);
+		        	plusMagicDefenseButton.setEnabled(true);
+					
+			        playerCharacter.setPointsLeft(playerCharacter.getPointsLeft()+1);
+			        pointsLeftLabel.setText("Points left: "+playerCharacter.getPointsLeft());
+			        
+			        playerCharacter.setAttack(playerCharacter.getAttack()-1);
+			        lblAvalue.setText(Integer.toString(playerCharacter.getAttack()));
+			        		        
+			        // if all points are refunded, disable minus buttons
+			        if(playerCharacter.getPointsLeft() == playerCharacter.getPointsToUse()){
+			        	minusHealthButton.setEnabled(false);
+			        	minusAttackButton.setEnabled(false);
+			        	minusMagicAttackButton.setEnabled(false);
+			        	minusDefenseButton.setEnabled(false);
+			        	minusMagicDefenseButton.setEnabled(false);
+			        }
 		        }
-				
 			}
 		});
 		minusAttackButton.setIcon(new ImageIcon(MainScreen.class.getResource("/minus_30.png")));
@@ -898,36 +898,37 @@ public class MainScreen extends JFrame {
 		minusMagicAttackButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				// disable start button
-				startGameWithChar.setEnabled(false);
-				
-				// more points are added to the pool, activate plus buttons
-	        	plusHealthButton.setEnabled(true);
-	        	plusAttackButton.setEnabled(true);
-	        	plusMagicAttackButton.setEnabled(true);
-	        	plusDefenseButton.setEnabled(true);
-	        	plusMagicDefenseButton.setEnabled(true);
-				
-		        playerCharacter.setPointsLeft(playerCharacter.getPointsLeft()+1);
-		        pointsLeftLabel.setText("Points left: "+playerCharacter.getPointsLeft());
-		        
-		        playerCharacter.setMagicAttack(playerCharacter.getMagicAttack()-1);
-		        lblMAvalue.setText(Integer.toString(playerCharacter.getMagicAttack()));
-		        		        
-		        // if all points are refunded, disable minus buttons
-		        if(playerCharacter.getPointsLeft() == playerCharacter.getPointsToUse()){
-		        	minusHealthButton.setEnabled(false);
-		        	minusAttackButton.setEnabled(false);
-		        	minusMagicAttackButton.setEnabled(false);
-		        	minusDefenseButton.setEnabled(false);
-		        	minusMagicDefenseButton.setEnabled(false);
-		        }
 		        
 		        // if magic attack is reduced to minimum, disable minus button.
-		        if(playerCharacter.getMinMagicAttack() == playerCharacter.getMagicAttack()){
+		        if(playerCharacter.getMinMagicAttack() == playerCharacter.getMagicAttack()-1){
 		        	minusMagicAttackButton.setEnabled(false);
+		        }else{
+					
+					// disable start button
+					startGameWithChar.setEnabled(false);
+					
+					// more points are added to the pool, activate plus buttons
+		        	plusHealthButton.setEnabled(true);
+		        	plusAttackButton.setEnabled(true);
+		        	plusMagicAttackButton.setEnabled(true);
+		        	plusDefenseButton.setEnabled(true);
+		        	plusMagicDefenseButton.setEnabled(true);
+					
+			        playerCharacter.setPointsLeft(playerCharacter.getPointsLeft()+1);
+			        pointsLeftLabel.setText("Points left: "+playerCharacter.getPointsLeft());
+			        
+			        playerCharacter.setMagicAttack(playerCharacter.getMagicAttack()-1);
+			        lblMAvalue.setText(Integer.toString(playerCharacter.getMagicAttack()));
+			        		        
+			        // if all points are refunded, disable minus buttons
+			        if(playerCharacter.getPointsLeft() == playerCharacter.getPointsToUse()){
+			        	minusHealthButton.setEnabled(false);
+			        	minusAttackButton.setEnabled(false);
+			        	minusMagicAttackButton.setEnabled(false);
+			        	minusDefenseButton.setEnabled(false);
+			        	minusMagicDefenseButton.setEnabled(false);
+			        }
 		        }
-				
 			}
 		});
 		minusMagicAttackButton.setIcon(new ImageIcon(MainScreen.class.getResource("/minus_30.png")));
@@ -991,38 +992,37 @@ public class MainScreen extends JFrame {
 		minusDefenseButton = new JButton("");
 		minusDefenseButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				// disable start button
-				startGameWithChar.setEnabled(false);
-				
-				// more points are added to the pool, activate plus buttons
-	        	plusHealthButton.setEnabled(true);
-	        	plusAttackButton.setEnabled(true);
-	        	plusMagicAttackButton.setEnabled(true);
-	        	plusDefenseButton.setEnabled(true);
-	        	plusMagicDefenseButton.setEnabled(true);
-				
-		        playerCharacter.setPointsLeft(playerCharacter.getPointsLeft()+1);
-		        pointsLeftLabel.setText("Points left: "+playerCharacter.getPointsLeft());
-		        
-		        playerCharacter.setDefense(playerCharacter.getDefense()-1);
-		        lblDvalue.setText(Integer.toString(playerCharacter.getDefense()));
-		        		        
-		        // if all points are refunded, disable minus buttons
-		        if(playerCharacter.getPointsLeft() == playerCharacter.getPointsToUse()){
-		        	minusHealthButton.setEnabled(false);
-		        	minusAttackButton.setEnabled(false);
-		        	minusMagicAttackButton.setEnabled(false);
-		        	minusDefenseButton.setEnabled(false);
-		        	minusMagicDefenseButton.setEnabled(false);
-		        }
 		        
 		        // if magic attack is reduced to minimum, disable minus button.
-		        if(playerCharacter.getMinDefense() == playerCharacter.getDefense()){
+		        if(playerCharacter.getMinDefense() == playerCharacter.getDefense()-1){
 		        	minusDefenseButton.setEnabled(false);
-		        }
-				
-			
+		        }else{
+					
+					// disable start button
+					startGameWithChar.setEnabled(false);
+					
+					// more points are added to the pool, activate plus buttons
+		        	plusHealthButton.setEnabled(true);
+		        	plusAttackButton.setEnabled(true);
+		        	plusMagicAttackButton.setEnabled(true);
+		        	plusDefenseButton.setEnabled(true);
+		        	plusMagicDefenseButton.setEnabled(true);
+					
+			        playerCharacter.setPointsLeft(playerCharacter.getPointsLeft()+1);
+			        pointsLeftLabel.setText("Points left: "+playerCharacter.getPointsLeft());
+			        
+			        playerCharacter.setDefense(playerCharacter.getDefense()-1);
+			        lblDvalue.setText(Integer.toString(playerCharacter.getDefense()));
+			        		        
+			        // if all points are refunded, disable minus buttons
+			        if(playerCharacter.getPointsLeft() == playerCharacter.getPointsToUse()){
+			        	minusHealthButton.setEnabled(false);
+			        	minusAttackButton.setEnabled(false);
+			        	minusMagicAttackButton.setEnabled(false);
+			        	minusDefenseButton.setEnabled(false);
+			        	minusMagicDefenseButton.setEnabled(false);
+			        }		        
+		        }			
 			}
 		});
 		minusDefenseButton.setIcon(new ImageIcon(MainScreen.class.getResource("/minus_30.png")));
@@ -1087,37 +1087,38 @@ public class MainScreen extends JFrame {
 		minusMagicDefenseButton = new JButton("");
 		minusMagicDefenseButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				// disable start button
-				startGameWithChar.setEnabled(false);
-				
-				// more points are added to the pool, activate plus buttons
-	        	plusHealthButton.setEnabled(true);
-	        	plusAttackButton.setEnabled(true);
-	        	plusMagicAttackButton.setEnabled(true);
-	        	plusDefenseButton.setEnabled(true);
-	        	plusMagicDefenseButton.setEnabled(true);
-				
-		        playerCharacter.setPointsLeft(playerCharacter.getPointsLeft()+1);
-		        pointsLeftLabel.setText("Points left: "+playerCharacter.getPointsLeft());
-		        
-		        playerCharacter.setMagicDefense(playerCharacter.getMagicDefense()-1);
-		        lblMDvalue.setText(Integer.toString(playerCharacter.getMagicDefense()));
-		        		        
-		        // if all points are refunded, disable minus buttons
-		        if(playerCharacter.getPointsLeft() == playerCharacter.getPointsToUse()){
-		        	minusHealthButton.setEnabled(false);
-		        	minusAttackButton.setEnabled(false);
-		        	minusMagicAttackButton.setEnabled(false);
-		        	minusDefenseButton.setEnabled(false);
-		        	minusMagicDefenseButton.setEnabled(false);
-		        }
-		        
+
 		        // if magic attack is reduced to minimum, disable minus button.
-		        if(playerCharacter.getMinDefense() == playerCharacter.getDefense()){
+		        if(playerCharacter.getMinDefense() == playerCharacter.getDefense()-1){
 		        	minusMagicDefenseButton.setEnabled(false);
+		        }else{
+					
+					// disable start button
+					startGameWithChar.setEnabled(false);
+					
+					// more points are added to the pool, activate plus buttons
+		        	plusHealthButton.setEnabled(true);
+		        	plusAttackButton.setEnabled(true);
+		        	plusMagicAttackButton.setEnabled(true);
+		        	plusDefenseButton.setEnabled(true);
+		        	plusMagicDefenseButton.setEnabled(true);
+					
+			        playerCharacter.setPointsLeft(playerCharacter.getPointsLeft()+1);
+			        pointsLeftLabel.setText("Points left: "+playerCharacter.getPointsLeft());
+			        
+			        playerCharacter.setMagicDefense(playerCharacter.getMagicDefense()-1);
+			        lblMDvalue.setText(Integer.toString(playerCharacter.getMagicDefense()));
+			        		        
+			        // if all points are refunded, disable minus buttons
+			        if(playerCharacter.getPointsLeft() == playerCharacter.getPointsToUse()){
+			        	minusHealthButton.setEnabled(false);
+			        	minusAttackButton.setEnabled(false);
+			        	minusMagicAttackButton.setEnabled(false);
+			        	minusDefenseButton.setEnabled(false);
+			        	minusMagicDefenseButton.setEnabled(false);
+			        }
+
 		        }
-				
 			}
 		});
 		minusMagicDefenseButton.setIcon(new ImageIcon(MainScreen.class.getResource("/minus_30.png")));
@@ -1163,6 +1164,10 @@ public class MainScreen extends JFrame {
 			    //enteringCombatAnimationLines();
 			    //enteringCombatAnimationSquare();
 			    //enteringCombatAnimationText();
+			    
+			    // set all buttons invisible once player has distributed all points.			    
+			    increaseAndDecrease.setVisible(false);
+			    pointsLeftLabel.setVisible(false);
 				
 			}
 		});
