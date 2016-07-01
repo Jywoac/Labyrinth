@@ -15,6 +15,64 @@ public class PlayerCharacter {
 	private int minMagicAttack;
 	private int minMagicDefense;
 	
+	// items in inventory
+	private String [][] mainHand;
+	private String [][] offHand;
+	private String [][] chest;
+	private String [][] pants;
+	private String [][] feet;
+	private String [][] head;
+	private String [][] hands;
+	private String [][] misc;	
+	
+	public String[][] getMainHand() {
+		return mainHand;
+	}
+	public void setMainHand(String[][] mainHand) {
+		this.mainHand = mainHand;
+	}
+	public String[][] getOffHand() {
+		return offHand;
+	}
+	public void setOffHand(String[][] offHand) {
+		this.offHand = offHand;
+	}
+	public String[][] getChest() {
+		return chest;
+	}
+	public void setChest(String[][] chest) {
+		this.chest = chest;
+	}
+	public String[][] getPants() {
+		return pants;
+	}
+	public void setPants(String[][] pants) {
+		this.pants = pants;
+	}
+	public String[][] getFeet() {
+		return feet;
+	}
+	public void setFeet(String[][] feet) {
+		this.feet = feet;
+	}
+	public String[][] getHead() {
+		return head;
+	}
+	public void setHead(String[][] head) {
+		this.head = head;
+	}
+	public String[][] getHands() {
+		return hands;
+	}
+	public void setHands(String[][] hands) {
+		this.hands = hands;
+	}
+	public String[][] getMisc() {
+		return misc;
+	}
+	public void setMisc(String[][] misc) {
+		this.misc = misc;
+	}
 	public int getMinHealth() {
 		return minHealth;
 	}
@@ -104,6 +162,22 @@ public class PlayerCharacter {
 		magicDefense= 1;;
 		pointsLeft = 10; // points left to distribute
 		pointsToUse = 10; // amount of points the player gets to distribute between attributes
+		
+		// player starting items
+		
+		// Mainhand
+		mainHand[0][0] = "Short Sword"; // name of the weapon
+		mainHand[0][1] = "2"; // attack value of the weapon
+		mainHand[0][2] = "100"; // value of the weapon
+		
+		// Offhand
+		// Helm
+		// Chest
+		// Feet
+		// Pants
+		// Hands
+		
+		// add these items to the inventory screen
 	}
 	
 }

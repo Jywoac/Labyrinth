@@ -40,6 +40,7 @@ import javax.swing.JPopupMenu;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.FlowLayout;
+import javax.swing.JComboBox;
 
 public class MainScreen extends JFrame {
 
@@ -514,49 +515,40 @@ public class MainScreen extends JFrame {
 		differentScreens.add(inventory, "INVENTORYSCREEN");
 		inventory.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		Component verticalStrut_6 = Box.createVerticalStrut(20);
-		inventory.add(verticalStrut_6);
-		
-		JLabel label = new JLabel("Labyrinth");
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setForeground(Color.WHITE);
-		label.setFont(new Font("Sitka Small", Font.PLAIN, 18));
-		inventory.add(label);
+		JLabel lblInventory = new JLabel("Inventory");
+		lblInventory.setHorizontalAlignment(SwingConstants.CENTER);
+		lblInventory.setForeground(Color.WHITE);
+		lblInventory.setFont(new Font("Sitka Small", Font.PLAIN, 18));
+		inventory.add(lblInventory);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setLayout(null);
 		panel_1.setBackground(Color.BLACK);
 		inventory.add(panel_1);
+		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JButton button = new JButton("");
-		button.setSize(new Dimension(100, 30));
-		button.setOpaque(false);
-		button.setFocusPainted(false);
-		button.setContentAreaFilled(false);
-		button.setBorderPainted(false);
-		button.setBounds(346, 0, 100, 30);
-		panel_1.add(button);
+		JComboBox Head = new JComboBox();
+		panel_1.add(Head);
 		
-		JButton button_1 = new JButton("");
-		button_1.setSize(new Dimension(100, 30));
-		button_1.setOpaque(false);
-		button_1.setFocusPainted(false);
-		button_1.setContentAreaFilled(false);
-		button_1.setBorderPainted(false);
-		button_1.setBounds(346, 41, 100, 30);
-		panel_1.add(button_1);
+		JComboBox Chest = new JComboBox();
+		panel_1.add(Chest);
 		
-		JButton button_2 = new JButton("");
-		button_2.setSize(new Dimension(100, 30));
-		button_2.setOpaque(false);
-		button_2.setFocusPainted(false);
-		button_2.setContentAreaFilled(false);
-		button_2.setBorderPainted(false);
-		button_2.setBounds(346, 82, 100, 30);
-		panel_1.add(button_2);
+		JComboBox Pants = new JComboBox();
+		panel_1.add(Pants);
 		
-		Component verticalStrut_7 = Box.createVerticalStrut(20);
-		inventory.add(verticalStrut_7);
+		JComboBox Feet = new JComboBox();
+		panel_1.add(Feet);
+		
+		JComboBox Hands = new JComboBox();
+		panel_1.add(Hands);
+		
+		JComboBox Mainhand = new JComboBox();
+		panel_1.add(Mainhand);
+		
+		JComboBox Off_hand = new JComboBox();
+		panel_1.add(Off_hand);
+		
+		JEditorPane MiscItems = new JEditorPane();
+		panel_1.add(MiscItems);
 		
 		Component verticalStrut_8 = Box.createVerticalStrut(20);
 		inventory.add(verticalStrut_8);
