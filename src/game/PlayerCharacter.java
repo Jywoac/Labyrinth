@@ -158,8 +158,8 @@ public class PlayerCharacter {
 		health = 10;
 		attack = 1;
 		defense= 1;;
-		magicAttack= 1;;
-		magicDefense= 1;;
+		magicAttack= 1;
+		magicDefense= 1;
 		pointsLeft = 10; // points left to distribute
 		pointsToUse = 10; // amount of points the player gets to distribute between attributes
 		
@@ -171,12 +171,34 @@ public class PlayerCharacter {
 		mainHand[0][2] = "100"; // value of the weapon
 		
 		// Offhand
-		// Helm
-		// Chest
-		// Feet
-		// Pants
-		// Hands
+		offHand[0][0] = "Wooden Shield"; // offhand item
+		offHand[0][1] = "1"; // defence value		
+		offHand[0][2] = "50";
 		
+		// head
+		head[0][0] = "Wooden Helm";
+		head[0][1] = "1"; //defense
+		head[0][2] = "20"; // value
+		
+		// Chest
+		chest[0][0] = "Wooden Breastplate";
+		chest[0][1] = "1";
+		chest[0][2] = "50";
+		
+		// Feet
+		feet[0][0] = "Wooden Shoes";
+		feet[0][1] = "1";
+		feet[0][2] = "10";
+		
+		// Pants
+		pants[0][0] = "Wooden Pants";
+		pants[0][1] = "1";
+		pants[0][2] = "20";
+		
+		// Hands
+		hands[0][0] = "Wooden Gloves";
+		hands[0][1] = "1";
+		hands[0][2] = "5";
 		// add these items to the inventory screen
 	}
 	
