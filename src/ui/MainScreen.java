@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import java.awt.GridLayout;
+import java.awt.HeadlessException;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.Component;
@@ -166,6 +167,25 @@ public class MainScreen extends JFrame {
 	    	    		characterScreen = true;
 						CardLayout cl = (CardLayout)(differentScreens.getLayout());
 					    cl.show(differentScreens, "CHARACTERSCREEN");
+					    numberOfPresses++;
+	    	    	}else{
+	    	    		characterScreen = false;
+						CardLayout cl = (CardLayout)(differentScreens.getLayout());
+					    cl.show(differentScreens, "GAMESCREEN");
+					    gameText.setText("<center>"+bo.gameLoop("c")+"</center>");
+					    numberOfPresses++;
+	    	    	}
+	    	    	
+	    	    }
+	    	    
+	    	    // move to inventory screen, disable buttons besides character and invetory
+	    	    if (key == KeyEvent.VK_I){
+	    	    	
+	    	    	// if even then move to character screen, if not move out of character screen.
+	    	    	if((numberOfPresses & 1) == 0){
+	    	    		characterScreen = true;
+						CardLayout cl = (CardLayout)(differentScreens.getLayout());
+					    cl.show(differentScreens, "INVENTORYSCREEN");
 					    numberOfPresses++;
 	    	    	}else{
 	    	    		characterScreen = false;
@@ -549,6 +569,14 @@ public class MainScreen extends JFrame {
 		
 		JEditorPane MiscItems = new JEditorPane();
 		panel_1.add(MiscItems);
+		
+		addItemsToSlot(Head,playerCharacter.getHead());
+		addItemsToSlot(Chest,playerCharacter.getChest());
+		addItemsToSlot(Pants,playerCharacter.getPants());
+		addItemsToSlot(Feet,playerCharacter.getFeet());
+		addItemsToSlot(Hands,playerCharacter.getHands());
+		addItemsToSlot(Mainhand,playerCharacter.getMainHand());
+		addItemsToSlot(Off_hand,playerCharacter.getOffHand());		
 		
 		Component verticalStrut_8 = Box.createVerticalStrut(20);
 		inventory.add(verticalStrut_8);
@@ -1374,5 +1402,30 @@ public class MainScreen extends JFrame {
         timer.setInitialDelay(0);
         timer.start();        
 
+	}
+	
+	public void addItemsToSlot(JComboBox<String> slot, String[][] items){
+		
+		// empty combobox and then refill it with new items.
+		slot.removeAllItems();
+		
+		int x = 0;
+		boolean endReached = false;
+		
+		while(endReached == false){		
+			
+			try{
+				
+				// currently only adds the name of the item, stats are not displayed on inventory screen.
+				slot.addItem(items[x][0]);
+				x++;
+				
+			}catch(IndexOutOfBoundsException e){
+				
+				endReached = true;
+			}
+			
+		}
+		
 	}
 }

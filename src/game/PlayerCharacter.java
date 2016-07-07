@@ -16,14 +16,14 @@ public class PlayerCharacter {
 	private int minMagicDefense;
 	
 	// items in inventory
-	private String [][] mainHand;
-	private String [][] offHand;
-	private String [][] chest;
-	private String [][] pants;
-	private String [][] feet;
-	private String [][] head;
-	private String [][] hands;
-	private String [][] misc;	
+	private String [][] mainHand = new String[50][3];
+	private String [][] offHand = new String[50][3];
+	private String [][] chest = new String[50][3];
+	private String [][] pants = new String[50][3];
+	private String [][] feet = new String[50][3];
+	private String [][] head = new String[50][3];
+	private String [][] hands = new String[50][3];
+	private String [][] misc = new String[50][3];
 	
 	public String[][] getMainHand() {
 		return mainHand;
@@ -152,7 +152,7 @@ public class PlayerCharacter {
 	public void setMagicDefense(int magicDefense) {
 		this.magicDefense = magicDefense;
 	}
-	
+		
 	public void initializeCharacter(){
 		name = "name here";
 		health = 10;
