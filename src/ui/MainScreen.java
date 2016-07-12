@@ -113,7 +113,6 @@ public class MainScreen extends JFrame {
 	    	    		
 	    	    	}else{		    	    	
 		    	    	gameText.setText("<center>"+bo.gameLoop("up")+"</center>");
-		    	    	// call for monster movement here via boardactions
 		    	    	
 	    	    	}	
 	    	    }	    
@@ -198,6 +197,15 @@ public class MainScreen extends JFrame {
 	    	    }
     	    
     	    }
+    	    
+    	    // check if a monster is near player, if it is move to combat.    	    
+    	    if(bo.monsterNear() == true){
+    	    	// randomly use one of the three moving to combat animations and then move to combat screen.
+    	    	// remember to disable button presses for combat.
+    	    }else{
+    	    	
+    	    }
+    	    
             return false;
         }
     }

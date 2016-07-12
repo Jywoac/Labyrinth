@@ -14,6 +14,7 @@ public class BoardActions {
 	private int mazeSize = 0;
 	private int firstMovement = 0; // if first movement is 0 then player is making their first move of the game
 	//private String [][] board = null;
+	private boolean monsterFound = false;
 
 	// set the size of the maze, 1 = small, 2 = medium, 3 = large
 	public void setMazeSize(int size){
@@ -300,6 +301,50 @@ public class BoardActions {
 			exploringBoard();
 			b.setBoard(b.getMonsterActions().moveMonsters(b.getBoard()));
 			
+			monsterFound = false;
+			
+			// check for possibility of combat in 4 directions
+			// if enemies are present in either north, south, west or east, enter combat
+			
+			if(monsterFound == false){
+			
+				if(b.getPositionInfo(playerXCoord, playerYCoord-1).toLowerCase().contains("wall")){
+					//wall at this direction, do not move to combat screen.
+				}else{
+					// move to combat, enemy north of player position
+					monsterFound = true;
+				}
+			}
+			
+			if(monsterFound == false){
+			
+				if(b.getPositionInfo(playerXCoord+1, playerYCoord).toLowerCase().contains("wall")){
+					//wall at this direction, do not move to combat screen.
+				}else{
+					// move to combat, enemy east of player position
+					monsterFound = true;
+				}
+			}
+		
+			if(monsterFound == false){
+			
+				if(b.getPositionInfo(playerXCoord, playerYCoord+1).toLowerCase().contains("wall")){
+					//wall at this direction, do not move to combat screen.
+				}else{
+					// move to combat, enemy south of player position
+					monsterFound = true;
+				}
+			}
+			
+			if(monsterFound == false){
+			
+				if(b.getPositionInfo(playerXCoord-1, playerYCoord).toLowerCase().contains("wall")){
+					//wall at this direction, do not move to combat screen.
+				}else{
+					// move to combat, enemy north of player position
+					monsterFound = true;
+				}
+			}
 			// MOVE TO COMBAT SCREEN IF PLAYER COORDINATE AND MONSTER COORDINATES ARE NEXT TO EACH OTHER OR THE SAME.
 			
 			// player is always on empty space but future proofing with this catch.
@@ -321,6 +366,10 @@ public class BoardActions {
 	
 	public int getYSizeFromBoard(){
 		return b.getBoardYSize();
+	}
+	
+	public boolean monsterNear(){
+		return monsterFound;
 	}
 		
 }
