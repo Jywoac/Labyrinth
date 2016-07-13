@@ -40,6 +40,7 @@ import java.awt.event.FocusEvent;
 import javax.swing.JPopupMenu;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Random;
 import java.awt.FlowLayout;
 import javax.swing.JComboBox;
 
@@ -81,6 +82,7 @@ public class MainScreen extends JFrame {
 	private JLabel lblMAvalue;	
 	private JLabel lblDvalue;	
 	private JLabel lblMDvalue;
+	private boolean inCombat = false;
 	
 	/**
 	 * Launch the application.
@@ -111,9 +113,14 @@ public class MainScreen extends JFrame {
 	    	    	
 	    	    	if(bo == null || characterScreen == true){
 	    	    		
-	    	    	}else{		    	    	
-		    	    	gameText.setText("<center>"+bo.gameLoop("up")+"</center>");
-		    	    	
+	    	    	}else{
+	    	    		
+	    	    		// if in combat, arrowkeys control combat ui instead of game ui
+	    	    		if(inCombat == true){
+	    	    			// CONTROL COMBAT UI HERE
+	    	    		}else{	    	    		
+	    	    			gameText.setText("<center>"+bo.gameLoop("up")+"</center>");
+	    	    		}
 	    	    	}	
 	    	    }	    
 	
@@ -121,8 +128,13 @@ public class MainScreen extends JFrame {
 	    	    	
 	    	    	if(bo == null || characterScreen == true){
 	    	    		
-	    	    	}else{		    	    	
-	    	    		gameText.setText("<center>"+bo.gameLoop("right")+"</center>");
+	    	    	}else{
+	    	    		// if in combat, arrowkeys control combat ui instead of game ui
+	    	    		if(inCombat == true){
+	    	    			// CONTROL COMBAT UI HERE
+	    	    		}else{	 
+	    	    			gameText.setText("<center>"+bo.gameLoop("right")+"</center>");
+	    	    		}
 	    	    	}
 	
 	    	    }
@@ -131,8 +143,13 @@ public class MainScreen extends JFrame {
 	    	    	
 	    	    	if(bo == null || characterScreen == true){
 	    	    		
-	    	    	}else{		    	    	
-	    	    		gameText.setText("<center>"+bo.gameLoop("down")+"</center>");
+	    	    	}else{
+	    	    		// if in combat, arrowkeys control combat ui instead of game ui
+	    	    		if(inCombat == true){
+	    	    			// CONTROL COMBAT UI HERE
+	    	    		}else{	 
+	    	    			gameText.setText("<center>"+bo.gameLoop("down")+"</center>");
+	    	    		}
 	    	    	}
 	
 	    	    }
@@ -141,8 +158,13 @@ public class MainScreen extends JFrame {
 	    	    	
 	    	    	if(bo == null || characterScreen == true){
 	    	    		
-	    	    	}else{		    	    	
-	    	    		gameText.setText("<center>"+bo.gameLoop("left")+"</center>");
+	    	    	}else{
+	    	    		// if in combat, arrowkeys control combat ui instead of game ui
+	    	    		if(inCombat == true){
+	    	    			// CONTROL COMBAT UI HERE
+	    	    		}else{	 
+	    	    			gameText.setText("<center>"+bo.gameLoop("left")+"</center>");
+	    	    		}
 	    	    	}
 	
 	    	    }
@@ -161,39 +183,50 @@ public class MainScreen extends JFrame {
 	    	    // move to character screen, disable other button presses 
 	    	    if (key == KeyEvent.VK_C){
 	    	    	
-	    	    	// if even then move to character screen, if not move out of character screen.
-	    	    	if((numberOfPresses & 1) == 0){
-	    	    		characterScreen = true;
-						CardLayout cl = (CardLayout)(differentScreens.getLayout());
-					    cl.show(differentScreens, "CHARACTERSCREEN");
-					    numberOfPresses++;
-	    	    	}else{
-	    	    		characterScreen = false;
-						CardLayout cl = (CardLayout)(differentScreens.getLayout());
-					    cl.show(differentScreens, "GAMESCREEN");
-					    gameText.setText("<center>"+bo.gameLoop("c")+"</center>");
-					    numberOfPresses++;
-	    	    	}
+    	    		// if in combat, arrowkeys control combat ui instead of game ui
+    	    		if(inCombat == true){
+    	    			// do nothing, c key is not used in combat
+    	    		}else{	
 	    	    	
+		    	    	// if even then move to character screen, if not move out of character screen.
+		    	    	if((numberOfPresses & 1) == 0){
+		    	    		characterScreen = true;
+							CardLayout cl = (CardLayout)(differentScreens.getLayout());
+						    cl.show(differentScreens, "CHARACTERSCREEN");
+						    numberOfPresses++;
+		    	    	}else{
+		    	    		characterScreen = false;
+							CardLayout cl = (CardLayout)(differentScreens.getLayout());
+						    cl.show(differentScreens, "GAMESCREEN");
+						    gameText.setText("<center>"+bo.gameLoop("c")+"</center>");
+						    numberOfPresses++;
+		    	    	}
+	    	    	
+    	    		}
 	    	    }
 	    	    
 	    	    // move to inventory screen, disable buttons besides character and invetory
 	    	    if (key == KeyEvent.VK_I){
 	    	    	
-	    	    	// if even then move to character screen, if not move out of character screen.
-	    	    	if((numberOfPresses & 1) == 0){
-	    	    		characterScreen = true;
-						CardLayout cl = (CardLayout)(differentScreens.getLayout());
-					    cl.show(differentScreens, "INVENTORYSCREEN");
-					    numberOfPresses++;
-	    	    	}else{
-	    	    		characterScreen = false;
-						CardLayout cl = (CardLayout)(differentScreens.getLayout());
-					    cl.show(differentScreens, "GAMESCREEN");
-					    gameText.setText("<center>"+bo.gameLoop("c")+"</center>");
-					    numberOfPresses++;
-	    	    	}
+    	    		// if in combat, arrowkeys control combat ui instead of game ui
+    	    		if(inCombat == true){
+    	    			// Do nothing, I key is not used in combat.
+    	    		}else{
 	    	    	
+		    	    	// if even then move to character screen, if not move out of character screen.
+		    	    	if((numberOfPresses & 1) == 0){
+		    	    		characterScreen = true;
+							CardLayout cl = (CardLayout)(differentScreens.getLayout());
+						    cl.show(differentScreens, "INVENTORYSCREEN");
+						    numberOfPresses++;
+		    	    	}else{
+		    	    		characterScreen = false;
+							CardLayout cl = (CardLayout)(differentScreens.getLayout());
+						    cl.show(differentScreens, "GAMESCREEN");
+						    gameText.setText("<center>"+bo.gameLoop("c")+"</center>");
+						    numberOfPresses++;
+		    	    	}
+    	    		}
 	    	    }
     	    
     	    }
@@ -202,6 +235,35 @@ public class MainScreen extends JFrame {
     	    if(bo.monsterNear() == true){
     	    	// randomly use one of the three moving to combat animations and then move to combat screen.
     	    	// remember to disable button presses for combat.
+    	    	
+    	    	inCombat = true;
+    	    	
+    	    	Random rand = new Random();
+    	    	
+    	    	int randomAnimation = rand.nextInt(2);
+				CardLayout cl = (CardLayout)(differentScreens.getLayout());
+    	    	
+    	    	switch(randomAnimation){
+    	    		case 0:
+    	    			enteringCombatAnimationLines();
+					    cl.show(differentScreens, "COMBATSCREEN");
+    	    			break;
+    	    		case 1:
+    	    			enteringCombatAnimationSquare();
+					    cl.show(differentScreens, "COMBATSCREEN");
+    	    			break;
+    	    		case 2:
+    	    			enteringCombatAnimationText();
+					    cl.show(differentScreens, "COMBATSCREEN");
+    	    			break;
+    	    			
+    	    			//when player of enemy health reaches zero set combat to false and either move back to the board or show gameover screen.
+    	    			//inCombat = false; // combat finished, move out of combat
+    	    			
+    	    	}
+    	    	
+    	    	
+    	    	
     	    }else{
     	    	
     	    }
