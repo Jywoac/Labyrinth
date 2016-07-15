@@ -83,6 +83,7 @@ public class MainScreen extends JFrame {
 	private JLabel lblDvalue;	
 	private JLabel lblMDvalue;
 	private boolean inCombat = false;
+	private JTextField txtHealth;
 	
 	/**
 	 * Launch the application.
@@ -245,19 +246,19 @@ public class MainScreen extends JFrame {
     	    	
     	    	switch(randomAnimation){
     	    		case 0:
+    	    			cl.show(differentScreens, "COMBATSCREEN");
     	    			enteringCombatAnimationLines();
-					    cl.show(differentScreens, "COMBATSCREEN");
-    	    			break;
+					    break;
     	    		case 1:
-    	    			enteringCombatAnimationSquare();
-					    cl.show(differentScreens, "COMBATSCREEN");
+    	    			cl.show(differentScreens, "COMBATSCREEN");
+    	    			enteringCombatAnimationSquare();					    
     	    			break;
     	    		case 2:
-    	    			enteringCombatAnimationText();
-					    cl.show(differentScreens, "COMBATSCREEN");
+    	    			cl.show(differentScreens, "COMBATSCREEN");
+    	    			enteringCombatAnimationText();					    
     	    			break;
     	    			
-    	    			//when player of enemy health reaches zero set combat to false and either move back to the board or show gameover screen.
+    	    			//when player or enemy health reaches zero set combat to false and either move back to the board or show gameover screen.
     	    			//inCombat = false; // combat finished, move out of combat
     	    			
     	    	}
@@ -397,11 +398,17 @@ public class MainScreen extends JFrame {
 		lblUseTheArrowkeys.setHorizontalAlignment(SwingConstants.CENTER);
 		lblUseTheArrowkeys.setForeground(Color.WHITE);
 		
-		JLabel lblNewLabel = new JLabel("Press the L key to look around.");
-		lblNewLabel.setFont(new Font("Sitka Small Bold", Font.PLAIN, 18));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setForeground(Color.WHITE);
-		controlTextPanel.add(lblNewLabel);
+		JLabel lblPressTheI = new JLabel("Press the \"i\" key to move to inventory.");
+		lblPressTheI.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPressTheI.setForeground(Color.WHITE);
+		lblPressTheI.setFont(new Font("Sitka Small", Font.PLAIN, 18));
+		controlTextPanel.add(lblPressTheI);
+		
+		JLabel lblPressTheC = new JLabel("Press the \"c\" key to move to character screen.");
+		lblPressTheC.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPressTheC.setForeground(Color.WHITE);
+		lblPressTheC.setFont(new Font("Sitka Small", Font.PLAIN, 18));
+		controlTextPanel.add(lblPressTheC);
 		
 		JPanel controlsMenuButtons = new JPanel();
 		controlsMenuButtons.setLayout(null);
@@ -457,16 +464,16 @@ public class MainScreen extends JFrame {
 		gameText.setEditable(false);
 		gameScreen.add(gameText);
 		
-		JPanel combatScreen = new JPanel();
-		differentScreens.add(combatScreen, "COMBATSCREEN");
-		combatScreen.setBackground(Color.BLACK);
-		combatScreen.setLayout(new GridLayout(0, 1, 0, 0));
+		JPanel combatScreenTransition = new JPanel();
+		differentScreens.add(combatScreenTransition, "COMBATSCREEN");
+		combatScreenTransition.setBackground(Color.BLACK);
+		combatScreenTransition.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		((HTMLDocument)combat.getDocument()).getStyleSheet().addRule(bodyRule);
 
 		combat.setEditable(false);
 		combat.setBackground(Color.BLACK);
-		combatScreen.add(combat);
+		combatScreenTransition.add(combat);
 		
 		JPanel AddMonstersDEVSCREEN = new JPanel();
 		differentScreens.add(AddMonstersDEVSCREEN, "MONSTERDEVSCREEN");
@@ -509,6 +516,12 @@ public class MainScreen extends JFrame {
 				txtAttackpower.setText("");
 			}
 		});
+		
+		txtHealth = new JTextField();
+		txtHealth.setText("HEALTH");
+		txtHealth.setHorizontalAlignment(SwingConstants.CENTER);
+		txtHealth.setColumns(10);
+		monsterAttributes.add(txtHealth);
 		txtAttackpower.setHorizontalAlignment(SwingConstants.CENTER);
 		txtAttackpower.setText("ATTACKPOWER");
 		monsterAttributes.add(txtAttackpower);
@@ -591,6 +604,7 @@ public class MainScreen extends JFrame {
 				monsters.setMonsterDifficulty(Integer.parseInt(txtMonsterDifficulty.getText()));
 				monsters.setMonsterAlwaysDrop(Integer.parseInt(txtAlwaysdrop.getText()));
 				monsters.setMonsterSymbol(txtSymbol.getText());
+				monsters.setHealth(Integer.parseInt(txtHealth.getText()));
 				monsters.addMonster();
 				
 				JOptionPane.showMessageDialog(AddMonstersDEVSCREEN ,"Monster added!");
@@ -1288,6 +1302,14 @@ public class MainScreen extends JFrame {
     	
     	// start game buttons starts as false since points need to be distributed and name need to be given.
     	startGameWithChar.setEnabled(false);
+    	
+    	JPanel actualCombat = new JPanel();
+    	actualCombat.setBackground(Color.BLACK);
+    	differentScreens.add(actualCombat, "ACTUALCOMBATSCREEN");
+    	actualCombat.setLayout(new GridLayout(2, 1, 0, 0));
+    	
+    	JLabel lblEnemyName = new JLabel("New label");
+    	actualCombat.add(lblEnemyName);
 
 	}
 	// Animation with lines when moving to combat

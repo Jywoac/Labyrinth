@@ -13,6 +13,7 @@ public class MonsterFileWork {
 	
 	private String name = null;
 	private String description = null;
+	private int health = 0;
 	private int attackPower = 0;
 	private int defensivePower = 0;
 	private int lootTable = 0; // ex. 1 would mean loot table one
@@ -54,6 +55,7 @@ public class MonsterFileWork {
 			bufferWritter.write(monsterDifficulty+"\n");
 			bufferWritter.write(alwaysDrop+"\n");
 			bufferWritter.write(monsterSymbol+"\n");
+			bufferWritter.write(health+"\n");
 			bufferWritter.write("-----\n");// separator 5 times -----
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -94,7 +96,7 @@ public class MonsterFileWork {
 		    	if(currentLine == 0){
 		    		monsterName.add(line);
 		    	}else{		    	
-			        if(currentLine % 8 == 0){
+			        if(currentLine % 10 == 0){
 			        	monsterName.add(line);
 			        	// CHECK HERE IF NAME IS EMPTY
 			        	// TODO
@@ -169,7 +171,15 @@ public class MonsterFileWork {
 	public void setName(String n){
 		name = n;
 	}
-	
+
+	public void setHealth(int health) {
+		this.health = health;
+	}
+
+	public void setAlwaysDrop(int alwaysDrop) {
+		this.alwaysDrop = alwaysDrop;
+	}
+
 	// set monster description
 	public void setDescription(String d){
 		description = d;
