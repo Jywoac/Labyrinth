@@ -23,6 +23,7 @@ import javax.swing.JOptionPane;
 import java.awt.CardLayout;
 
 import game.BoardActions;
+import game.Combat;
 import game.MonsterActions;
 import game.MonsterFileWork;
 import game.PlayerCharacter;
@@ -84,6 +85,7 @@ public class MainScreen extends JFrame {
 	private JLabel lblMDvalue;
 	private boolean inCombat = false;
 	private JTextField txtHealth;
+	private Combat c = new Combat();
 	
 	/**
 	 * Launch the application.
@@ -1306,10 +1308,59 @@ public class MainScreen extends JFrame {
     	JPanel actualCombat = new JPanel();
     	actualCombat.setBackground(Color.BLACK);
     	differentScreens.add(actualCombat, "ACTUALCOMBATSCREEN");
-    	actualCombat.setLayout(new GridLayout(2, 1, 0, 0));
+    	actualCombat.setLayout(new GridLayout(4, 1, 0, 0));
     	
     	JLabel lblEnemyName = new JLabel("New label");
+    	lblEnemyName.setHorizontalAlignment(SwingConstants.CENTER);
+    	lblEnemyName.setFont(new Font("Sitka Small", Font.PLAIN, 18));
+    	lblEnemyName.setForeground(Color.WHITE);
     	actualCombat.add(lblEnemyName);
+    	
+    	JLabel lblAttackResult = new JLabel("New label");
+    	lblAttackResult.setHorizontalAlignment(SwingConstants.CENTER);
+    	lblAttackResult.setForeground(Color.WHITE);
+    	lblAttackResult.setFont(new Font("Sitka Small", Font.PLAIN, 18));
+    	actualCombat.add(lblAttackResult);
+    	
+    	JLabel lblPlayer = new JLabel("Player");
+    	lblPlayer.setHorizontalAlignment(SwingConstants.CENTER);
+    	lblPlayer.setForeground(Color.WHITE);
+    	lblPlayer.setFont(new Font("Sitka Small", Font.PLAIN, 18));
+    	actualCombat.add(lblPlayer);
+    	
+    	JPanel combatButtons = new JPanel();
+    	combatButtons.setBackground(Color.BLACK);
+    	actualCombat.add(combatButtons);
+    	combatButtons.setLayout(new GridLayout(0, 2, 0, 0));
+    	
+    	JButton Attack = new JButton("");
+    	Attack.addActionListener(new ActionListener() {
+    		public void actionPerformed(ActionEvent arg0) {
+    			//c.dosomehting
+    		}
+    	});
+    	Attack.setPressedIcon(new ImageIcon(MainScreen.class.getResource("/attack_pressed.png")));
+    	Attack.setIcon(new ImageIcon(MainScreen.class.getResource("/attack.png")));
+    	Attack.setRolloverIcon(new ImageIcon(MainScreen.class.getResource("/attack_rollover.png")));
+    	Attack.setOpaque(false);
+    	Attack.setFocusPainted(false);
+    	Attack.setContentAreaFilled(false);
+    	Attack.setBorderPainted(false);
+    	combatButtons.add(Attack);
+    	
+    	JButton Defend = new JButton("");
+    	Defend.addActionListener(new ActionListener() {
+    		public void actionPerformed(ActionEvent e) {
+    		}
+    	});
+    	Defend.setIcon(new ImageIcon(MainScreen.class.getResource("/defend.png")));
+    	Defend.setPressedIcon(new ImageIcon(MainScreen.class.getResource("/defend_pressed.png")));
+    	Defend.setRolloverIcon(new ImageIcon(MainScreen.class.getResource("/defend_rollover.png")));
+    	Defend.setOpaque(false);
+    	Defend.setFocusPainted(false);
+    	Defend.setContentAreaFilled(false);
+    	Defend.setBorderPainted(false);
+    	combatButtons.add(Defend);
 
 	}
 	// Animation with lines when moving to combat
