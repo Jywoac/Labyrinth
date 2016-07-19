@@ -250,14 +250,17 @@ public class MainScreen extends JFrame {
     	    		case 0:
     	    			cl.show(differentScreens, "COMBATSCREEN");
     	    			enteringCombatAnimationLines();
+    	    			cl.show(differentScreens, "ACTUALCOMBATSCREEN");
 					    break;
     	    		case 1:
     	    			cl.show(differentScreens, "COMBATSCREEN");
-    	    			enteringCombatAnimationSquare();					    
+    	    			enteringCombatAnimationSquare();
+    	    			cl.show(differentScreens, "ACTUALCOMBATSCREEN");
     	    			break;
     	    		case 2:
     	    			cl.show(differentScreens, "COMBATSCREEN");
-    	    			enteringCombatAnimationText();					    
+    	    			enteringCombatAnimationText();
+    	    			cl.show(differentScreens, "ACTUALCOMBATSCREEN");
     	    			break;
     	    			
     	    			//when player or enemy health reaches zero set combat to false and either move back to the board or show gameover screen.
@@ -633,24 +636,109 @@ public class MainScreen extends JFrame {
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JComboBox Head = new JComboBox();
+		Head.setMaximumSize(new Dimension(100, 20));
+		Head.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+                String currentlyChosen =  (String) Head.getSelectedItem();
+                int index = Head.getSelectedIndex(); // index is same in playercharacter and in inventory screen
+                int attackOrDefenseOfItem = Integer.parseInt(playerCharacter.getHead()[index][1]);
+                
+                // add new value to item
+                playerCharacter.setDefense(playerCharacter.getDefense() + attackOrDefenseOfItem);
+                    
+			}
+		});
 		panel_1.add(Head);
 		
 		JComboBox Chest = new JComboBox();
+		Chest.setMaximumSize(new Dimension(100, 20));
+		Chest.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+                String currentlyChosen =  (String) Chest.getSelectedItem();
+                int index = Chest.getSelectedIndex(); // index is same in playercharacter and in inventory screen
+                int attackOrDefenseOfItem = Integer.parseInt(playerCharacter.getChest()[index][1]);
+                
+                // add new value to item
+                playerCharacter.setDefense(playerCharacter.getDefense() + attackOrDefenseOfItem);
+			}
+		});
 		panel_1.add(Chest);
 		
 		JComboBox Pants = new JComboBox();
+		Pants.setMaximumSize(new Dimension(100, 20));
+		Pants.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+                String currentlyChosen =  (String) Pants.getSelectedItem();
+                int index = Pants.getSelectedIndex(); // index is same in playercharacter and in inventory screen
+                int attackOrDefenseOfItem = Integer.parseInt(playerCharacter.getPants()[index][1]);
+                
+                // add new value to item
+                playerCharacter.setDefense(playerCharacter.getDefense() + attackOrDefenseOfItem);
+			}
+		});
 		panel_1.add(Pants);
 		
 		JComboBox Feet = new JComboBox();
+		Feet.setMaximumSize(new Dimension(100, 20));
+		Feet.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+                String currentlyChosen =  (String) Feet.getSelectedItem();
+                int index = Feet.getSelectedIndex(); // index is same in playercharacter and in inventory screen
+                int attackOrDefenseOfItem = Integer.parseInt(playerCharacter.getFeet()[index][1]);
+                
+                // add new value to item
+                playerCharacter.setDefense(playerCharacter.getDefense() + attackOrDefenseOfItem);
+			}
+		});
 		panel_1.add(Feet);
 		
 		JComboBox Hands = new JComboBox();
+		Hands.setMaximumSize(new Dimension(100, 20));
+		Hands.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+                String currentlyChosen =  (String) Hands.getSelectedItem();
+                int index = Hands.getSelectedIndex(); // index is same in playercharacter and in inventory screen
+                int attackOrDefenseOfItem = Integer.parseInt(playerCharacter.getHands()[index][1]);
+                
+                // add new value to item
+                playerCharacter.setDefense(playerCharacter.getDefense() + attackOrDefenseOfItem);
+			}
+		});
 		panel_1.add(Hands);
 		
 		JComboBox Mainhand = new JComboBox();
+		Mainhand.setMaximumSize(new Dimension(100, 20));
+		Mainhand.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+                String currentlyChosen =  (String) Mainhand.getSelectedItem();
+                int index = Mainhand.getSelectedIndex(); // index is same in playercharacter and in inventory screen
+                int attackOrDefenseOfItem = Integer.parseInt(playerCharacter.getMainHand()[index][1]);
+                
+                // add new value to item
+                playerCharacter.setAttack(playerCharacter.getAttack() + attackOrDefenseOfItem);
+			}
+		});
 		panel_1.add(Mainhand);
 		
 		JComboBox Off_hand = new JComboBox();
+		Off_hand.setMaximumSize(new Dimension(100, 20));
+		Off_hand.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+                String currentlyChosen =  (String) Off_hand.getSelectedItem();
+                int index = Off_hand.getSelectedIndex(); // index is same in playercharacter and in inventory screen
+                int attackOrDefenseOfItem = Integer.parseInt(playerCharacter.getOffHand()[index][1]);
+                
+                // add new value to item
+                playerCharacter.setDefense(playerCharacter.getDefense() + attackOrDefenseOfItem);
+			}
+		});
 		panel_1.add(Off_hand);
 		
 		JEditorPane MiscItems = new JEditorPane();
@@ -1336,7 +1424,10 @@ public class MainScreen extends JFrame {
     	JButton Attack = new JButton("");
     	Attack.addActionListener(new ActionListener() {
     		public void actionPerformed(ActionEvent arg0) {
-    			//c.dosomehting
+    			
+    			// do combat attacking
+    			// call combat attack function
+    			
     		}
     	});
     	Attack.setPressedIcon(new ImageIcon(MainScreen.class.getResource("/attack_pressed.png")));
