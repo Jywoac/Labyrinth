@@ -6,6 +6,9 @@ import java.util.Random;
 public class MonsterActions {
 	
 	private String [] monstersCoordinates;
+	
+	// Needed for comabat, has monster health, attack defense, name and location (x,y coord)
+	private String [][] allStatsOfMonstersInPlay;
 	private int spot = 0;
 	
 	public String [][] addMonstersToBoard(String [][] boardWithoutMonsters){
@@ -166,9 +169,15 @@ public class MonsterActions {
 		return monstersMovedInBoard;
 		
 	}
+		
+	public String[] getMonstersCoordinates() {
+		return monstersCoordinates;
+	}
 
-	
-	
+	public void setMonstersCoordinates(String[] monstersCoordinates) {
+		this.monstersCoordinates = monstersCoordinates;
+	}
+
 	// return specific monster data from file
 	// identified with symbol
 	// returns string array with all monster info

@@ -47,15 +47,15 @@ public class MonsterFileWork {
         BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
                         
         try {
-			bufferWritter.write(name+"\n");
-			bufferWritter.write(description+"\n");
-			bufferWritter.write(attackPower+"\n");
-			bufferWritter.write(defensivePower+"\n");
-			bufferWritter.write(lootTable+"\n");
-			bufferWritter.write(monsterDifficulty+"\n");
-			bufferWritter.write(alwaysDrop+"\n");
-			bufferWritter.write(monsterSymbol+"\n");
-			bufferWritter.write(health+"\n");
+			bufferWritter.write(name+"\n"); // 0
+			bufferWritter.write(description+"\n"); // 1
+			bufferWritter.write(attackPower+"\n"); // 2
+			bufferWritter.write(defensivePower+"\n"); // 3
+			bufferWritter.write(lootTable+"\n"); // 4
+			bufferWritter.write(monsterDifficulty+"\n"); //5
+			bufferWritter.write(alwaysDrop+"\n"); // 6
+			bufferWritter.write(monsterSymbol+"\n"); // 7
+			bufferWritter.write(health+"\n"); // 8
 			bufferWritter.write("-----\n");// separator 5 times -----
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -164,8 +164,57 @@ public class MonsterFileWork {
 	// get all monsters
 	// returns table of monsters from file
 	public String [][] getAllMonsters() {
-		return null;
+		
+		String [][] allMonsters = new String [50][20];
+		BufferedReader reader = null;
+		
+		int currentLine = 0;
+		int monsterNameLine = 0;
+		int lineInMonsterTableStats = 0;
+		
+		try {
+		    File file = new File("monsters.data");
+		    reader = new BufferedReader(new FileReader(file));
+
+		    String line;
+		    while ((line = reader.readLine()) != null) {    
+		        // check if line is on top of the symbol
+		        // if it is add it to return array
+		    	
+		    	if(currentLine == 0){
+		    		allMonsters[monsterNameLine][lineInMonsterTableStats] = line; // add the first name
+		    		lineInMonsterTableStats++;
+		    		monsterNameLine++;
+		    	}else{
+		    		
+		    		allMonsters[monsterNameLine][lineInMonsterTableStats] = line;
+		    		lineInMonsterTableStats++;
+		    		
+		    		// all stats from previous monster have been added, move to new monster.
+	    	        if(currentLine % 11 == 0){
+	    	        	lineInMonsterTableStats = 0;
+			    		allMonsters[monsterNameLine][lineInMonsterTableStats] = line; // add the name of next monster
+			    		lineInMonsterTableStats++;
+			    		monsterNameLine++;
+	    	        }
+		        
+		    	}
+		        currentLine++;
+		    }
+
+		} catch (IOException e) {
+		    e.printStackTrace();
+		} finally {
+		    try {
+		        reader.close();
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		    }
+		}
+		
+		return allMonsters;
 	}
+
 	
 	// set monster name
 	public void setName(String n){

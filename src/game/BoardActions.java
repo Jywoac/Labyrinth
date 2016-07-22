@@ -15,6 +15,9 @@ public class BoardActions {
 	private int firstMovement = 0; // if first movement is 0 then player is making their first move of the game
 	//private String [][] board = null;
 	private boolean monsterFound = false;
+	private String monsterSymbol = null;
+	private int mX;
+	private int mY;
 
 	// set the size of the maze, 1 = small, 2 = medium, 3 = large
 	public void setMazeSize(int size){
@@ -313,6 +316,9 @@ public class BoardActions {
 				}else{
 					// move to combat, enemy north of player position
 					monsterFound = true;
+					monsterSymbol = b.getPositionInfo(playerXCoord, playerYCoord-1);
+					mX = playerXCoord;
+					mY = playerYCoord-1;
 				}
 			}
 			
@@ -323,6 +329,9 @@ public class BoardActions {
 				}else{
 					// move to combat, enemy east of player position
 					monsterFound = true;
+					monsterSymbol = b.getPositionInfo(playerXCoord+1, playerYCoord);
+					mX = playerXCoord+1;
+					mY = playerYCoord;
 				}
 			}
 		
@@ -333,6 +342,9 @@ public class BoardActions {
 				}else{
 					// move to combat, enemy south of player position
 					monsterFound = true;
+					monsterSymbol = b.getPositionInfo(playerXCoord, playerYCoord+1);
+					mX = playerXCoord;
+					mY = playerYCoord+1;
 				}
 			}
 			
@@ -343,6 +355,9 @@ public class BoardActions {
 				}else{
 					// move to combat, enemy north of player position
 					monsterFound = true;
+					monsterSymbol = b.getPositionInfo(playerXCoord, playerYCoord+1);
+					mX = playerXCoord;
+					mY = playerYCoord+1;
 				}
 			}
 			// MOVE TO COMBAT SCREEN IF PLAYER COORDINATE AND MONSTER COORDINATES ARE NEXT TO EACH OTHER OR THE SAME.
@@ -371,5 +386,21 @@ public class BoardActions {
 	public boolean monsterNear(){
 		return monsterFound;
 	}
-		
+	
+	public String getMonsterSymbol(){
+		return monsterSymbol;
+	}
+	
+	public MonsterActions getMonsterActionsFromBoard(){
+		return b.getMonsterActions();
+	}
+	
+	public int monsterFoundCoordinateX(){
+		return mX;
+	}
+	
+	public int monsterFoundCoordinateY(){
+		return mY;
+	}
+
 }

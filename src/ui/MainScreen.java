@@ -24,6 +24,7 @@ import java.awt.CardLayout;
 
 import game.BoardActions;
 import game.Combat;
+import game.Monster;
 import game.MonsterActions;
 import game.MonsterFileWork;
 import game.PlayerCharacter;
@@ -86,6 +87,9 @@ public class MainScreen extends JFrame {
 	private boolean inCombat = false;
 	private JTextField txtHealth;
 	private Combat c = new Combat();
+	private String [][] monsterDatabase;
+	private Monster monster = new Monster();
+	private int shieldBuffCounter = 0;
 	
 	/**
 	 * Launch the application.
@@ -251,16 +255,83 @@ public class MainScreen extends JFrame {
     	    			cl.show(differentScreens, "COMBATSCREEN");
     	    			enteringCombatAnimationLines();
     	    			cl.show(differentScreens, "ACTUALCOMBATSCREEN");
+			
+    	    			int i = 0;    	    			
+    	    			boolean found = false;
+    	    			
+    	    			while(found == false){
+    	    				
+    	    				// if monster in database is same as on board
+    	    				// up stats to monster class for combat.
+    	    				if(monsterDatabase[i][7].contains(bo.getMonsterSymbol())){
+    	    					
+    	    					monster.initializeMonster(monsterDatabase[i][0], monsterDatabase[i][0], Integer.parseInt(monsterDatabase[i][2]),
+    	    							Integer.parseInt(monsterDatabase[i][3]), Integer.parseInt(monsterDatabase[i][4]),
+    	    							Integer.parseInt(monsterDatabase[i][5]), monsterDatabase[i][6],
+    	    							Integer.parseInt(monsterDatabase[i][7]), bo.monsterFoundCoordinateX(), 
+    	    							bo.monsterFoundCoordinateY());
+    	    					    	    					    	    					
+    	    					found = true;
+    	    					break;
+    	    				}
+    	    				i++;
+    	    			}
+    	    			
+    	    			
 					    break;
     	    		case 1:
     	    			cl.show(differentScreens, "COMBATSCREEN");
     	    			enteringCombatAnimationSquare();
     	    			cl.show(differentScreens, "ACTUALCOMBATSCREEN");
+
+    	    			int i1 = 0;    	    			
+    	    			boolean found1 = false;
+    	    			
+    	    			while(found1 == false){
+    	    				
+    	    				// if monster in database is same as on board
+    	    				// up stats to monster class for combat.
+    	    				if(monsterDatabase[i1][7].contains(bo.getMonsterSymbol())){
+    	    					
+    	    					monster.initializeMonster(monsterDatabase[i1][0], monsterDatabase[i1][0], Integer.parseInt(monsterDatabase[i1][2]),
+    	    							Integer.parseInt(monsterDatabase[i1][3]), Integer.parseInt(monsterDatabase[i1][4]),
+    	    							Integer.parseInt(monsterDatabase[i1][5]), monsterDatabase[i1][6],
+    	    							Integer.parseInt(monsterDatabase[i1][7]), bo.monsterFoundCoordinateX(), 
+    	    							bo.monsterFoundCoordinateY());
+    	    					    	    					    	    					
+    	    					found1 = true;
+    	    					break;
+    	    				}
+    	    				i1++;
+    	    			}
+	
     	    			break;
     	    		case 2:
     	    			cl.show(differentScreens, "COMBATSCREEN");
     	    			enteringCombatAnimationText();
     	    			cl.show(differentScreens, "ACTUALCOMBATSCREEN");
+    	    			
+    	    			int i11 = 0;    	    			
+    	    			boolean found11 = false;
+    	    			
+    	    			while(found11 == false){
+    	    				
+    	    				// if monster in database is same as on board
+    	    				// up stats to monster class for combat.
+    	    				if(monsterDatabase[i11][7].contains(bo.getMonsterSymbol())){
+    	    					
+    	    					monster.initializeMonster(monsterDatabase[i11][0], monsterDatabase[i11][0], Integer.parseInt(monsterDatabase[i11][2]),
+    	    							Integer.parseInt(monsterDatabase[i11][3]), Integer.parseInt(monsterDatabase[i11][4]),
+    	    							Integer.parseInt(monsterDatabase[i11][5]), monsterDatabase[i11][6],
+    	    							Integer.parseInt(monsterDatabase[i11][7]), bo.monsterFoundCoordinateX(), 
+    	    							bo.monsterFoundCoordinateY());
+    	    					    	    					    	    					
+    	    					found11 = true;
+    	    					break;
+    	    				}
+    	    				i11++;
+    	    			}
+    	    			
     	    			break;
     	    			
     	    			//when player or enemy health reaches zero set combat to false and either move back to the board or show gameover screen.
@@ -288,6 +359,8 @@ public class MainScreen extends JFrame {
         
         // ininitalize a default character
         playerCharacter.initializeCharacter();
+        MonsterFileWork mon = new MonsterFileWork();
+        monsterDatabase = mon.getAllMonsters(); // needed when attacking monsters
         
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -1396,7 +1469,7 @@ public class MainScreen extends JFrame {
     	JPanel actualCombat = new JPanel();
     	actualCombat.setBackground(Color.BLACK);
     	differentScreens.add(actualCombat, "ACTUALCOMBATSCREEN");
-    	actualCombat.setLayout(new GridLayout(4, 1, 0, 0));
+    	actualCombat.setLayout(new GridLayout(5, 1, 0, 0));
     	
     	JLabel lblEnemyName = new JLabel("New label");
     	lblEnemyName.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1420,14 +1493,70 @@ public class MainScreen extends JFrame {
     	combatButtons.setBackground(Color.BLACK);
     	actualCombat.add(combatButtons);
     	combatButtons.setLayout(new GridLayout(0, 2, 0, 0));
+
+    	JLabel lblBuffsAndDebuffs = new JLabel("New label");
+    	actualCombat.add(lblBuffsAndDebuffs);
+    	lblBuffsAndDebuffs.setText("");
     	
     	JButton Attack = new JButton("");
     	Attack.addActionListener(new ActionListener() {
-    		public void actionPerformed(ActionEvent arg0) {
+    		public void actionPerformed(ActionEvent arg0) {    			
     			
-    			// do combat attacking
-    			// call combat attack function
+    			// attack done against monster
+    			int healthBeforeAttack = monster.getHealth();
     			
+    			monster.setHealth(c.attack(playerCharacter.getAttack(), monster.getHealth(), monster.getDP()));
+    			
+    			lblAttackResult.setText(Integer.toString(healthBeforeAttack - monster.getHealth()));
+    			
+    			// monster defeated, move out of combat.
+    			if(monster.getHealth() <= 0){
+    				
+    				inCombat = false;
+    				
+    				lblEnemyName.setText("DEAD");
+    				lblAttackResult.setText("YOU WIN!");
+    				
+    				try {
+						Thread.sleep(3000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+    				
+					CardLayout cl = (CardLayout)(differentScreens.getLayout());
+				    cl.show(differentScreens, "GAMESCREEN");
+    			}else{    			
+    			
+	    			// monster does their attack	    			
+	    			playerCharacter.setHealth(c.attack(monster.getAP(), playerCharacter.getHealth(), playerCharacter.getDefense()));
+	    			
+	    			// check if player has died.
+	    			if(playerCharacter.getHealth() <= 0){
+	    				
+	    				lblPlayer.setText("DEAD");
+	    				lblAttackResult.setText("GAME OVER!");
+	    				
+	    				try {
+							Thread.sleep(3000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+	    				
+						CardLayout cl = (CardLayout)(differentScreens.getLayout());
+					    cl.show(differentScreens, "MAINMENU");
+	    				
+	    			}
+	    			
+	    			shieldBuffCounter--;
+	    			
+	    			// clears all buffs
+	    			if(shieldBuffCounter == 0){
+	    				lblBuffsAndDebuffs.setText("");
+	    			}
+	    			
+    			}
     		}
     	});
     	Attack.setPressedIcon(new ImageIcon(MainScreen.class.getResource("/attack_pressed.png")));
@@ -1442,6 +1571,34 @@ public class MainScreen extends JFrame {
     	JButton Defend = new JButton("");
     	Defend.addActionListener(new ActionListener() {
     		public void actionPerformed(ActionEvent e) {
+    			
+
+    			// player defends, increase defense by 50 for the next 3 monster attacks.
+    			lblBuffsAndDebuffs.setText(lblBuffsAndDebuffs.getText() + "Shielded +50 defense");    			
+    			playerCharacter.setDefense(playerCharacter.getDefense() + 50);
+    			shieldBuffCounter = 3;
+
+    			// monster does their attack	    			
+    			playerCharacter.setHealth(c.attack(monster.getAP(), playerCharacter.getHealth(), playerCharacter.getDefense()));
+    			
+    			// check if player has died.
+    			if(playerCharacter.getHealth() <= 0){
+    				
+    				lblPlayer.setText("DEAD");
+    				lblAttackResult.setText("GAME OVER!");
+    				
+    				try {
+						Thread.sleep(3000);
+					} catch (InterruptedException ee) {
+						// TODO Auto-generated catch block
+						ee.printStackTrace();
+					}
+    				
+					CardLayout cl = (CardLayout)(differentScreens.getLayout());
+				    cl.show(differentScreens, "MAINMENU");
+    				
+    			}   			
+    			
     		}
     	});
     	Defend.setIcon(new ImageIcon(MainScreen.class.getResource("/defend.png")));
@@ -1452,6 +1609,7 @@ public class MainScreen extends JFrame {
     	Defend.setContentAreaFilled(false);
     	Defend.setBorderPainted(false);
     	combatButtons.add(Defend);
+
 
 	}
 	// Animation with lines when moving to combat
