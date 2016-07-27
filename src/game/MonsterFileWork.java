@@ -82,7 +82,7 @@ public class MonsterFileWork {
 		ArrayList<String> monsterName = new ArrayList<String>();	
 		BufferedReader reader = null;
 		
-		int currentLine = 0;
+		int currentLine = 1;
 
 		try {
 		    File file = new File("monsters.data");
@@ -93,13 +93,11 @@ public class MonsterFileWork {
 		        // check if line is on top of the symbol
 		        // if it is add it to return array
 		    	
-		    	if(currentLine == 0){
+		    	if(currentLine == 1){
 		    		monsterName.add(line);
 		    	}else{		    	
-			        if(currentLine % 10 == 0){
-			        	monsterName.add(line);
-			        	// CHECK HERE IF NAME IS EMPTY
-			        	// TODO
+			        if(currentLine == 9){
+			        	currentLine = 0;
 			        }		        
 		    	}
 		    	
@@ -125,7 +123,7 @@ public class MonsterFileWork {
 		ArrayList<String> monsterSymbol = new ArrayList<String>();	
 		BufferedReader reader = null;
 		
-		int currentLine = 0;
+		int currentLine = 1;
 
 		try {
 		    File file = new File("monsters.data");
@@ -136,12 +134,16 @@ public class MonsterFileWork {
 		        // check if line is on top of the symbol
 		        // if it is add it to return array
 		    	
-		    	if(currentLine == 0){
+		    	if(currentLine == 1){
 		    		// skip first line
 		    	}else{
-		    	        if(currentLine % 7 == 0){
+		    	    if(currentLine == 8){
 			        	monsterSymbol.add(line);
 				        System.out.println(line);
+			        }else{
+			        	if(currentLine == 9){
+			        		currentLine = 0;
+			        	}
 			        }
 		        
 		    	}
@@ -168,7 +170,7 @@ public class MonsterFileWork {
 		String [][] allMonsters = new String [50][20];
 		BufferedReader reader = null;
 		
-		int currentLine = 0;
+		int currentLine = 1;
 		int monsterNameLine = 0;
 		int lineInMonsterTableStats = 0;
 		
@@ -178,27 +180,28 @@ public class MonsterFileWork {
 
 		    String line;
 		    while ((line = reader.readLine()) != null) {    
-		        // check if line is on top of the symbol
-		        // if it is add it to return array
 		    	
-		    	if(currentLine == 0){
-		    		allMonsters[monsterNameLine][lineInMonsterTableStats] = line; // add the first name
+		    	if(currentLine == 1){
+		    		allMonsters[monsterNameLine][lineInMonsterTableStats] = line; // add the first name		    		
 		    		lineInMonsterTableStats++;
-		    		monsterNameLine++;
+		    		
 		    	}else{
 		    		
-		    		allMonsters[monsterNameLine][lineInMonsterTableStats] = line;
-		    		lineInMonsterTableStats++;
-		    		
 		    		// all stats from previous monster have been added, move to new monster.
-	    	        if(currentLine % 11 == 0){
+	    	        if(currentLine == 10){
+	    	        	
+	    	        	currentLine = 1;
+	    	        	
 	    	        	lineInMonsterTableStats = 0;
-			    		allMonsters[monsterNameLine][lineInMonsterTableStats] = line; // add the name of next monster
-			    		lineInMonsterTableStats++;
 			    		monsterNameLine++;
+			    		allMonsters[monsterNameLine][lineInMonsterTableStats] = line;
+			    		lineInMonsterTableStats++;
+	    	        }else{
+			    		allMonsters[monsterNameLine][lineInMonsterTableStats] = line;		    		
+			    		lineInMonsterTableStats++;
 	    	        }
-		        
 		    	}
+		    	
 		        currentLine++;
 		    }
 

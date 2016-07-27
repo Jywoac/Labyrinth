@@ -20,4 +20,7 @@ public class Combat {
 		return targetHealth;
 	}
 	
+	
+	// combat finished inCombat = false;
+	
 }

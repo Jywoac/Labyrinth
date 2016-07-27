@@ -90,6 +90,7 @@ public class MainScreen extends JFrame {
 	private String [][] monsterDatabase;
 	private Monster monster = new Monster();
 	private int shieldBuffCounter = 0;
+	private JLabel lblEnemyName = new JLabel("New label");
 	
 	/**
 	 * Launch the application.
@@ -250,27 +251,51 @@ public class MainScreen extends JFrame {
     	    	int randomAnimation = rand.nextInt(2);
 				CardLayout cl = (CardLayout)(differentScreens.getLayout());
     	    	
+//				int x = 0;
+//						
+//				while(x<100){
+//					System.out.println(monsterDatabase[0][x]);
+//					x++;
+//				}
+				
+				
     	    	switch(randomAnimation){
     	    		case 0:
-    	    			cl.show(differentScreens, "COMBATSCREEN");
-    	    			enteringCombatAnimationLines();
-    	    			cl.show(differentScreens, "ACTUALCOMBATSCREEN");
-			
+    	    			// animations bugged atm
+//    	    			cl.show(differentScreens, "COMBATSCREEN");
+//    	    			enteringCombatAnimationLines();
+    	    			
+    	    			// combat
+    	    			//cl.show(differentScreens, "ACTUALCOMBATSCREEN");
+    	    			
     	    			int i = 0;    	    			
     	    			boolean found = false;
     	    			
     	    			while(found == false){
     	    				
     	    				// if monster in database is same as on board
-    	    				// up stats to monster class for combat.
-    	    				if(monsterDatabase[i][7].contains(bo.getMonsterSymbol())){
+    	    				// up stats to monster class for combat. 				
+    	    				
+    	    				System.out.println(i);
+    	    				
+    	    				System.out.println(monsterDatabase[i][7] + " and " + bo.getMonsterSymbol());
+    	    				
+    	    				if(monsterDatabase[i][7].equals(bo.getMonsterSymbol())){ 
     	    					
-    	    					monster.initializeMonster(monsterDatabase[i][0], monsterDatabase[i][0], Integer.parseInt(monsterDatabase[i][2]),
-    	    							Integer.parseInt(monsterDatabase[i][3]), Integer.parseInt(monsterDatabase[i][4]),
-    	    							Integer.parseInt(monsterDatabase[i][5]), monsterDatabase[i][6],
-    	    							Integer.parseInt(monsterDatabase[i][7]), bo.monsterFoundCoordinateX(), 
-    	    							bo.monsterFoundCoordinateY());
-    	    					    	    					    	    					
+    	    					monster.setName(monsterDatabase[i][0]);
+    	    					monster.setDesc(monsterDatabase[i][1]);
+    	    					monster.setAP(Integer.parseInt(monsterDatabase[i][2]));
+    	    					monster.setDP(Integer.parseInt(monsterDatabase[i][3]));
+    	    					monster.setLootTable(Integer.parseInt(monsterDatabase[i][4]));
+    	    					monster.setMonsterDiff(Integer.parseInt(monsterDatabase[i][5]));
+    	    					monster.setAlwaysDrop(Integer.parseInt(monsterDatabase[i][6]));
+    	    					monster.setSymbol(monsterDatabase[i][7]);
+    	    					monster.setHealth(Integer.parseInt(monsterDatabase[i][8]));
+    	    					monster.setxCoord(bo.monsterFoundCoordinateX());
+    	    					monster.setyCoord(bo.monsterFoundCoordinateY());
+    	    					
+    	    					lblEnemyName.setText(monster.getName());
+    	    					
     	    					found = true;
     	    					break;
     	    				}
@@ -280,25 +305,38 @@ public class MainScreen extends JFrame {
     	    			
 					    break;
     	    		case 1:
-    	    			cl.show(differentScreens, "COMBATSCREEN");
-    	    			enteringCombatAnimationSquare();
-    	    			cl.show(differentScreens, "ACTUALCOMBATSCREEN");
+//    	    			cl.show(differentScreens, "COMBATSCREEN");
+//    	    			enteringCombatAnimationSquare();
+    	    			// combat
+    	    			//cl.show(differentScreens, "ACTUALCOMBATSCREEN");
 
     	    			int i1 = 0;    	    			
     	    			boolean found1 = false;
     	    			
     	    			while(found1 == false){
-    	    				
     	    				// if monster in database is same as on board
     	    				// up stats to monster class for combat.
-    	    				if(monsterDatabase[i1][7].contains(bo.getMonsterSymbol())){
+    	    				
+    	    				System.out.println(i1);
+    	    				
+    	    				System.out.println(monsterDatabase[i1][7] + " and " + bo.getMonsterSymbol());
+    	    				
+    	    				if(monsterDatabase[i1][7].equals(bo.getMonsterSymbol())){
     	    					
-    	    					monster.initializeMonster(monsterDatabase[i1][0], monsterDatabase[i1][0], Integer.parseInt(monsterDatabase[i1][2]),
-    	    							Integer.parseInt(monsterDatabase[i1][3]), Integer.parseInt(monsterDatabase[i1][4]),
-    	    							Integer.parseInt(monsterDatabase[i1][5]), monsterDatabase[i1][6],
-    	    							Integer.parseInt(monsterDatabase[i1][7]), bo.monsterFoundCoordinateX(), 
-    	    							bo.monsterFoundCoordinateY());
-    	    					    	    					    	    					
+    	    					monster.setName(monsterDatabase[i1][0]);
+    	    					monster.setDesc(monsterDatabase[i1][1]);
+    	    					monster.setAP(Integer.parseInt(monsterDatabase[i1][2]));
+    	    					monster.setDP(Integer.parseInt(monsterDatabase[i1][3]));
+    	    					monster.setLootTable(Integer.parseInt(monsterDatabase[i1][4]));
+    	    					monster.setMonsterDiff(Integer.parseInt(monsterDatabase[i1][5]));
+    	    					monster.setAlwaysDrop(Integer.parseInt(monsterDatabase[i1][6]));
+    	    					monster.setSymbol(monsterDatabase[i1][7]);
+    	    					monster.setHealth(Integer.parseInt(monsterDatabase[i1][8]));
+    	    					monster.setxCoord(bo.monsterFoundCoordinateX());
+    	    					monster.setyCoord(bo.monsterFoundCoordinateY());
+    	    					    	    			
+    	    					lblEnemyName.setText(monster.getName());
+    	    					
     	    					found1 = true;
     	    					break;
     	    				}
@@ -307,25 +345,38 @@ public class MainScreen extends JFrame {
 	
     	    			break;
     	    		case 2:
-    	    			cl.show(differentScreens, "COMBATSCREEN");
-    	    			enteringCombatAnimationText();
-    	    			cl.show(differentScreens, "ACTUALCOMBATSCREEN");
+//    	    			cl.show(differentScreens, "COMBATSCREEN");
+//    	    			enteringCombatAnimationText();
+    	    			// combat
+    	    			//cl.show(differentScreens, "ACTUALCOMBATSCREEN");
     	    			
     	    			int i11 = 0;    	    			
     	    			boolean found11 = false;
     	    			
     	    			while(found11 == false){
     	    				
+    	    				System.out.println(i11);
+    	    				// monster symbol does not get the right symbol, gives floor......
+    	    				System.out.println(monsterDatabase[i11][7] + " and " + bo.getMonsterSymbol());
+    	    				
     	    				// if monster in database is same as on board
     	    				// up stats to monster class for combat.
-    	    				if(monsterDatabase[i11][7].contains(bo.getMonsterSymbol())){
+    	    				if(monsterDatabase[i11][7].equals(bo.getMonsterSymbol())){
     	    					
-    	    					monster.initializeMonster(monsterDatabase[i11][0], monsterDatabase[i11][0], Integer.parseInt(monsterDatabase[i11][2]),
-    	    							Integer.parseInt(monsterDatabase[i11][3]), Integer.parseInt(monsterDatabase[i11][4]),
-    	    							Integer.parseInt(monsterDatabase[i11][5]), monsterDatabase[i11][6],
-    	    							Integer.parseInt(monsterDatabase[i11][7]), bo.monsterFoundCoordinateX(), 
-    	    							bo.monsterFoundCoordinateY());
-    	    					    	    					    	    					
+    	    					monster.setName(monsterDatabase[i11][0]);
+    	    					monster.setDesc(monsterDatabase[i11][1]);
+    	    					monster.setAP(Integer.parseInt(monsterDatabase[i11][2]));
+    	    					monster.setDP(Integer.parseInt(monsterDatabase[i11][3]));
+    	    					monster.setLootTable(Integer.parseInt(monsterDatabase[i11][4]));
+    	    					monster.setMonsterDiff(Integer.parseInt(monsterDatabase[i11][5]));
+    	    					monster.setAlwaysDrop(Integer.parseInt(monsterDatabase[i11][6]));
+    	    					monster.setSymbol(monsterDatabase[i11][7]);
+    	    					monster.setHealth(Integer.parseInt(monsterDatabase[i11][8]));
+    	    					monster.setxCoord(bo.monsterFoundCoordinateX());
+    	    					monster.setyCoord(bo.monsterFoundCoordinateY());
+    	    					    	    	
+    	    					lblEnemyName.setText(monster.getName());
+    	    					
     	    					found11 = true;
     	    					break;
     	    				}
@@ -1469,15 +1520,14 @@ public class MainScreen extends JFrame {
     	JPanel actualCombat = new JPanel();
     	actualCombat.setBackground(Color.BLACK);
     	differentScreens.add(actualCombat, "ACTUALCOMBATSCREEN");
-    	actualCombat.setLayout(new GridLayout(5, 1, 0, 0));
-    	
-    	JLabel lblEnemyName = new JLabel("New label");
+    	actualCombat.setLayout(new GridLayout(5, 1, 0, 0));    	
+
     	lblEnemyName.setHorizontalAlignment(SwingConstants.CENTER);
     	lblEnemyName.setFont(new Font("Sitka Small", Font.PLAIN, 18));
     	lblEnemyName.setForeground(Color.WHITE);
     	actualCombat.add(lblEnemyName);
     	
-    	JLabel lblAttackResult = new JLabel("New label");
+    	JLabel lblAttackResult = new JLabel(" ");
     	lblAttackResult.setHorizontalAlignment(SwingConstants.CENTER);
     	lblAttackResult.setForeground(Color.WHITE);
     	lblAttackResult.setFont(new Font("Sitka Small", Font.PLAIN, 18));
@@ -1495,6 +1545,10 @@ public class MainScreen extends JFrame {
     	combatButtons.setLayout(new GridLayout(0, 2, 0, 0));
 
     	JLabel lblBuffsAndDebuffs = new JLabel("New label");
+    	lblBuffsAndDebuffs.setBackground(Color.WHITE);
+    	lblBuffsAndDebuffs.setForeground(Color.WHITE);
+    	lblBuffsAndDebuffs.setHorizontalAlignment(SwingConstants.CENTER);
+    	lblBuffsAndDebuffs.setFont(new Font("Sitka Small", Font.PLAIN, 18));
     	actualCombat.add(lblBuffsAndDebuffs);
     	lblBuffsAndDebuffs.setText("");
     	
@@ -1636,6 +1690,9 @@ public class MainScreen extends JFrame {
                     } catch(InterruptedException ex) {
                         Thread.currentThread().interrupt();
                     }
+                    
+                    CardLayout cl = (CardLayout)(differentScreens.getLayout());
+	    			cl.show(differentScreens, "ACTUALCOMBATSCREEN");
                 }
                 else
                 {
@@ -1692,6 +1749,9 @@ public class MainScreen extends JFrame {
                     } catch(InterruptedException ex) {
                         Thread.currentThread().interrupt();
                     }
+                    
+                    CardLayout cl = (CardLayout)(differentScreens.getLayout());
+	    			cl.show(differentScreens, "ACTUALCOMBATSCREEN");
                 }
                 else
                 {
@@ -1762,6 +1822,8 @@ public class MainScreen extends JFrame {
                     } catch(InterruptedException ex) {
                         Thread.currentThread().interrupt();
                     }
+                    CardLayout cl = (CardLayout)(differentScreens.getLayout());
+	    			cl.show(differentScreens, "ACTUALCOMBATSCREEN");
                 }else{
         			if(currentLetter < textToShow.length()){
         				animation = animation + textToShow.charAt(currentLetter);

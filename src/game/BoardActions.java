@@ -314,11 +314,17 @@ public class BoardActions {
 				if(b.getPositionInfo(playerXCoord, playerYCoord-1).toLowerCase().contains("wall")){
 					//wall at this direction, do not move to combat screen.
 				}else{
-					// move to combat, enemy north of player position
-					monsterFound = true;
-					monsterSymbol = b.getPositionInfo(playerXCoord, playerYCoord-1);
-					mX = playerXCoord;
-					mY = playerYCoord-1;
+					
+					if(b.getPositionInfo(playerXCoord, playerYCoord-1).toLowerCase().contains("floor")){
+						// floor
+					}else{
+					
+						// move to combat, enemy north of player position
+						monsterFound = true;
+						monsterSymbol = b.getPositionInfo(playerXCoord, playerYCoord-1);
+						mX = playerXCoord;
+						mY = playerYCoord-1;
+					}
 				}
 			}
 			
@@ -327,11 +333,17 @@ public class BoardActions {
 				if(b.getPositionInfo(playerXCoord+1, playerYCoord).toLowerCase().contains("wall")){
 					//wall at this direction, do not move to combat screen.
 				}else{
-					// move to combat, enemy east of player position
-					monsterFound = true;
-					monsterSymbol = b.getPositionInfo(playerXCoord+1, playerYCoord);
-					mX = playerXCoord+1;
-					mY = playerYCoord;
+					
+					if(b.getPositionInfo(playerXCoord+1, playerYCoord).toLowerCase().contains("floor")){
+						// floor
+					}else{
+					
+						// move to combat, enemy east of player position
+						monsterFound = true;
+						monsterSymbol = b.getPositionInfo(playerXCoord+1, playerYCoord);
+						mX = playerXCoord+1;
+						mY = playerYCoord;
+					}
 				}
 			}
 		
@@ -340,11 +352,17 @@ public class BoardActions {
 				if(b.getPositionInfo(playerXCoord, playerYCoord+1).toLowerCase().contains("wall")){
 					//wall at this direction, do not move to combat screen.
 				}else{
-					// move to combat, enemy south of player position
-					monsterFound = true;
-					monsterSymbol = b.getPositionInfo(playerXCoord, playerYCoord+1);
-					mX = playerXCoord;
-					mY = playerYCoord+1;
+										
+					if(b.getPositionInfo(playerXCoord, playerYCoord+1).toLowerCase().contains("floor")){
+						// floor
+					}else{
+						// move to combat, enemy south of player position
+						monsterFound = true;
+						monsterSymbol = b.getPositionInfo(playerXCoord, playerYCoord+1);
+						mX = playerXCoord;
+						mY = playerYCoord+1;
+					
+					}
 				}
 			}
 			
@@ -354,10 +372,16 @@ public class BoardActions {
 					//wall at this direction, do not move to combat screen.
 				}else{
 					// move to combat, enemy north of player position
-					monsterFound = true;
-					monsterSymbol = b.getPositionInfo(playerXCoord, playerYCoord+1);
-					mX = playerXCoord;
-					mY = playerYCoord+1;
+					
+					if(b.getPositionInfo(playerXCoord-1, playerYCoord).toLowerCase().contains("floor")){
+						// floor
+					}else{
+						// move to combat, enemy north of player position					
+						monsterFound = true;
+						monsterSymbol = b.getPositionInfo(playerXCoord-1, playerYCoord);
+						mX = playerXCoord;
+						mY = playerYCoord+1;
+					}
 				}
 			}
 			// MOVE TO COMBAT SCREEN IF PLAYER COORDINATE AND MONSTER COORDINATES ARE NEXT TO EACH OTHER OR THE SAME.

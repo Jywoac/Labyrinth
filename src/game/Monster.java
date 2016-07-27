@@ -15,13 +15,14 @@ public class Monster {
 	private int xCoord;
 	private int yCoord;
 	
-	public void initializeMonster(String nam, String des, int att, int def, int loot, int drop, String sym, int heal, int x, int y){
+	public void initializeMonster(String nam, String des, int att, int def, int loot, int monDiff, int drop, String sym, int heal, int x, int y){
 		
 		name = nam;
 		desc = des;
 		AP = att;
 		DP = def;
 		lootTable = loot;
+		monsterDiff = monDiff;
 		alwaysDrop = drop;
 		symbol = sym;
 		health = heal;
